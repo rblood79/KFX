@@ -1,1 +1,1 @@
-console.log('KFX')
+console.log('KFX start')
