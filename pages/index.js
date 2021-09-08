@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import styles from '../styles/Home.module.scss'
 import ReactDOM from "react-dom";
 import _ from 'lodash';
-import { FindColor, byKeys } from './component/Utill';
+import { FindColor, byKeys } from '../component/Utill';
 import React, { useContext, useState, useEffect, useRef, forwardRef, createContext } from 'react';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import { Controller } from 'swiper';
@@ -20,7 +20,7 @@ import SwiperCore, {
   EffectCreative,
 } from "swiper";
 
-import Step from './component/Step';
+import Step from '../component/Step';
 
 SwiperCore.use([Pagination, Scrollbar, Mousewheel, Keyboard]);
 
@@ -39,7 +39,8 @@ const App = props => {
   const [stepNum, setStepNum] = useState(1);
   const [rowNum, setRowNum] = useState(1);
   const [swiper, setSwiper] = useState(null);
-  const [controlledSwiper, setControlledSwiper] = useState(null);
+  const [slideSize, setSlideSize] = useState(0);
+  const [over, setOver] = useState(false);
   const [spring, setSpring] = useState('noWobble');
   const [type, setType] = useState('list');
   const [focused, setFocused] = useState(null);
@@ -128,71 +129,86 @@ const App = props => {
   }
   const boxLine = (item) => {
     const result = [];
-    result.push(<span key={'base' + item.id} className={styles.boxLineBase} />)
-    result.push(
-      <div key={'button' + item.id} className={classNames(styles.detailButton, 'detailButton')} onClick={(e) => itemClick(e, item.id)}>
-        <span className={styles.detailText}>{focused ? 'CLOSE' : 'DETAIL'}</span>
-      </div>
-    )
-    for (let i = 0; i < 4; i++) {
-      result.push(<span key={i} className={styles.boxLine} />)
+    result.push(<span key={'base' + item.id} className={classNames(styles.boxLineBase, 'boxLineBase')} />)
+
+    if (!focused) {
+      for (let i = 0; i < 4; i++) {
+        result.push(<span key={i} className={classNames(styles.boxLine, 'boxLine')} />)
+      }
+    }
+
+    if (type !== 'grid' || focused) {
+      result.push(
+        <div key={'button' + item.id} className={classNames(styles.detailButton, 'detailButton')} onClick={(e) => itemClick(e, item.id)}>
+          <span className={styles.detailText}>{focused ? 'CLOSE' : 'DETAIL'}</span>
+        </div>
+      )
     }
     return result;
   }
 
   const ListItem = (item, onClick) => {
+    //console.log('//', item)
     let percentColor = FindColor(item.engine, 0, 240);
     return (
-      <Flipped flipId={item.id}>
-        <div key={item.id} className={classNames(styles.listItem, 'listItem', item.active ? styles.active : null)} >
+      <Flipped flipId={item.id} translate>
+        <div key={item.id} className={classNames(styles.listItem, 'listItem', item.active ? styles.active : null)} onClick={(e) => type === 'grid' && itemClick(e, item.id)}>
           <div className={classNames(styles.boxLineGroup, 'boxLineGroup')}>
-            {type === 'list' && boxLine(item)}
+            {
+              boxLine(item)
+            }
           </div>
-          <Flipped flipId={'centerContents' + item.id} opacity>
-            <div className={styles.aircraftGroup}>
-              <div className={styles.aircraft}>
-                <img src={item.img} />
-              </div>
+          <div className={styles.aircraftGroup}>
+            <div className={styles.aircraft}>
+              <img src={item.img} />
             </div>
-          </Flipped>
-          <Flipped flipId={'itemTitle' + item.id} opacity>
-            <div className={styles.itemTitle}>{item.title}</div></Flipped>
-          <Flipped flipId={'itemGueage' + item.id} opacity>
+          </div>
+
+          <div className={classNames(styles.itemSwitch, 'itemSwitch')}>
+            <div className={styles.itemTitle}>{item.title}</div>
             <div className={styles.itemGueage}>
               <div className={styles.itemBar} style={{ width: item.engine + '%', backgroundColor: percentColor }} />
               {gueaguBox()}
             </div>
-          </Flipped>
-          <Flipped flipId={'itemPercent' + item.id} opacity>
             <div className={classNames(styles.itemPercent, 'itemPercent')} style={{ color: percentColor }}>{item.engine}%</div>
-          </Flipped>
+          </div>
+
+          <div className={classNames(styles.itemSwitchActive, 'itemSwitchActive')}>
+            <div>
+              <div className={styles.itemGueage}>
+                <div className={styles.itemBar} style={{ width: item.engine + '%', backgroundColor: percentColor }} />
+                {gueaguBox()}
+              </div>
+              <span className={styles.itemRating}>RATING POINT</span>
+              <div className={classNames(styles.itemPercent, 'itemPercent')} style={{ color: percentColor }}>{item.engine}%</div>
+            </div>
+            <div className={styles.itemTitleGroup}>
+              <div className={styles.itemTitle}>{item.title}</div>
+              <span className={styles.itemSubText}>Boramae</span>
+            </div>
+          </div>
         </div>
       </Flipped>
     )
   }
 
   const ListItemExpend = (item, onClick) => {
+    //console.log('//000', item)
     let percentColor = FindColor(item.engine, 0, 240);
     return (
-      <Flipped flipId={item.id} key={item.id} >
+      <Flipped flipId={item.id} key={item.id} translate>
         <div key={item.id} className={classNames(styles.listItem, styles.listItemExpend, item.active ? styles.active : null)} >
-
           <div className={classNames(styles.boxLineGroup, 'boxLineGroup')}>
-            {type === 'list' && boxLine(item)}
+            {
+              boxLine(item)
+            }
           </div>
-          <Flipped flipId={'centerContents' + item.id} opacity>
-            <div className={styles.graph}>
-              <img src={'gr.png'} />
-            </div>
-          </Flipped>
-          <Flipped flipId={'itemTitle' + item.id} opacity>
-            <div className={styles.itemTitle}>{item.title}<span className={styles.itemTitleGray}>BORAMAE</span></div></Flipped>
-          <Flipped flipId={'itemGueage' + item.id} opacity>
-            <span className={styles.itemPoint}>MATCHING POINT</span>
-          </Flipped>
-          <Flipped flipId={'itemPercent' + item.id} opacity>
-            <div className={classNames(styles.itemPercent, 'itemPercent')} style={{ color: percentColor }}>{item.engine}%</div>
-          </Flipped>
+          <div className={styles.graph}>
+            <img src={'gr.png'} />
+          </div>
+          <div className={styles.itemTitle}>{item.title}<span className={styles.itemTitleGray}>BORAMAE</span></div>
+          <span className={styles.itemPoint}>MATCHING POINT</span>
+          <div className={classNames(styles.itemPercent, 'itemPercent')} style={{ color: percentColor }}>{item.engine}%</div>
         </div>
       </Flipped>
     )
@@ -235,11 +251,14 @@ const App = props => {
       swiper.disable();
     }
     swiper.update();
+    setFocused(null);
+    setSlideSize(swiper.slides[0].clientWidth)
     /*swiper.on('slideChange', function () {
       console.log('slide changed22');
     });*/
   }
-  const 외장변경hnge = (i) => {
+  const dataChange = (i) => {
+    setFocused(null);
     setTopNum(i);
     swiper.slideTo(0);
     if (i === 0) {
@@ -258,15 +277,21 @@ const App = props => {
       setFocused(null)
     }
   }
-  const FlipperComplete = () => {
-    console.log('FlipperComplete')
+
+  const swComplete = (swiper) => {
+    setSwiper(swiper)
+    swiper.on('resize', function () {
+      setSlideSize(swiper.slides[0].clientWidth);
+    });
   }
 
   useEffect(() => {
     // 브라우저 API를 이용하여 문서 타이틀을 업데이트합니다.
-    console.log('focused', focused)
+    if (swiper) {
+      setSlideSize(swiper.slides[0].clientWidth);
+    }
     setData(daegu)
-  }, []);
+  }, [swiper]);
 
   return (
     <>
@@ -275,14 +300,14 @@ const App = props => {
         <meta name="description" content="KF-21" />
         <link rel="icon" href="/favicon.ico" />
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700&display=swap" rel="stylesheet"></link>
-        <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet"></link>
+        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100;400;800&display=swap" rel="stylesheet"></link>
       </Head>
       <nav className={styles.nav}>
         <button className={styles.navButton}>A</button>
         <button className={styles.navButton}>B</button>
         <button className={styles.navButton}>V</button>
       </nav>
-      <main className={styles.main}>
+      <main className={classNames(styles.main)}>
         <div className={styles.content}>
           <div className={styles.top}>
             <div className={styles.topLogo}><div className={styles.logoBase}></div><div className={styles.logo} /></div>
@@ -290,7 +315,7 @@ const App = props => {
               {
                 topNav.map((item, idx) => {
                   return (
-                    <button key={idx} className={classNames(styles.topButton, idx === topNum ? styles.active : null)} onClick={() => 외장변경hnge(idx)}>{item.title}</button>
+                    <button key={idx} className={classNames(styles.topButton, idx === topNum ? styles.active : null)} onClick={() => dataChange(idx)}>{item.title}</button>
                   )
                 })
               }
@@ -304,15 +329,17 @@ const App = props => {
           </div>
           <Flipper
             className={styles.flipper}
-            flipKey={[data, type]}
-          //onComplete={() => FlipperComplete()}
+            flipKey={[data, type, focused]}
           >
-            <div className={classNames(styles.swiperContainer, focused !== null && styles.active)} >
+            <div className={classNames(styles.swiperContainer, focused !== null && styles.active)}
+            //onMouseEnter={() => setOver(true)}
+            //onMouseLeave={() => setOver(false)}
+            >
               <Swiper
                 centeredSlides={true}
-                //onSlideChange={() => console.log('slide change', swiper.activeIndex)}
                 className={classNames(type === "grid" ? "fm-grid" : "fm-list")}
-                onSwiper={setSwiper}
+                //onSwiper={setSwiper}
+                onSwiper={(swiper) => swComplete(swiper)}
                 allowTouchMove={false}
                 mousewheel={true}
                 keyboard={true}
@@ -353,7 +380,7 @@ const App = props => {
               >
                 {data.map((item, i) => {
                   return (
-                    <SwiperSlide key={i} >
+                    <SwiperSlide key={i} className={styles.SwiperSlide}>
                       {({ isActive }) => (
                         <ListItem key={'ListItem'} {...item} active={isActive} onClick={() => onClick(this)} />
                       )}
@@ -362,23 +389,45 @@ const App = props => {
                 })}
               </Swiper>
             </div>
-            {focused === null ?
-              (
-                <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
 
-                </Flipped>
-              ) : (
-                <Flipped flipId={'FlippedContainer'} key={'detailContainer'}>
+            <div className={classNames(styles.baseContainer, (type === "grid" && !focused) && styles.active)}>
+              <div className={styles.baseContents} style={{ width: slideSize + 'px', height: slideSize + 'px' }}>
+                <div className={classNames(styles.baseBox, over ? styles.active : null)}>
+                  <div className={styles.base}></div>
+                </div>
+              </div>
+            </div>
+
+
+            {focused === null ? (
+              <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
+                <div className={styles.empty}>
+
                   <div className={styles.detail}>
-                    <div className={styles.detailContainer}>
-                      <ul className={styles.detailContents}>
+                    <div className={styles.detailContainer} style={{ width: slideSize, height: slideSize }}>
+                      <ul className={styles.detailContents} style={{ marginLeft: (slideSize - (type === 'list' ? 48 : 18)) * 0.5 }}>
                         <SideItem {...data.filter(v => v.id === focused)[0]} key={'sideItem'} />
                       </ul>
                       <ListItemExpend key={'ListItemExpend'} {...data.filter(v => v.id === focused)[0]} active={true} />
                     </div>
                   </div>
-                </Flipped>
-              )
+
+                </div>
+              </Flipped>
+            ) : (
+              <Flipped flipId={'FlippedContainer'} key={'detailContainer'} translate>
+
+                <div className={styles.detail}>
+                  <div className={styles.detailContainer} style={{ width: slideSize, height: slideSize }}>
+                    <ul className={styles.detailContents} style={{ marginLeft: (slideSize - (type === 'list' ? 48 : 18)) * 0.5 }}>
+                      <SideItem {...data.filter(v => v.id === focused)[0]} key={'sideItem'} />
+                    </ul>
+                    <ListItemExpend key={'ListItemExpend'} {...data.filter(v => v.id === focused)[0]} active={true} />
+                  </div>
+                </div>
+
+              </Flipped>
+            )
             }
           </Flipper>
           <Step stepNum={stepNum} />

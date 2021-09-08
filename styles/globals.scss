@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
 }
-ul{
+ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -59,10 +59,18 @@ body > div {
     .swiper-wrapper {
       flex-wrap: wrap;
       .listItem {
+        cursor: pointer;
         align-items: flex-start !important;
+        filter: grayscale(0%);
         .boxLineGroup {
           transform: rotate(0deg) !important;
-          background: #fff !important;
+          background: #fff;
+          .boxLineBase {
+            //background-color: #00f;
+          }
+          .boxLine {
+            border-color: #fff;
+          }
         }
         .itemPercent {
           font-size: 24px !important;
@@ -70,6 +78,21 @@ body > div {
         }
         img {
           filter: none !important;
+        }
+        &:hover {
+          z-index: 1;
+          .boxLineBase {
+            background-color: #fff;
+          }
+          .boxLine {
+            border-color: rgba(5, 109, 205, 1);
+          }
+        }
+        .itemSwitch {
+          opacity: 1;
+        }
+        .itemSwitchActive {
+          opacity: 0;
         }
       }
     }
