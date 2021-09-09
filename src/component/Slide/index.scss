@@ -1,0 +1,29 @@
+.flipper {
+    border: 1px solid #f00;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .sliderContainer {
+        border: 1px solid #f00;
+        overflow: hidden;
+        .sliderContents {
+            background-color: #ccc;
+            display: flex;
+            flex-direction: row;
+            transition: all 0.3s ease-in-out;
+            &.active {
+                flex-wrap: wrap;
+            }
+            .slideItem {
+                background-color: #eaeaea;
+                border: 1px solid #000;
+                display: flex;
+                width: 360px;
+                height: 160px;
+                flex-shrink: 0;
+            }
+        }
+    }
+}

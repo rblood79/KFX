@@ -1,0 +1,101 @@
+.head {
+    display: flex;
+    justify-content: space-between;
+    z-index: 110;
+    width: 100%;
+    position: relative;
+    .topLogo {
+        position: absolute;
+        width: 254px;
+        height: 127px;
+        top: -24px;
+        left: calc(50% - 127px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1001;
+        overflow: hidden;
+        .logoBase {
+            position: absolute;
+            z-index: 0;
+            width: 180px;
+            height: 180px;
+            background-color: #1f3c70;
+            box-shadow: inset 0 -8px 16px rgba(0, 0, 0, 0.48);
+            transform: rotate(45deg);
+            transform-origin: center;
+            top: -90px;
+        }
+        .logo {
+            z-index: 1;
+            width: 108px;
+            height: 54px;
+            margin-bottom: 36px;
+        }
+    }
+    .topNav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .topButton {
+            font-size: 14px;
+            font-weight: 500;
+            padding: 0 24px;
+            height: 24px;
+            color: #d3d3d3;
+            letter-spacing: 1px;
+            &:first-child {
+                padding-left: 0;
+            }
+            &:last-child {
+                padding-right: 0;
+            }
+            &.active,
+            &:hover {
+                color: #1c1c1c;
+            }
+            &.active {
+                text-decoration: underline;
+            }
+        }
+    }
+    .topView {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .viewText {
+            margin-right: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #7c7c7c;
+            letter-spacing: 1px;
+        }
+        .viewButton {
+            width: 48px;
+            height: 48px;
+            border: 1px solid #d3d3d3;
+            background-color: #fff;
+            color: #d3d3d3;
+            font-size: 21px;
+            &:nth-child(2) {
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+                border-right: none;
+            }
+            &:last-child {
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+                border-left: none;
+            }
+            &:hover {
+                //background-color: #f00;
+                color: #7c7c7c;
+            }
+            &.active {
+                background-color: #efefef;
+                box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.16);
+                color: #1c1c1c;
+            }
+        }
+    }
+}
