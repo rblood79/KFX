@@ -6,6 +6,16 @@ export function getColor(percent, start, end) {
     return 'hsl(' + c + ', 60%, 48%)';
 }
 
+export function byKeys(obj, keys = []) {
+    const filtered = {}
+    keys.forEach(key => {
+        if (obj.hasOwnProperty(key)) {
+            filtered[key] = obj[key]
+        }
+    })
+    return filtered
+}
+
 export function shuffle(dataSet) {
     const array = dataSet.slice();
     let currentIndex = array.length, temporaryValue, randomIndex;

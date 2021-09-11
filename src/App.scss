@@ -24,14 +24,16 @@ $radius: 16px;
     padding: 0 $halfSize;
     display: flex;
     .contents {
+      position: relative;
       background: #fff;
       width: 100%;
       border-radius: $radius;
-      padding: $halfSize $halfSize 0 $halfSize;
+      padding: $halfSize 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
+      overflow: hidden;
     }
   }
   .footer {

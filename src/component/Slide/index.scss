@@ -1,21 +1,66 @@
-.flipper {
-    border: 1px solid #f00;
+.slider {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
+
     .sliderContainer {
-        border: 1px solid #f00;
-        overflow: hidden;
+        display: flex;
         .sliderContents {
-            background-color: #ccc;
             display: flex;
             flex-direction: row;
-            transition: all 0.3s ease-in-out;
+            align-items: center;
+            width: fit-content;
             &.active {
                 flex-wrap: wrap;
             }
         }
+    }
+
+    .filter {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 48px;
+        .filterButton {
+            border: 1px solid #d3d3d3;
+            background-color: #fff;
+            color: #d3d3d3;
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i {
+                font-size: 21px;
+            }
+        }
+    }
+
+    .empty {
+        background: #f00;
+        position: absolute;
+        pointer-events: none;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        top: -48px;
+        z-index: 1;
+    }
+    .detail {
+        background: #fff;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 10;
     }
 }

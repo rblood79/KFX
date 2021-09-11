@@ -1,0 +1,21 @@
+.boxGueageContainer{
+    background-color: #ccc;
+    position: relative;
+    display: flex;
+    height: 8px;
+    .boxGueageBase{
+        background: #ccc;
+        position: absolute;
+        height: 100%;
+        z-index: 0;
+    }
+    .boxGueage {
+        border-left: 1px solid #fff;
+        display: flex;
+        flex: 1;
+        z-index: 1;
+        &:first-child {
+            border: none;
+        }
+    }
+}

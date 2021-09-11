@@ -3,6 +3,7 @@
     justify-content: space-between;
     z-index: 110;
     width: 100%;
+    padding: 0 48px;
     position: relative;
     .topLogo {
         position: absolute;
@@ -73,6 +74,9 @@
             letter-spacing: 1px;
         }
         .viewButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 48px;
             height: 48px;
             border: 1px solid #d3d3d3;
@@ -90,7 +94,6 @@
                 border-left: none;
             }
             &:hover {
-                //background-color: #f00;
                 color: #7c7c7c;
             }
             &.active {

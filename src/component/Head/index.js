@@ -1,17 +1,18 @@
 import './index.scss';
-import React, { useEffect} from 'react';
+import React, { useContext, useState } from 'react';
+import context from '../Context';
 import classNames from 'classnames';
-import 'remixicon/fonts/remixicon.css'
+import 'remixicon/fonts/remixicon.css';
 
 const App = (props) => {
-  const topNav = props.topNav;
-  const topNum = props.topNum;
-  const type = props.type;
+  const state = useContext(context);
+  const { topNum, setTopNum, type, setType } = state;
+  const [topNav] = useState([
+    { id: 0, title: 'GWANGJU 1B', },
+    { id: 1, title: 'DAEGU 2B', },
+    { id: 2, title: 'BUSAN 3B', },
+  ]);
   //
-  useEffect(() => {
-    
-  });
-
   return (
     <div className="head">
       <div className={'topLogo'}>
@@ -24,7 +25,7 @@ const App = (props) => {
         {
           topNav.map((item, idx) => {
             return (
-              <button key={idx} className={classNames('topButton', idx === topNum ? 'active' : null)} onClick={() => props.callBack(item.id)}>
+              <button key={idx} className={classNames('topButton', idx === topNum ? 'active' : null)} onClick={() => setTopNum(item.id)}>
                 {item.title}
               </button>
             )
@@ -33,9 +34,8 @@ const App = (props) => {
       </div>
       <div className={classNames('topView', type)}>
         <span className={'viewText'}>VIEW TYPE</span>
-        <button className={classNames('viewButton', type === 'list' && 'active')} onClick={() => props.callBackType('list')}><i className="ri-checkbox-blank-fill"></i></button>
-        <button className={classNames('viewButton', type === 'grid' && 'active')} onClick={() => props.callBackType('grid')}><i className="ri-layout-grid-fill"></i></button>
-        <button className={classNames('viewButton')} onClick={() => props.callBackSort()}><i className="ri-equalizer-fill"></i></button>
+        <button className={classNames('viewButton', type === 'list' && 'active')} onClick={() => setType('list')}><i className="ri-checkbox-blank-fill"></i></button>
+        <button className={classNames('viewButton', type === 'grid' && 'active')} onClick={() => setType('grid')}><i className="ri-layout-grid-fill"></i></button>
       </div>
     </div>
   );
@@ -43,6 +43,7 @@ const App = (props) => {
 
 App.defaultProps = {
   topNum: 0,
+  type: 'list',
 };
 
 export default App;
