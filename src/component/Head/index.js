@@ -1,5 +1,5 @@
 import './index.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
 
@@ -40,5 +40,9 @@ const App = (props) => {
     </div>
   );
 }
+
+App.defaultProps = {
+  topNum: 0,
+};
 
 export default App;

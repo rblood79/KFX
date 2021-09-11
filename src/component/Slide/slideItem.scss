@@ -1,0 +1,238 @@
+$centerSize: 360px;
+$defaultSize: 48px;
+$halfSize: 24px;
+$duration: 0.24s;
+
+.listItem {
+    border: 1px solid #000;
+    width: 360px;
+    height: 160px;
+    flex-shrink: 0;
+}
+
+.listItem {
+    will-change: transform;
+    //background-color: #fff;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    user-select: none;
+    filter: grayscale(100%);
+    .boxLineGroup {
+        will-change: transform;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        //background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+
+        .boxLineBase {
+            transition: background $duration ease-in-out;
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: calc(100% - 16px);
+            height: calc(100% - 16px);
+            display: flex;
+            background: #fafafa;
+            z-index: 1;
+        }
+        .boxLine {
+            transition: border $duration ease-in-out;
+            position: absolute;
+            border: 2px solid rgba(0, 0, 0, 0.08);
+            width: 16px;
+            height: 16px;
+            display: flex;
+            &:nth-child(2) {
+                border-right: 0;
+                border-bottom: 0;
+            }
+            &:nth-child(3) {
+                right: 0px;
+                border-left: 0;
+                border-bottom: 0;
+            }
+            &:nth-child(4) {
+                bottom: 0px;
+                border-right: 0;
+                border-top: 0;
+            }
+            &:nth-child(5) {
+                right: 0px;
+                bottom: 0px;
+                border-left: 0;
+                border-top: 0;
+            }
+        }
+    }
+
+    .itemGueage {
+        //pointer-events: none;
+        position: relative;
+        background-color: #ccc;
+        width: 90px;
+        height: 8px;
+        display: flex;
+        z-index: 1;
+        .itemBar {
+            position: absolute;
+            background-color: #f00;
+            width: 50%;
+            height: 8px;
+            z-index: 0;
+        }
+        .gueaguBox {
+            width: 9px;
+            height: 8px;
+            z-index: 1;
+            border-right: 1px solid #fff;
+        }
+    }
+    .itemTitle {
+        //pointer-events: none;
+        width: 90px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #1c1c1c;
+        position: relative;
+        z-index: 1;
+        .itemTitleGray {
+            color: #d3d3d3;
+        }
+    }
+    .itemPercent {
+        //pointer-events: none;
+        width: 90px;
+        font-size: 24px;
+        line-height: 26px;
+        //font-weight: bold;
+        position: relative;
+        z-index: 1;
+        font-family: "Urbanist", sans-serif;
+        //letter-spacing: -0.16em;
+    }
+    .aircraftGroup {
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        padding: 12px;
+        display: flex;
+        z-index: 0;
+
+        .aircraft {
+            //background-color: rgba(0, 0, 0, 0.016);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            img {
+                width: 240px;
+                height: fit-content;
+                //filter: blur(1px) grayscale(100%);
+            }
+        }
+    }
+    .detailButton {
+        z-index: 100;
+        position: absolute;
+        width: 100px;
+        height: 50px;
+        bottom: 0px;
+        right: -25px;
+        transition: opacity $duration * 0.5 ease-in-out;
+        transition-delay: $duration * 0.5;
+        transform: rotate(-45deg);
+        display: flex;
+        overflow: hidden;
+        justify-content: center;
+        opacity: 0;
+        cursor: pointer;
+        .detailText {
+            z-index: 1;
+            color: #fff;
+            padding-top: 8px;
+        }
+        &::before {
+            content: "";
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            transform: rotate(45deg);
+            background: #056dcd;
+            bottom: 20px;
+        }
+    }
+
+    .itemSwitch {
+        position: absolute;
+        opacity: 1;
+    }
+    .itemSwitchActive {
+        opacity: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: space-around;
+        align-items: center;
+        .itemPercent {
+            font-size: 36px;
+            line-height: 36px;
+            text-align: center;
+        }
+
+        .itemRating {
+            position: relative;
+        }
+        .itemTitleGroup {
+            text-align: center;
+            .itemTitle {
+                width: auto;
+                font-size: 24px;
+                line-height: 24px;
+            }
+            .itemSubText {
+                position: relative;
+                font-size: 18px;
+                color: #d3d3d3;
+            }
+        }
+    }
+    &:hover {
+        .boxLineGroup {
+            .boxLine {
+                border-color: rgba(5, 109, 205, 1);
+            }
+        }
+    }
+    &.active {
+        z-index: 100;
+        filter: grayscale(0%);
+        .itemSwitch {
+            opacity: 0;
+        }
+        .itemSwitchActive {
+            opacity: 1;
+        }
+        .boxLineGroup {
+            transform: rotate(45deg);
+        }
+        .aircraftGroup {
+            .aircraft {
+                img {
+                    filter: blur(0px) grayscale(0%);
+                }
+            }
+        }
+        .detailButton {
+            opacity: 1;
+        }
+    }
+}

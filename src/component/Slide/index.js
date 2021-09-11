@@ -1,18 +1,19 @@
 import './index.scss';
-import React, { useEffect, useState } from 'react';
+//import React, { useEffect, } from 'react';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
-import { Flipper, Flipped } from 'react-flip-toolkit';
-//import { Swiper, SwiperSlide } from 'swiper/react';
+import { Flipper,} from 'react-flip-toolkit';
+
+import SlideItem from './slideItem';
 
 const App = (props) => {
   const type = props.type;
   const data = props.data;
   const focused = props.focused;
   //
-  useEffect(() => {
+  /*useEffect(() => {
     console.log('slide', focused)
-  }, [data]);
+  }, [data]);*/
 
   return (
     <Flipper
@@ -23,9 +24,7 @@ const App = (props) => {
         <div className={classNames('sliderContents', type === 'grid' && 'active')}>
           {data.map((item, i) => {
             return (
-              <Flipped flipId={item.id} translate>
-                <div className={'slideItem'}>{item.title}</div>
-              </Flipped>
+              <SlideItem item={item} index={i} focused={focused} key={'slideItem' + i} />
             )
           })}
         </div>
@@ -33,5 +32,9 @@ const App = (props) => {
     </Flipper>
   );
 }
+
+App.defaultProps = {
+  focused: null,
+};
 
 export default App;
