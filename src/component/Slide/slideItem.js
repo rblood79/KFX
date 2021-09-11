@@ -24,9 +24,9 @@ const App = (props) => {
         
         selectItem(item)
         setFocused(index)
-        if(type === 'grid'){
+        /*if(type === 'grid'){
             setFocused(index)
-        }
+        }*/
     }
 
     return (
