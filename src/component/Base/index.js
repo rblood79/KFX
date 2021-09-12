@@ -5,12 +5,12 @@ import context from '../Context';
 
 const App = (props) => {
   const state = useContext(context);
-  const { type, focused, } = state;
+  const { type, focused, base } = state;
   const slideSize = 360;
 
   return (
-    <div className={classNames('base', (type === "grid" && !focused) && 'active')}>
-      <div className={'baseContents'} style={{ width: slideSize , height: slideSize }}>
+    <div className={classNames('base', type !== 'grid' ? null : !base && 'active')}>
+      <div className={'baseContents'} style={{ width: slideSize, height: slideSize }}>
         <div className={classNames('baseBox')}>
           <div className={'base'} />
         </div>

@@ -1,5 +1,5 @@
 import './expendItem.scss';
-import React, { useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
@@ -10,8 +10,8 @@ import context from '../Context';
 
 const App = (props) => {
     const state = useContext(context);
-    const { type , setFocused} = state;
-    const item = props.item;
+    const { type, setFocused, setBase } = state;
+    const item = _.cloneDeep(props.item);
     const selectItem = props.select
     //
     let percentColor = item && getColor(item.engine, 0, 240);
@@ -28,7 +28,6 @@ const App = (props) => {
     ])
 
     const SideItem = item => {
-        //console.log('sideItem', item)
         const rr = byKeys(item, ['주기검사', '야간비행', '외장변경', '실무장여부', '항공기등급', '조종사컨디션', '비행일수', '주요결함'])
         const result = [];
         _.map(rr, (val, key) => {
@@ -46,9 +45,7 @@ const App = (props) => {
 
     const onClick = () => {
         selectItem(null)
-        if(type === 'grid'){
-            setFocused(null)
-        };
+        setBase(false)
     }
 
     return (
@@ -60,11 +57,9 @@ const App = (props) => {
                 <div className={'graph'}>
                     <img src={process.env.PUBLIC_URL + '/assets/gr.png'} alt='graph' />
                 </div>
-                    
-                    <div className={'itemTitle'}>{item && item.title}<span className={'itemTitleGray'}>BORAMAE</span></div>
-                    <span className={'itemPoint'}>MATCHING POINT</span>
-                    <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item && item.engine}%</div>
-                   
+                <div className={'itemTitle'}>{item && item.title}<span className={'itemTitleGray'}>BORAMAE</span></div>
+                <span className={'itemPoint'}>MATCHING POINT</span>
+                <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item && item.engine}%</div>
                 <button className={'detailButton'} onClick={() => { onClick() }}><span className={'detailText'}>Close</span></button>
             </div>
         </div>

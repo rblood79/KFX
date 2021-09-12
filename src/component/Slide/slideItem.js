@@ -11,7 +11,7 @@ import GueageBox from './gueage';
 
 const App = (props) => {
     const state = useContext(context);
-    const { focused, setFocused, type } = state;
+    const { focused, setFocused, type, base, setBase } = state;
     const index = props.index;
     const item = props.item;
     const margin = props.margin;
@@ -21,12 +21,9 @@ const App = (props) => {
     let percentColor = getColor(item.engine, 0, 240);
 
     const onClick = () => {
-        
         selectItem(item)
         setFocused(index)
-        /*if(type === 'grid'){
-            setFocused(index)
-        }*/
+        setBase(true)
     }
 
     return (

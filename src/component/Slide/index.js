@@ -14,14 +14,14 @@ import { gwangju, daegu, busan } from '../Data'
 
 const App = (props) => {
   const state = useContext(context);
-  const { topNum, type, focused, setFocused } = state;
+  const { topNum, type, focused, setFocused, } = state;
   const [startX, setStartX] = useState(0);
   const [posX, setPosX] = useState(0);
   const [itemWidth, setItemWidth] = useState(360);
   const [margin, setMargin] = useState(96);
 
 
-  const [selecItem, setSelectItem] = useState(null)
+  const [selectItem, setSelectItem] = useState(null);
   const [data, setData] = useState([]);
 
   const sliderContainer = useRef(null);
@@ -99,11 +99,11 @@ const App = (props) => {
           }
         </div>
       </div>
-      {selecItem === null ? (
+      {(selectItem === null) ? (
         <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
           <div className={'empty'}>
             <div className={'detail'}>
-              <ExpendItem item={data[focused]} active={true} select={setSelectItem} key={'sideItem'}/>
+              <ExpendItem item={data[focused]} active={false} select={setSelectItem} key={'sideItem'}/>
             </div>
           </div>
         </Flipped>

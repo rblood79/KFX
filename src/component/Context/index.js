@@ -10,6 +10,7 @@ class UserProvider extends Component {
         topNum: 0,
         type: 'list',
         focused: 0,
+        base: false,
         count: 0,
     };
     // Method to update state
@@ -29,14 +30,17 @@ class UserProvider extends Component {
     setFocused = focused => {
         this.setState(prevState => ({ focused }));
     };
-    setCount = value => {
-        this.setState(prevState => ({ value }));
+    setBase = base => {
+        this.setState(prevState => ({ base }));
+    };
+    setCount = count => {
+        this.setState(prevState => ({ count }));
     };
     //
     render() {
         const { children } = this.props;
-        const { url, theme, topNum, type, focused, count } = this.state;
-        const { setTheme, setTopNum, setType, setFocused, setCount } = this;
+        const { url, theme, topNum, type, focused, count, base } = this.state;
+        const { setTheme, setTopNum, setType, setFocused, setCount, setBase } = this;
 
         return (
             <UserContext.Provider
@@ -47,11 +51,13 @@ class UserProvider extends Component {
                     type,
                     focused,
                     count,
+                    base,
                     setTheme,
                     setTopNum,
                     setType,
                     setFocused,
                     setCount,
+                    setBase,
                 }}>
                 {children}
             </UserContext.Provider>
