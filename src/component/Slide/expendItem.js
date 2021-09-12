@@ -10,7 +10,7 @@ import context from '../Context';
 
 const App = (props) => {
     const state = useContext(context);
-    const { type, setBase } = state;
+    const { type, setBase , setFocused} = state;
     const item = props.item;
     const selectItem = props.select
     //
@@ -44,8 +44,8 @@ const App = (props) => {
     }
 
     const onClick = () => {
-        selectItem(null)
-        setBase(false)
+        selectItem(null);
+        setBase(false);
     }
 
     return (

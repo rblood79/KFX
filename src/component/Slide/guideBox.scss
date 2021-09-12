@@ -11,16 +11,12 @@
     transition: transform 0.24s ease-in-out;
     &.active {
         transform: scale(1.41);//rotate(45deg);
-        transform: rotate(45deg);
+        //transform: rotate(45deg);
         background: linear-gradient(90deg, #eee 0%, #fafafa 100%);
-        .boxLine {
-            border-color: transparent;
-        }
     }
     .boxLine {
         position: absolute;
         border: 2px solid rgba(0, 0, 0, 0.16);
-        //border: 2px solid rgba(0, 0, 0, 0.08);
         width: 16px;
         height: 16px;
         &:nth-child(1) {

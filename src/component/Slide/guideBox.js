@@ -15,7 +15,9 @@ const App = (props) => {
     }
     return (
         <div className={classNames('boxLineContainer', active && 'active')}>
-            {type === 'list' && <Box />}
+            {
+                <Box />//type === 'list' && <Box />
+            }
         </div>
     );
 }

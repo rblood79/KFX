@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, } from 'react';
 
 import './App.scss';
-import context from './component/Context';
 import Head from './component/Head/';
 import Foot from './component/Foot/';
 import Slide from './component/Slide';

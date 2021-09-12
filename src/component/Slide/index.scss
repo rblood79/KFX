@@ -2,19 +2,31 @@
     position: relative;
     width: 100%;
     height: 100%;
+    height: calc(100vh - 208px);
     display: flex;
     justify-content: center;
     flex-direction: column;
+    //background-color: #efefef;
 
     .sliderContainer {
         display: flex;
         .sliderContents {
-            display: flex;
+            /*display: flex;
             flex-direction: row;
             align-items: center;
             width: fit-content;
             &.active {
                 flex-wrap: wrap;
+            }*/
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            //grid-template-columns: repeat(9, 360px);
+            //grid-template-rows: repeat(1, 160px);
+            //grid-template: repeat(1, 160px) / repeat(9, 360px);
+            gap: 96px;
+            &.active {
+                gap: 24px;
             }
         }
     }

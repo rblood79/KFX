@@ -11,7 +11,7 @@ import GueageBox from './gueage';
 
 const App = (props) => {
     const state = useContext(context);
-    const { focused, setFocused, type, setBase } = state;
+    const { focused, setFocused, type, setBase, setPrev } = state;
     const index = props.index;
     const item = props.item;
     const margin = props.margin;
@@ -21,6 +21,7 @@ const App = (props) => {
     let percentColor = getColor(item.engine, 0, 240);
 
     const onClick = () => {
+        setPrev(focused)
         selectItem(item)
         setFocused(index)
         setBase(true)
@@ -28,7 +29,10 @@ const App = (props) => {
 
     return (
         <Flipped flipId={item.id} translate>
-            <div key={item.id} className={classNames('listItem', active && 'active')} style={{ marginRight: type !== 'grid' && margin }} onClick={() => { onClick() }}>
+            <div key={item.id} className={classNames('listItem', active && 'active')} 
+                style={{ marginRight: type !== 'grid' && margin }}
+                onClick={() => { onClick() }}
+            >
                 <GuideBox value={item.engine} active={active} type={type} />
                 <div className={'aircraftGroup'} >
                     <div className={'aircraft'}>
@@ -46,7 +50,7 @@ const App = (props) => {
                             <div className={'itemTitle'}>{item.title}</div>
                             <span className={'itemSubText'}>Boramae</span>
                         </div>
-                        <button className={'detailButton'} onClick={() => { onClick() }}>
+                        <button className={'detailButton'}>
                             <span className={'detailText'}>Detail</span>
                         </button>
                     </div>

@@ -12,6 +12,9 @@ class UserProvider extends Component {
         focused: 0,
         base: false,
         count: 0,
+        width: 0,
+        height: 0,
+        prev: null,
     };
     // Method to update state
     setTheme = async theme => {
@@ -36,11 +39,20 @@ class UserProvider extends Component {
     setCount = count => {
         this.setState(prevState => ({ count }));
     };
+    setWidth = width => {
+        this.setState(prevState => ({ width }));
+    };
+    setHeight = height => {
+        this.setState(prevState => ({ height }));
+    };
+    setPrev = prev => {
+        this.setState(prevState => ({ prev }));
+    };
     //
     render() {
         const { children } = this.props;
-        const { url, theme, topNum, type, focused, count, base } = this.state;
-        const { setTheme, setTopNum, setType, setFocused, setCount, setBase } = this;
+        const { url, theme, topNum, type, focused, count, base, width, height, prev } = this.state;
+        const { setTheme, setTopNum, setType, setFocused, setCount, setBase, setWidth, setHeight, setPrev } = this;
 
         return (
             <UserContext.Provider
@@ -52,12 +64,18 @@ class UserProvider extends Component {
                     focused,
                     count,
                     base,
+                    width,
+                    height,
+                    prev,
                     setTheme,
                     setTopNum,
                     setType,
                     setFocused,
                     setCount,
                     setBase,
+                    setWidth,
+                    setHeight,
+                    setPrev,
                 }}>
                 {children}
             </UserContext.Provider>

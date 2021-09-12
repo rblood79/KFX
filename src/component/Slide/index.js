@@ -10,19 +10,24 @@ import ExpendItem from './expendItem';
 
 import { shuffle } from '../Utill';
 
-import { gwangju, daegu, busan } from '../Data'
+import { gwangju, daegu, busan, sa } from '../Data'
 
 const App = (props) => {
   const state = useContext(context);
-  const { topNum, type, focused, setFocused, } = state;
+  const {topNum, type, focused, setFocused, base, prev } = state;
+
   const [startX, setStartX] = useState(0);
   const [posX, setPosX] = useState(0);
   const [itemWidth, setItemWidth] = useState(360);
   const [margin, setMargin] = useState(96);
 
-
   const [selectItem, setSelectItem] = useState(null);
   const [data, setData] = useState([]);
+
+  //const [viewCount] =useState(5);
+  const [col, setCol] = useState(9);
+  const [row, setRow] = useState(1);
+  const [end, setEnd] = useState();
 
   const sliderContainer = useRef(null);
   const sliderContents = useRef(null);
@@ -33,41 +38,43 @@ const App = (props) => {
       setStartX(type === 'list' ? sliderContainer.current.clientWidth * 0.5 : 0);
     }
   }
+
   const moveX = (postion) => {
     if (postion === 'prev') {
-      focused > 0 && setFocused(focused - 1)
+      focused > 0 && setFocused(focused - 1);
     } else if (postion === 'next') {
-      focused < data.length - 1 && setFocused(focused + 1)
-    } else {
-
-    }
+      focused < end && setFocused(focused + 1);
+    };
   }
 
-  useEffect(() => {
-    type === 'list' ? setPosX(Math.round(startX - ((itemWidth + margin) * focused) - (itemWidth * 0.5))) : setPosX(0);
-  }, [focused, startX]);
+  const gridX = () => {
+    const total = data.length;
+    let row = 1;
+    let col = total;
 
-  useEffect(() => {
-    setFocused(0);
-    if (topNum === 0) {
-      setData(gwangju);
-    } else if (topNum === 1) {
-      setData(daegu);
-    } else if (topNum === 2) {
-      setData(busan);
-    }
-  }, [topNum]);
+    if (type === 'grid') {
+      if (15 < total) {
+        row = 3;
+        col = Math.ceil(total / row);
+      } else if (10 < total && total < 15) {
+        row = 3;
+        col = 5;
+      } else if (5 < total && total < 10) {
+        row = 2;
+        col = 5;
+      } else {
+        row = 1;
+        col = total;
+      }
+      setMargin(16);
+    } else {
+      setMargin(96);
+    };
 
-  useEffect(() => {
-    fn_startX();
-    setFocused(0);
-  }, [type]);
-
-  useEffect(() => {
-    if (sliderContainer) {
-      fn_startX();
-    }
-  }, [sliderContainer]);
+    setCol(col);
+    setRow(row);
+    setEnd(type === 'list' ? total - 1 : col - 5);
+  }
 
   useEffect(() => {
     window.addEventListener('resize', fn_startX);
@@ -75,6 +82,46 @@ const App = (props) => {
       window.removeEventListener('resize', fn_startX);
     }
   })
+
+  useEffect(() => {
+    if (type === 'list') {
+      setPosX(Math.round(startX - ((itemWidth + margin) * focused) - (itemWidth * 0.5)))
+    } else if (data.length > 15 && !base) {
+      setPosX(Math.round(startX - ((itemWidth + margin) * focused)))
+    };
+  }, [focused, startX]);
+
+  useEffect(() => {
+    setFocused(0);
+    type === 'grid' && setPosX(0);
+
+    if (topNum === 0) {
+      setData(gwangju);
+    } else if (topNum === 1) {
+      setData(daegu);
+    } else if (topNum === 2) {
+      setData(busan);
+    } else if (topNum === 3) {
+      setData(sa);
+    }
+  }, [topNum]);
+
+  useEffect(() => {
+    gridX();
+    fn_startX();
+    setFocused(0);
+    setPosX(0);
+  }, [type]);
+
+  useEffect(() => {
+    if (sliderContainer) {
+      fn_startX();
+    };
+  }, [sliderContainer]);
+
+  useEffect(() => {
+    gridX();
+  }, [data])
 
   return (
     <Flipper
@@ -88,7 +135,11 @@ const App = (props) => {
       </div>
       <div className={classNames('sliderContainer', focused !== null && 'active')} ref={sliderContainer}>
         <div className={classNames('sliderContents', type === 'grid' && 'active')} ref={sliderContents}
-          style={{ transform: 'translateX(' + posX + 'px)' }}
+          style={{
+            transform: 'translateX(' + posX + 'px)',
+            gridTemplateColumns: 'repeat(' + col + ', 360px)',
+            gridTemplateRows: 'repeat(' + row + ', 160px)',
+          }}
         >
           {
             data.map((item, i) => {
@@ -100,17 +151,17 @@ const App = (props) => {
         </div>
       </div>
       {(selectItem === null) ? (
-        <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
+        <Flipped flipId={'FlippedContainer'} key={'swiperContainer'} onComplete={() => {type==='grid'&&setFocused(prev)}}>
           <div className={'empty'}>
             <div className={'detail'}>
-              <ExpendItem item={data[focused]} active={false} select={setSelectItem} key={'sideItem'}/>
+              <ExpendItem item={data[focused]} active={false} select={setSelectItem} key={'sideItem'} />
             </div>
           </div>
         </Flipped>
       ) : (
         <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
           <div className={'detail'}>
-            <ExpendItem item={data[focused]} active={true} select={setSelectItem} key={'sideItem'}/>
+            <ExpendItem item={data[focused]} active={true} select={setSelectItem} key={'sideItem'} />
           </div>
         </Flipped>
       )}

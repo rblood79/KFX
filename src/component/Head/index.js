@@ -11,6 +11,7 @@ const App = (props) => {
     { id: 0, title: 'GWANGJU 1B', },
     { id: 1, title: 'DAEGU 2B', },
     { id: 2, title: 'BUSAN 3B', },
+    { id: 3, title: 'SACHUN 4B', },
   ]);
   //
   return (
