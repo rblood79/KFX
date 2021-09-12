@@ -11,7 +11,7 @@ import context from '../Context';
 const App = (props) => {
     const state = useContext(context);
     const { type, setBase } = state;
-    const item = _.cloneDeep(props.item);
+    const item = props.item;
     const selectItem = props.select
     //
     let percentColor = item && getColor(item.engine, 0, 240);
@@ -50,7 +50,10 @@ const App = (props) => {
 
     return (
         <div className={'detailContainer'} style={{ width: 360, height: 360 }}>
-            <ul className={'detailContents'} style={{ marginLeft: (96 - (type === 'list' ? 48 : 18)) * 0.5 }}>
+            <ul className={'detailContents'} style={{ 
+                //marginLeft: (96 - (type === 'list' ? 48 : 18)) * 0.5
+                marginLeft: '24px'
+            }}>
                 <SideItem {...item} type={type} key={'sideItem'} />
             </ul>
             <div className={classNames('listItem', 'listItemExpend')} >
