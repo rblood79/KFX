@@ -11,7 +11,7 @@ import GueageBox from './gueage';
 
 const App = (props) => {
     const state = useContext(context);
-    const { focused, setFocused, type, base, setBase } = state;
+    const { focused, setFocused, type, setBase } = state;
     const index = props.index;
     const item = props.item;
     const margin = props.margin;

@@ -10,7 +10,7 @@ import context from '../Context';
 
 const App = (props) => {
     const state = useContext(context);
-    const { type, setFocused, setBase } = state;
+    const { type, setBase } = state;
     const item = _.cloneDeep(props.item);
     const selectItem = props.select
     //

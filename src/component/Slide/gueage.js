@@ -1,12 +1,8 @@
 
 import './gueage.scss';
 import classNames from 'classnames';
-/*import React, { useContext, } from 'react';
-import context from '../Context';*/
 
 const App = (props) => {
-    /*const state = useContext(context);
-    const { focused } = state;*/
     const value = props.value;
     const color = props.color;
 

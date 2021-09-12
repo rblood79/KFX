@@ -5,7 +5,7 @@ import context from '../Context';
 
 const App = (props) => {
   const state = useContext(context);
-  const { type, focused, base } = state;
+  const { type, base } = state;
   const slideSize = 360;
 
   return (
