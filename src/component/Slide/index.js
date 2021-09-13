@@ -10,7 +10,7 @@ import ExpendItem from './expendItem';
 
 import { shuffle } from '../Utill';
 
-import { gwangju, daegu, busan, sa } from '../Data'
+import { DS, gwangju, daegu, busan, sa } from '../Data'
 
 const App = (props) => {
   const state = useContext(context);
@@ -86,7 +86,6 @@ const App = (props) => {
   }
 
   useEffect(() => {
-    console.log('resize')
     window.addEventListener('resize', fn_startX);
     return () => {
       window.removeEventListener('resize', fn_startX);
@@ -95,6 +94,7 @@ const App = (props) => {
 
   useMemo(() => {
     console.log('useMemo')
+    setData(DS);
   },[])
 
   useEffect(() => {
@@ -110,6 +110,8 @@ const App = (props) => {
       setData(busan);
     } else if (topNum === 3) {
       setData(sa);
+    } else {
+      setData(DS);
     }
   }, [topNum]);
 

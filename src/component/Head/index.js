@@ -16,8 +16,7 @@ const App = (props) => {
   //
   return (
     <div className="head">
-      <div className={'topLogo'}>
-        <div className={'logoBase'} />
+      <div className={'topLogo'} onClick={() => setTopNum(null)}>
         <div className={'logo'}>
           <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt={'logo'} />
         </div>

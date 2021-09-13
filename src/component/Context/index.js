@@ -7,7 +7,7 @@ class UserProvider extends Component {
     state = {
         url: 'http://localhost:8080',
         theme: 'light',
-        topNum: 0,
+        topNum: null,
         type: 'list',
         focused: 0,
         base: false,
