@@ -14,11 +14,13 @@ const App = (props) => {
         return result;
     }
     return (
+        <>
         <div className={classNames('boxLineContainer', active && 'active')}>
             {
                 <Box />//type === 'list' && <Box />
             }
         </div>
+        </>
     );
 }
 

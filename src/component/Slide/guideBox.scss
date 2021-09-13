@@ -1,6 +1,5 @@
 .boxLineContainer {
     background: #fafafa;
-    //background: #f00;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -8,17 +7,24 @@
     top: 0;
     pointer-events: none;
     user-select: none;
-    transition: transform 0.24s ease-in-out;
+    transition: transform 0.24s ease-in-out, clip-path 0.24s ease-in-out;
+    clip-path: polygon(0 0, 50% 0, 100% 0, 100% 50%, 100% 100%, 50% 100%, 0 100%, 0 50%);
     &.active {
-        transform: scale(1.41);//rotate(45deg);
-        //transform: rotate(45deg);
-        background: linear-gradient(90deg, #eee 0%, #fafafa 100%);
+        transform: scale(1.36);
+        background: linear-gradient(90deg, #eee 0%, #fff 100%);
+        clip-path: polygon(0 50%, 50% 0, 100% 50%, 100% 50%, 100% 50%, 50% 100%, 0 50%, 0 50%);
+        .boxLine{
+            border-color: rgba(0, 0, 0, 0.16) !important;
+            width: 16px !important;
+            height: 16px !important;
+        }
     }
     .boxLine {
         position: absolute;
         border: 2px solid rgba(0, 0, 0, 0.16);
-        width: 16px;
-        height: 16px;
+        width: 8px;
+        height: 8px;
+        transition: width 0.24s ease-in-out 0s, height 0.24s ease-in-out 0s, border 0.24s ease-in-out 0.12s;
         &:nth-child(1) {
             border-right: 0;
             border-bottom: 0;

@@ -10,7 +10,7 @@ import context from '../Context';
 
 const App = (props) => {
     const state = useContext(context);
-    const { type, setBase , setFocused} = state;
+    const { type, setBase, } = state;
     const item = props.item;
     const selectItem = props.select
     //
@@ -50,10 +50,7 @@ const App = (props) => {
 
     return (
         <div className={'detailContainer'} style={{ width: 360, height: 360 }}>
-            <ul className={'detailContents'} style={{ 
-                //marginLeft: (96 - (type === 'list' ? 48 : 18)) * 0.5
-                marginLeft: '24px'
-            }}>
+            <ul className={'detailContents'}>
                 <SideItem {...item} type={type} key={'sideItem'} />
             </ul>
             <div className={classNames('listItem', 'listItemExpend')} >
@@ -63,7 +60,7 @@ const App = (props) => {
                 <div className={'itemTitle'}>{item && item.title}<span className={'itemTitleGray'}>BORAMAE</span></div>
                 <span className={'itemPoint'}>MATCHING POINT</span>
                 <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item && item.engine}%</div>
-                <button className={'detailButton'} onClick={() => { onClick() }}><span className={'detailText'}>Close</span></button>
+                <button className={'detailButton'} onClick={() => { onClick() }} />
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ $centerSize: 360px;
 $defaultSize: 48px;
 $halfSize: 24px;
 $duration: 0.24s;
+$minSize: 4px;
 
 .listItem {
     width: 100%;
@@ -16,8 +17,27 @@ $duration: 0.24s;
     flex-direction: column;
     justify-content: flex-start;
     //user-select: none;
-    //filter: grayscale(100%) blur(2px);
+    //filter: grayscale(100%);
     transition: height $duration ease-in-out, filter $duration ease-in-out;
+    &:hover {
+        .boxLine {
+            border-color: rgba(5, 109, 205, 1);
+            /*width: 50%;
+            height: 50%;*/
+            &:nth-child(1) {
+                width: calc(100% - 8px);
+            }
+            &:nth-child(2) {
+                height: calc(100% - 8px);
+            }
+            &:nth-child(3) {
+                height: calc(100% - 8px);
+            }
+            &:nth-child(4) {
+                width: calc(100% - 8px);
+            }
+        }
+    }
     &:last-child {
         margin-right: 0 !important;
     }
@@ -78,36 +98,16 @@ $duration: 0.24s;
             z-index: 1;
             font-family: "Urbanist", sans-serif;
         }
-        .detailButton {
-            opacity: 0;
-            position: absolute;
-            bottom: -63px;
-            overflow: hidden;
-            width: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60px;
+        
+        .detailButtonGrid {
             z-index: 1;
-            .detailText {
-                z-index: 1;
-                padding-bottom: 16px;
-                color: #fff;
-                font-weight: bold;
-            }
-            &::before {
-                content: "A";
-                display: flex;
-                width: 86px;
-                height: 86px;
-                background-color: #0461b8;
-                transform: rotate(45deg);
-                transform-origin: center;
-                position: absolute;
-                bottom: 18px;
-                z-index: 0;
-            }
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
         }
+        
     }
     .aircraftGroup {
         //pointer-events: none;

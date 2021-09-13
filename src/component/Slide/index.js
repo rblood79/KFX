@@ -1,5 +1,5 @@
 import './index.scss';
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState, useRef, useMemo } from 'react';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
 import { Flipper, Flipped } from 'react-flip-toolkit';
@@ -14,7 +14,7 @@ import { gwangju, daegu, busan, sa } from '../Data'
 
 const App = (props) => {
   const state = useContext(context);
-  const {topNum, type, focused, setFocused, base, prev } = state;
+  const { topNum, type, base, focused, setFocused, count, setCount} = state;
 
   const [startX, setStartX] = useState(0);
   const [posX, setPosX] = useState(0);
@@ -24,7 +24,6 @@ const App = (props) => {
   const [selectItem, setSelectItem] = useState(null);
   const [data, setData] = useState([]);
 
-  //const [viewCount] =useState(5);
   const [col, setCol] = useState(9);
   const [row, setRow] = useState(1);
   const [end, setEnd] = useState();
@@ -41,11 +40,21 @@ const App = (props) => {
 
   const moveX = (postion) => {
     if (postion === 'prev') {
-      focused > 0 && setFocused(focused - 1);
+      type === 'list' && focused > 0 && setFocused(focused - 1);
+      count > 0 && setCount(count - 1);
     } else if (postion === 'next') {
-      focused < end && setFocused(focused + 1);
+      type === 'list' && focused < end && setFocused(focused + 1);
+      count < end && setCount(count + 1);
     };
   }
+
+  useEffect(() => {
+    if (type === 'list') {
+      setPosX(Math.round(startX - ((itemWidth + margin) * count) - (itemWidth * 0.5)))
+    } else if (data.length > 15 && !base) {
+      setPosX(Math.round(startX - ((itemWidth + margin) * count)))
+    };
+  }, [count, startX]);
 
   const gridX = () => {
     const total = data.length;
@@ -77,22 +86,20 @@ const App = (props) => {
   }
 
   useEffect(() => {
+    console.log('resize')
     window.addEventListener('resize', fn_startX);
     return () => {
       window.removeEventListener('resize', fn_startX);
     }
-  })
+  },[])
 
-  useEffect(() => {
-    if (type === 'list') {
-      setPosX(Math.round(startX - ((itemWidth + margin) * focused) - (itemWidth * 0.5)))
-    } else if (data.length > 15 && !base) {
-      setPosX(Math.round(startX - ((itemWidth + margin) * focused)))
-    };
-  }, [focused, startX]);
+  useMemo(() => {
+    console.log('useMemo')
+  },[])
 
   useEffect(() => {
     setFocused(0);
+    setCount(0);
     type === 'grid' && setPosX(0);
 
     if (topNum === 0) {
@@ -111,6 +118,7 @@ const App = (props) => {
     fn_startX();
     setFocused(0);
     setPosX(0);
+    setCount(0);
   }, [type]);
 
   useEffect(() => {
@@ -130,11 +138,12 @@ const App = (props) => {
     >
       <div className={'filter'}>
         <button className={'filterButton'} onClick={() => setData(shuffle(data))}><i className="ri-equalizer-fill"></i></button>
-        <button className={'filterButton'} onClick={() => moveX('prev')}>prev</button>
-        <button className={'filterButton'} onClick={() => moveX('next')}>next</button>
+        <button className={'filterButton'} onClick={() => moveX('prev')}><i class="ri-arrow-left-s-line"></i></button>
+        <button className={'filterButton'} onClick={() => moveX('next')}><i class="ri-arrow-right-s-line"></i></button>
       </div>
-      <div className={classNames('sliderContainer', focused !== null && 'active')} ref={sliderContainer}>
-        <div className={classNames('sliderContents', type === 'grid' && 'active')} ref={sliderContents}
+
+      <div className={classNames('slide')} ref={sliderContainer}>
+        <div className={classNames('list', type === 'grid' && 'active')} ref={sliderContents}
           style={{
             transform: 'translateX(' + posX + 'px)',
             gridTemplateColumns: 'repeat(' + col + ', 360px)',
@@ -151,7 +160,9 @@ const App = (props) => {
         </div>
       </div>
       {(selectItem === null) ? (
-        <Flipped flipId={'FlippedContainer'} key={'swiperContainer'} onComplete={() => {type==='grid'&&setFocused(prev)}}>
+        <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}
+        //onComplete={() => {type==='grid'&&setFocused(prev)}}
+        >
           <div className={'empty'}>
             <div className={'detail'}>
               <ExpendItem item={data[focused]} active={false} select={setSelectItem} key={'sideItem'} />

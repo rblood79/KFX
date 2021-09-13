@@ -1,7 +1,7 @@
 $duration: 0.24s;
 
 .base {
-  padding-bottom: 14px;
+  //padding-bottom: 14px;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -17,8 +17,11 @@ $duration: 0.24s;
     opacity: 0;
   }
   .baseContents {
+    position: relative;
     width: 0px;
     height: 0px;
+    display: flex;
+    justify-content: center;
     transition: width $duration ease-in-out, height $duration ease-in-out;
     .baseBox {
       border: 1px solid rgb(2, 81, 155);
@@ -55,27 +58,15 @@ $duration: 0.24s;
         border: 8px solid;
         border-image: linear-gradient(to right, rgba(31, 60, 112, 1), rgba(5, 109, 205, 1));
         border-image-slice: 1;
-        /*&::before {
-          content: "";
-          background: #f00;
-          position: absolute;
-          width: 100vh;
-          height: calc(100% + 16px);
-          top: -48px;
-          right: calc(100% + 8px);
-        }
-        &::after {
-          content: "";
-          background: #f00;
-          position: absolute;
-          width: 100vh;
-          height: calc(100% + 16px);
-          bottom: -48px;
-          left: calc(100% + 8px);
-        }*/
       }
       &.active {
         transform: rotate(45deg);
+      }
+    }
+    .detailButton {
+      bottom: -63px;
+      &::before {
+        background-color: #343434;
       }
     }
   }

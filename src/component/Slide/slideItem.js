@@ -11,7 +11,7 @@ import GueageBox from './gueage';
 
 const App = (props) => {
     const state = useContext(context);
-    const { focused, setFocused, type, setBase, setPrev } = state;
+    const { focused, setFocused, type, setBase, setCount } = state;
     const index = props.index;
     const item = props.item;
     const margin = props.margin;
@@ -21,17 +21,18 @@ const App = (props) => {
     let percentColor = getColor(item.engine, 0, 240);
 
     const onClick = () => {
-        setPrev(focused)
+        //setPrev(focused)
         selectItem(item)
         setFocused(index)
         setBase(true)
+        type === 'list' && setCount(index);
     }
 
     return (
         <Flipped flipId={item.id} translate>
-            <div key={item.id} className={classNames('listItem', active && 'active')} 
+            <div key={item.id} className={classNames('listItem', active && 'active')}
                 style={{ marginRight: type !== 'grid' && margin }}
-                onClick={() => { onClick() }}
+
             >
                 <GuideBox value={item.engine} active={active} type={type} />
                 <div className={'aircraftGroup'} >
@@ -39,7 +40,7 @@ const App = (props) => {
                         <img src={process.env.PUBLIC_URL + item.img} alt={'KF-21'} />
                     </div>
                 </div>
-                {(focused === index && type !== 'grid') ? (
+                {(focused === index && type === 'list') ? (
                     <div className={classNames('item')} >
                         <div>
                             <GueageBox value={item.engine} color={percentColor} />
@@ -50,19 +51,17 @@ const App = (props) => {
                             <div className={'itemTitle'}>{item.title}</div>
                             <span className={'itemSubText'}>Boramae</span>
                         </div>
-                        <button className={'detailButton'}>
-                            <span className={'detailText'}>Detail</span>
-                        </button>
+                        <button className={'detailButton'} onClick={() => { onClick() }} />
                     </div>
+
                 ) : (
                     <div className={classNames('item')} >
                         <div className={'itemTitle'}>{item.title}</div>
                         <GueageBox value={item.engine} color={percentColor} />
                         <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.engine}%</div>
+                        <button className={'detailButtonGrid'} onClick={() => { onClick() }} />
                     </div>
                 )}
-
-
 
             </div>
         </Flipped>
