@@ -16,8 +16,8 @@ const App = (props) => {
         </div>
         <div className={'detailButton'}>
           <div className={classNames('detailButtonContainer', base && 'active')}>
-            <span className={'detailText'}>상세정보<i class="ri-search-line"></i></span>
-            <span className={'detailText'}>닫기<i class="ri-close-line"></i></span>
+            <span className={'detailText'}>상세정보<i className={"ri-search-line"}></i></span>
+            <span className={'detailText'}>닫기<i className={"ri-close-line"}></i></span>
           </div>
         </div>
       </div>

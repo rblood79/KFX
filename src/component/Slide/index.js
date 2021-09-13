@@ -9,12 +9,13 @@ import SlideItem from './slideItem';
 import ExpendItem from './expendItem';
 
 import { shuffle } from '../Utill';
+import _ from 'lodash';
 
-import { DS, gwangju, daegu, busan, sa } from '../Data'
+import { DS } from '../Data';
 
 const App = (props) => {
   const state = useContext(context);
-  const { topNum, type, base, focused, setFocused, count, setCount} = state;
+  const { topNum, type, base, focused, setFocused, count, setCount } = state;
 
   const [startX, setStartX] = useState(0);
   const [posX, setPosX] = useState(0);
@@ -90,12 +91,12 @@ const App = (props) => {
     return () => {
       window.removeEventListener('resize', fn_startX);
     }
-  },[])
+  }, [])
 
   useMemo(() => {
     console.log('useMemo')
     setData(DS);
-  },[])
+  }, [])
 
   useEffect(() => {
     setFocused(0);
@@ -103,13 +104,23 @@ const App = (props) => {
     type === 'grid' && setPosX(0);
 
     if (topNum === 0) {
-      setData(gwangju);
+      const filterData = _.filter(DS, { LOCATION: '1B'});
+      //console.log(filterData)
+      const skip = ['id', 'title', 'img', 'LOCATION', 'SERIES', 'MISSION']
+      //const xx = _.omit(DS, skip)
+      var yy = _.map(filterData, function (n) {
+        return _.omit(n, skip);
+      });
+      setData(filterData)
     } else if (topNum === 1) {
-      setData(daegu);
+      const filterData = _.filter(DS, { LOCATION: '2B', SERIES: 'KF21' });
+      setData(filterData)
     } else if (topNum === 2) {
-      setData(busan);
+      const filterData = _.filter(DS, { LOCATION: '3B', SERIES: 'T50' });
+      setData(filterData)
     } else if (topNum === 3) {
-      setData(sa);
+      const filterData = _.filter(DS, { LOCATION: '4B', SERIES: 'T50' });
+      setData(filterData)
     } else {
       setData(DS);
     }
@@ -140,8 +151,8 @@ const App = (props) => {
     >
       <div className={'filter'}>
         <button className={'filterButton'} onClick={() => setData(shuffle(data))}><i className="ri-equalizer-fill"></i></button>
-        <button className={'filterButton'} onClick={() => moveX('prev')}><i class="ri-arrow-left-s-line"></i></button>
-        <button className={'filterButton'} onClick={() => moveX('next')}><i class="ri-arrow-right-s-line"></i></button>
+        <button className={'filterButton'} onClick={() => moveX('prev')}><i className="ri-arrow-left-s-line"></i></button>
+        <button className={'filterButton'} onClick={() => moveX('next')}><i className="ri-arrow-right-s-line"></i></button>
       </div>
 
       <div className={classNames('slide')} ref={sliderContainer}>

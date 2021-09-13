@@ -13,6 +13,10 @@ const App = (props) => {
     { id: 2, title: 'BUSAN 3B', },
     { id: 3, title: 'SACHUN 4B', },
   ]);
+
+  const onClick=(id)=>{
+    setTopNum(id)
+  }
   //
   return (
     <div className="head">
@@ -25,7 +29,7 @@ const App = (props) => {
         {
           topNav.map((item, idx) => {
             return (
-              <button key={idx} className={classNames('topButton', idx === topNum ? 'active' : null)} onClick={() => setTopNum(item.id)}>
+              <button key={idx} className={classNames('topButton', idx === topNum ? 'active' : null)} onClick={() => onClick(item.id)}>
                 {item.title}
               </button>
             )

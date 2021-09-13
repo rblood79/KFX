@@ -1,64 +1,3 @@
-export const gwangju = [
-    { id: 1, title: 'F-16-001', LOCATION: '1B', SERIES: 'F16', MISSION: 'AirFight', img: 'assets/aircraft/air-0.png', engine: 15, 주기검사: 66, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 80 },
-    { id: 2, title: 'F-16-002', LOCATION: '1B', SERIES: 'F16', MISSION: 'BaseDefence', img: 'assets/aircraft/air-1.png', engine: 76, 주기검사: 78, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 44 },
-    { id: 3, title: 'F-16-003', LOCATION: '1B', SERIES: 'F16', MISSION: 'DogFight', img: 'assets/aircraft/air-2.png', engine: 51, 주기검사: 44, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 67 },
-    { id: 4, title: 'KF-21-013', LOCATION: '1B', SERIES: 'KF21', MISSION: 'AirFight', img: 'assets/aircraft/air-3.png', engine: 25, 주기검사: 52, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 24 },
-    { id: 5, title: 'KF-21-0143', LOCATION: '1B', SERIES: 'KF21', MISSION: 'AirFight', img: 'assets/aircraft/air-4.png', engine: 19, 주기검사: 30, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 55 },
-    { id: 6, title: 'T-50 001A', LOCATION: '1B', SERIES: 'T50', MISSION: 'BaseDefence', img: 'assets/aircraft/air-4.png', engine: 19, 주기검사: 30, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 55 },
-    { id: 7, title: 'T-50 002A', LOCATION: '1B', SERIES: 'T50', MISSION: 'DogFight', img: 'assets/aircraft/air-4.png', engine: 19, 주기검사: 30, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 55 },
-]
-
-export const daegu = [
-    { id: 'e43', title: 'KF-21-001', LOCATION: '2B', SERIES: 'KF21', MISSION: 'AirFight', img: 'assets/aircraft/air-0.png', engine: 94, 주기검사: 80, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 77 },
-    { id: 'fe2', title: 'KF-21-002', LOCATION: '2B', SERIES: 'KF21', MISSION: 'AirFight', img: 'assets/aircraft/air-1.png', engine: 88, 주기검사: 75, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 79 },
-    { id: 13, title: 'KF-21-003', LOCATION: '2B', SERIES: 'KF21', MISSION: 'AirFight', img: 'assets/aircraft/air-2.png', engine: 82, 주기검사: 80, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 71 },
-    { id: 14, title: 'KF-21-004', LOCATION: '2B', SERIES: 'KF21', MISSION: 'BaseDefence', img: 'assets/aircraft/kf-21.png', engine: 79, 주기검사: 77, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 65 },
-    { id: 15, title: 'KF-21-005', LOCATION: '2B', SERIES: 'KF21', MISSION: 'BaseDefence', img: 'assets/aircraft/air-4.png', engine: 71, 주기검사: 55, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 88 },
-    { id: 16, title: 'KF-21-006', LOCATION: '2B', SERIES: 'KF21', MISSION: 'BaseDefence', img: 'assets/aircraft/air-5.png', engine: 65, 주기검사: 89, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 82 },
-    { id: 17, title: 'KF-21-007', LOCATION: '2B', SERIES: 'KF21', MISSION: 'DogFight', img: 'assets/aircraft/air-3.png', engine: 59, 주기검사: 80, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 47 },
-    { id: 18, title: 'KF-21-008', LOCATION: '2B', SERIES: 'KF21', MISSION: 'DogFight', img: 'assets/aircraft/kf-21.png', engine: 43, 주기검사: 30, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 76 },
-    { id: 19, title: 'KF-21-009', LOCATION: '2B', SERIES: 'KF21', MISSION: 'DogFight', img: 'assets/aircraft/air-2.png', engine: 36, 주기검사: 54, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 23 },
-    { id: 21, title: 'KF-21-001', LOCATION: '2B', SERIES: 'KF21', MISSION: 'DogFight', img: 'assets/aircraft/air-0.png', engine: 94, 주기검사: 80, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 77 },
-    { id: 32, title: 'KF-21-002', LOCATION: '2B', SERIES: 'KF21', MISSION: 'DogFight', img: 'assets/aircraft/air-1.png', engine: 88, 주기검사: 75, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 79 },
-    { id: 1233, title: 'F-16-003', LOCATION: '2B', SERIES: 'F16', MISSION: 'CityDefence', img: 'assets/aircraft/air-2.png', engine: 82, 주기검사: 80, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 71 },
-    { id: 142, title: 'F-16-004', LOCATION: '2B', SERIES: 'F16', MISSION: 'CityDefence', img: 'assets/aircraft/kf-21.png', engine: 79, 주기검사: 77, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 65 },
-    { id: 155, title: 'F-16-005', LOCATION: '2B', SERIES: 'F16', MISSION: 'CityDefence', img: 'assets/aircraft/air-4.png', engine: 71, 주기검사: 55, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 88 },
-    { id: 1643, title: 'F-16-006', LOCATION: '2B', SERIES: 'F16', MISSION: 'AirFight', img: 'assets/aircraft/air-5.png', engine: 65, 주기검사: 89, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 82 },
-    { id: 1764, title: 'F-16-007', LOCATION: '2B', SERIES: 'F16', MISSION: 'AirFight', img: 'assets/aircraft/air-3.png', engine: 59, 주기검사: 80, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 47 },
-    { id: 123, title: 'F-16-008', LOCATION: '2B', SERIES: 'F16', MISSION: 'AirFight', img: 'assets/aircraft/kf-21.png', engine: 43, 주기검사: 30, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 76 },
-    { id: 34232, title: 'F-16-009', LOCATION: '2B', SERIES: 'F16', MISSION: 'BaseDefence', img: 'assets/aircraft/air-2.png', engine: 36, 주기검사: 54, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 23 },
-    { id: 543, title: 'F-16-005', LOCATION: '2B', SERIES: 'F16', MISSION: 'BaseDefence', img: 'assets/aircraft/air-4.png', engine: 71, 주기검사: 55, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 88 },
-    { id: 654, title: 'F-16-006', LOCATION: '2B', SERIES: 'F16', MISSION: 'BaseDefence', img: 'assets/aircraft/air-5.png', engine: 65, 주기검사: 89, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 82 },
-    { id: 765, title: 'F-16-007', LOCATION: '2B', SERIES: 'F16', MISSION: 'Recon', img: 'assets/aircraft/air-3.png', engine: 59, 주기검사: 80, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 47 },
-    { id: 4325, title: 'F-16-008', LOCATION: '2B', SERIES: 'F16', MISSION: 'Recon', img: 'assets/aircraft/kf-21.png', engine: 43, 주기검사: 30, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 76 },
-    { id: 765765, title: 'F-16-009', LOCATION: '2B', SERIES: 'F16', MISSION: 'Recon', img: 'assets/aircraft/air-2.png', engine: 36, 주기검사: 54, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 23 },
-]
-
-export const busan = [
-    { id: 21, title: 'T-50-001', LOCATION: '3B', SERIES: 'T50', MISSION: 'AirFight', img: 'assets/aircraft/air-0.png', engine: 55, 주기검사: 75, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 99 },
-    { id: 22, title: 'T-50-002', LOCATION: '3B', SERIES: 'T50', MISSION: 'AirFight', img: 'assets/aircraft/air-5.png', engine: 89, 주기검사: 99, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 88 },
-    { id: 23, title: 'T-50-003', LOCATION: '3B', SERIES: 'T50', MISSION: 'Stealth', img: 'assets/aircraft/kf-21.png', engine: 77, 주기검사: 47, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 14 },
-    { id: 24, title: 'T-50-004', LOCATION: '3B', SERIES: 'T50', MISSION: 'Stealth', img: 'assets/aircraft/air-2.png', engine: 18, 주기검사: 55, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 56 },
-    { id: 25, title: 'T-50-005', LOCATION: '3B', SERIES: 'T50', MISSION: 'Stealth', img: 'assets/aircraft/air-3.png', engine: 24, 주기검사: 42, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 47 },
-    { id: 26, title: 'T-50-006', LOCATION: '3B', SERIES: 'T50', MISSION: 'Stealth', img: 'assets/aircraft/air-4.png', engine: 9, 주기검사: 18, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 26 },
-]
-
-export const sa = [
-    { id: 251, title: 'T-50-001', LOCATION: '4B', SERIES: 'T50', MISSION: 'AirFight', img: 'assets/aircraft/air-0.png', engine: 55, 주기검사: 75, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 99 },
-    { id: 252, title: 'T-50-002', LOCATION: '4B', SERIES: 'T50', MISSION: 'BaseDefence', img: 'assets/aircraft/air-5.png', engine: 89, 주기검사: 99, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 88 },
-    { id: 253, title: 'T-50-003', LOCATION: '4B', SERIES: 'T50', MISSION: 'BaseDefence', img: 'assets/aircraft/kf-21.png', engine: 77, 주기검사: 47, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 14 },
-    { id: 254, title: 'T-50-004', LOCATION: '4B', SERIES: 'T50', MISSION: 'BaseDefence', img: 'assets/aircraft/air-2.png', engine: 18, 주기검사: 55, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 56 },
-    { id: 255, title: 'T-50-005', LOCATION: '4B', SERIES: 'T50', MISSION: 'BaseDefence', img: 'assets/aircraft/air-3.png', engine: 24, 주기검사: 42, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 47 },
-    { id: 256, title: 'T-50-006', LOCATION: '4B', SERIES: 'T50', MISSION: 'CityDefence', img: 'assets/aircraft/air-4.png', engine: 9, 주기검사: 18, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 26 },
-    { id: 2251, title: 'T-50-001', LOCATION: '4B', SERIES: 'T50', MISSION: 'CityDefence', img: 'assets/aircraft/air-0.png', engine: 55, 주기검사: 75, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 99 },
-    { id: 2522, title: 'T-50-002', LOCATION: '4B', SERIES: 'T50', MISSION: 'CityDefence', img: 'assets/aircraft/air-5.png', engine: 89, 주기검사: 99, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 88 },
-    { id: 3422, title: 'F-16-002', LOCATION: '4B', SERIES: 'F16', MISSION: 'CityDefence', img: 'assets/aircraft/air-1.png', engine: 76, 주기검사: 78, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 44 },
-    { id: 5463, title: 'F-16-003', LOCATION: '4B', SERIES: 'F16', MISSION: 'AirFight', img: 'assets/aircraft/air-2.png', engine: 51, 주기검사: 44, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 67 },
-    { id: 7654, title: 'KF-21-013', LOCATION: '4B', SERIES: 'KF21', MISSION: 'AirFight', img: 'assets/aircraft/air-3.png', engine: 25, 주기검사: 52, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 24 },
-    { id: 87685, title: 'KF-21-0143', LOCATION: '4B', SERIES: 'KF21', MISSION: 'AirFight', img: 'assets/aircraft/air-4.png', engine: 19, 주기검사: 30, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 55 },
-]
-
-
 export const DS = [
     { id: 'e6743', title: 'KF-21-001', LOCATION: '2B', SERIES: 'KF21', MISSION: 'AirFight', img: 'assets/aircraft/air-0.png', engine: 94, 주기검사: 80, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 77 },
     { id: 'f765e2', title: 'KF-21-002', LOCATION: '2B', SERIES: 'KF21', MISSION: 'AirFight', img: 'assets/aircraft/air-1.png', engine: 88, 주기검사: 75, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 79 },
@@ -95,7 +34,7 @@ export const DS = [
     { id: 26541, title: 'T-50-001', LOCATION: '3B', SERIES: 'T50', MISSION: 'AirFight', img: 'assets/aircraft/air-0.png', engine: 55, 주기검사: 75, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 99 },
     { id: 276572, title: 'T-50-002', LOCATION: '3B', SERIES: 'T50', MISSION: 'AirFight', img: 'assets/aircraft/air-5.png', engine: 89, 주기검사: 99, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 88 },
     { id: 276573, title: 'T-50-003', LOCATION: '3B', SERIES: 'T50', MISSION: 'Stealth', img: 'assets/aircraft/kf-21.png', engine: 77, 주기검사: 47, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 14 },
-    { id: 27654, title: 'T-50-004', LOCATION: '3B', SERIES: 'T50', MISSION: 'Stealth', img: 'assets/aircraft/air-2.png', engine: 18, 주기검사: 55, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 56 },
+    { id: 27654, title: 'F-16K', LOCATION: '3B', SERIES: 'F16', MISSION: 'Stealth', img: 'assets/aircraft/air-2.png', engine: 18, 주기검사: 55, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 56 },
     { id: 27655, title: 'T-50-005', LOCATION: '3B', SERIES: 'T50', MISSION: 'Stealth', img: 'assets/aircraft/air-3.png', engine: 24, 주기검사: 42, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 47 },
     { id: 23456, title: 'T-50-006', LOCATION: '3B', SERIES: 'T50', MISSION: 'Stealth', img: 'assets/aircraft/air-4.png', engine: 9, 주기검사: 18, 야간비행: 50, 외장변경: 50, 실무장여부: 50, 항공기등급: 50, 조종사컨디션: 50, 비행일수: 50, 주요결함: 26 },
 
