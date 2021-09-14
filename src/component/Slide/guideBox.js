@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 const App = (props) => {
     const active = props.active;
-    const type = props.type;
+    //const type = props.type;
 
     const Box = () => {
         const result = [];
@@ -17,7 +17,7 @@ const App = (props) => {
         <>
         <div className={classNames('boxLineContainer', active && 'active')}>
             {
-                <Box />//type === 'list' && <Box />
+                <Box />
             }
         </div>
         </>

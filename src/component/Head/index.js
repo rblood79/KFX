@@ -6,7 +6,7 @@ import 'remixicon/fonts/remixicon.css';
 
 const App = (props) => {
   const state = useContext(context);
-  const { topNum, setTopNum, type, setType } = state;
+  const { topNum, setTopNum, type, setType, setFocused, setCount } = state;
   const [topNav] = useState([
     { id: 0, title: 'GWANGJU 1B', },
     { id: 1, title: 'DAEGU 2B', },
@@ -14,10 +14,18 @@ const App = (props) => {
     { id: 3, title: 'SACHUN 4B', },
   ]);
 
-  const onClick=(id)=>{
+  const onClick = (id) => {
+    setFocused(0);
+    setCount(0);
     setTopNum(id)
   }
-  //
+
+  const onType = (type) =>{
+    setFocused(0);
+    setCount(0);
+    setType(type)
+  }
+
   return (
     <div className="head">
       <div className={'topLogo'} onClick={() => setTopNum(null)}>
@@ -38,15 +46,15 @@ const App = (props) => {
       </div>
       <div className={classNames('topView', type)}>
         <span className={'viewText'}>VIEW TYPE</span>
-        <button className={classNames('viewButton', type === 'list' && 'active')} onClick={() => setType('list')}><i className="ri-checkbox-blank-fill"></i></button>
-        <button className={classNames('viewButton', type === 'grid' && 'active')} onClick={() => setType('grid')}><i className="ri-layout-grid-fill"></i></button>
+        <button className={classNames('viewButton', type === 'list' && 'active')} onClick={() => onType('list')}><i className="ri-checkbox-blank-fill"></i></button>
+        <button className={classNames('viewButton', type === 'grid' && 'active')} onClick={() => onType('grid')}><i className="ri-layout-grid-fill"></i></button>
       </div>
     </div>
   );
 }
 
 App.defaultProps = {
-  topNum: 0,
+  topNum: null,
   type: 'list',
 };
 

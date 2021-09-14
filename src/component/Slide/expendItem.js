@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
-import { getColor, byKeys } from '../Utill'
+import { getColor, byKeys } from '../Mixin'
 import context from '../Context';
 
 

@@ -1,9 +1,9 @@
 import './slideItem.scss';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext,} from 'react';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
 import { Flipped } from 'react-flip-toolkit';
-import { getColor } from '../Utill'
+import { getColor } from '../Mixin'
 import context from '../Context';
 
 import GuideBox from './guideBox';
@@ -14,7 +14,6 @@ const App = (props) => {
     const { focused, setFocused, type, setBase, setCount } = state;
     const index = props.index;
     const item = props.item;
-    const margin = props.margin;
     const active = focused === index && type !== 'grid';
     const selectItem = props.selectItem;
     //
@@ -30,11 +29,8 @@ const App = (props) => {
 
     return (
         <Flipped flipId={item.id} translate>
-            <div key={item.id} className={classNames('listItem', active && 'active')}
-                style={{ marginRight: type !== 'grid' && margin }}
-
-            >
-                <GuideBox value={item.engine} active={active} type={type} />
+            <div key={item.id} className={classNames('listItem', active && 'active')}>
+                <GuideBox value={item.engine} active={active}/>
                 <div className={'aircraftGroup'} >
                     <div className={'aircraft'}>
                         <img src={process.env.PUBLIC_URL + item.img} alt={'KF-21'} />
