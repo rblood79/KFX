@@ -7,6 +7,7 @@ $duration: 0.24s;
   height: 100%;
   left: 0;
   top: 0;
+  padding-bottom: 10px;
   z-index: 100;
   display: flex;
   justify-content: center;
@@ -56,18 +57,37 @@ $duration: 0.24s;
         width: 100%;
         height: 100%;
         border: 8px solid;
-        border-image: linear-gradient(to right, rgba(31, 60, 112, 1), rgba(5, 109, 205, 1));
-        border-image-slice: 1;
+        //border-image: linear-gradient(to right, rgba(31, 60, 112, 1), rgba(5, 109, 205, 1));
+        //border-image-slice: 1;
       }
       &.active {
         transform: rotate(45deg);
       }
     }
+    .inBox {
+      background: linear-gradient(145deg, #056dcd, #1f3c70, #056dcd);
+      background-size: 400%;
+      animation: baseAnime 3s ease infinite;
+      width: 100%;
+      height: 100%;
+      transform: scale(1.41);
+      position: absolute;
+      clip-path: polygon(0 50%, 50% 100%, 50% 97.5%, 2.5% 50%, 50% 2.5%, 97.5% 50%, 50% 97.5%, 50% 100%, 100% 50%, 50% 0);
+    }
     .detailButton {
       bottom: -63px;
       &::before {
-        background-color: #343434;
+        //background-color: #343434;
+        background: linear-gradient(180deg, #424242, #343434);
+        background-size: 300%;
+        animation: baseAnime 3s ease infinite;
       }
     }
   }
+}
+
+@keyframes baseAnime {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }

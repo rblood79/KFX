@@ -14,6 +14,7 @@ const App = (props) => {
         <div className={classNames('baseBox')}>
           <div className={'base'} />
         </div>
+        <div className={classNames('inBox')} />
         <div className={'detailButton'}>
           <div className={classNames('detailButtonContainer', base && 'active')}>
             <span className={'detailText'}>상세정보<i className={"ri-search-line"}></i></span>

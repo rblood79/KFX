@@ -26,7 +26,7 @@ const App = (props) => {
   const move = useMove(type, count, grid, position);
 
   //
-  const moveX = (postion) => {
+  const moveSlide = (postion) => {
     if (postion === 'prev') {
       type === 'list' && focused > 0 && setFocused(focused - 1);
       count > 0 && setCount(count - 1);
@@ -73,8 +73,8 @@ const App = (props) => {
         <>
           <div className={'filter'}>
             <button className={'filterButton'} onClick={() => setData(shuffle(data))}><i className="ri-equalizer-fill"></i></button>
-            <button className={'filterButton'} onClick={() => moveX('prev')}><i className="ri-arrow-left-s-line"></i></button>
-            <button className={'filterButton'} onClick={() => moveX('next')}><i className="ri-arrow-right-s-line"></i></button>
+            <button className={'filterButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i></button>
+            <button className={'filterButton'} onClick={() => moveSlide('next')}><i className="ri-arrow-right-s-line"></i></button>
 
             <div style={{ position: 'absolute', zIndex: 10000, left: 0, top: 0 }}>TYPE: {type} / COUNT: {count} / WIDTH: {size.width} / COL: {grid.col} / ROW: {grid.row} / End: {grid.end} / GAP: {grid.gap} / POS: {position.x} / MOVE: {move.x}</div>
           </div>

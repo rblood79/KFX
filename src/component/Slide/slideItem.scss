@@ -45,6 +45,9 @@ $minSize: 4px;
         filter: none;
         height: 360px;
         z-index: 1;
+        .aircraft {
+            transform: scale(1.26);
+        }
         .item {
             width: 100%;
             flex-direction: column;

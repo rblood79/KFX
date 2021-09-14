@@ -1,3 +1,4 @@
+  
 .head {
     display: flex;
     justify-content: space-between;
@@ -15,18 +16,12 @@
         align-items: center;
         justify-content: center;
         z-index: 10;
-        overflow: hidden;
         clip-path: polygon(50% 100%, 0 0, 100% 0);
-        &::before {
-            content: '';
-            position: absolute;
-            z-index: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #1f3c70;
-            box-shadow: inset 0 -8px 16px rgba(0, 0, 0, 0.48);
-            transform-origin: center;
-        }
+        box-shadow: inset 0px 0px 16px rgba(0, 0, 0, 0.48);
+        background-color: #1f3c70;
+        background: radial-gradient(circle, #056dcd, #1f3c70);
+        background-size: 200% 300%;
+        animation: baseAnime 3s ease infinite;
         .logo {
             z-index: 1;
             width: 108px;

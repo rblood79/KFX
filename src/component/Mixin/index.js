@@ -76,7 +76,7 @@ export function useGridNum(data, type) {
                 _row = 1;
                 _col = total;
             }
-            _gap = 24;
+            _gap = 16;
         };
         setGridNum({
             col: _col,
