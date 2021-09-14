@@ -24,6 +24,8 @@ const App = (props) => {
   const grid = useGridNum(data, type);
   const position = usePosition(sliderContainer, type, size);
   const move = useMove(type, count, grid, position);
+  //
+  const [checkList, setCheckList] = useState(null);
 
   //
   const moveSlide = (postion) => {
@@ -71,6 +73,8 @@ const App = (props) => {
       const keyArray = Object.keys(used);
       const sUsed = aver(mUsed, keyArray);
       const lists = _.cloneDeep(oData[0].호수추천);
+      setCheckList(oData[0].기준정보)
+
       _.each(lists, (obj) => {
         let valueSum = 0;
         _.map(obj, (v, k) => {
@@ -87,13 +91,13 @@ const App = (props) => {
 
       //
     } else if (topNum === 1) {
-      const filterData = _.filter(DS, { LOCATION: '2B', SERIES: 'KF21' });
+      const filterData = _.filter(DS, { LOCATION: '2B', 기종: 'KF21' });
       setData(filterData)
     } else if (topNum === 2) {
-      const filterData = _.filter(DS, { LOCATION: '3B', SERIES: 'T50' });
+      const filterData = _.filter(DS, { LOCATION: '3B', 기종: 'T50' });
       setData(filterData)
     } else if (topNum === 3) {
-      const filterData = _.filter(DS, { LOCATION: '4B', SERIES: 'T50' });
+      const filterData = _.filter(DS, { LOCATION: '4B', 기종: 'T50' });
       setData(filterData)
     } else {
       //setData(DS);
@@ -101,8 +105,25 @@ const App = (props) => {
   }, [topNum]);
 
   /*useMemo(() => {
-    console.log('useMemo', temp)
+    console.log('useMemo', checkList)
   }, [])*/
+  const FilterBox = () => {
+    let result = [];
+    useEffect(() => {
+      if (checkList) {
+        console.log('useMemo', checkList)
+        _.map(checkList, (v, k) => {
+          result.push(
+            <div key={'check' + k}>
+              test
+            </div>
+          )
+        })
+      }
+    }, [checkList]);
+    return result;
+    return (<div>aaa</div>)
+  }
 
   return (
     <Flipper
@@ -116,7 +137,10 @@ const App = (props) => {
             <button className={'filterButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i></button>
             <button className={'filterButton'} onClick={() => moveSlide('next')}><i className="ri-arrow-right-s-line"></i></button>
 
-            <div style={{ position: 'absolute', zIndex: 10000, left: 0, top: 0 }}>TYPE: {type} / COUNT: {count} / WIDTH: {size.width} / COL: {grid.col} / ROW: {grid.row} / End: {grid.end} / GAP: {grid.gap} / POS: {position.x} / MOVE: {move.x}</div>
+            <div style={{ position: 'absolute', zIndex: 10000, left: 0, top: 0 }}>
+              TYPE: {type} / COUNT: {count} / WIDTH: {size.width} / COL: {grid.col} / ROW: {grid.row} / End: {grid.end} / GAP: {grid.gap} / POS: {position.x} / MOVE: {move.x}
+              <FilterBox />
+            </div>
           </div>
           <div className={classNames('slide')} ref={sliderContainer}>
             <div className={classNames('list', type === 'grid' && 'active')}
