@@ -12,31 +12,35 @@ const App = (props) => {
     const state = useContext(context);
     const { type, setBase, } = state;
     const item = props.item;
-    const selectItem = props.select
+    const selectItem = props.select;
+    const checkList = props.checkList;
+    //console.log(item)
+    //console.log(checkList)
     //
     let percentColor = item && getColor(item.TOTAL, 0, 240);
 
     const [itemIcon] = useState([
         { name: '주기검사', icon: 'ri-tools-fill' },
-        { name: '야간비행', icon: 'ri-contrast-2-fill' },
+        { name: '야간비행여부', icon: 'ri-contrast-2-fill' },
         { name: '외장변경', icon: 'ri-timer-line' },
         { name: '실무장여부', icon: 'ri-flight-takeoff-fill' },
         { name: '항공기등급', icon: 'ri-todo-line' },
-        { name: '조종사컨디션', icon: 'ri-user-heart-line' },
-        { name: '비행일수', icon: 'ri-calendar-line' },
+        { name: '가동상태', icon: 'ri-user-heart-line' },
+        { name: '최근비행', icon: 'ri-calendar-line' },
         { name: '주요결함', icon: 'ri-pulse-line' },
     ])
 
     const SideItem = item => {
-        const rr = byKeys(item, ['주기검사', '야간비행', '외장변경', '실무장여부', '항공기등급', '조종사컨디션', '비행일수', '주요결함'])
+        const rr = byKeys(item, _.keys(checkList))
         const result = [];
         _.map(rr, (val, key) => {
+            const color = getColor(val, 0, 240)
             result.push(
-                <li key={key} className={'sideItem'}>
+                <li key={key} className={classNames('sideItem', checkList[key] === 'N' && 'disabled')}>
                     <span className={'sideItemBase'} />
-                    <span className={'sideItemIcon'}><i className={_.find(itemIcon, ['name', key]).icon}></i></span>
+                    <span className={'sideItemIcon'}><i className={_.find(itemIcon, ['name', key]).icon}/></span>
                     <span className={'sideItemTitle'}>{key}</span>
-                    <span className={'sideItemValue'}>{key === '야간비행' ? <i className={'ri-check-fill'} /> : val}</span>
+                    <span className={'sideItemValue'} style={{color: color}}>{checkList[key] === 'N' ? <i className="ri-eye-off-line"/> : val}</span>
                 </li>
             )
         })

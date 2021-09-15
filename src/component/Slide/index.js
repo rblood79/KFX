@@ -26,12 +26,8 @@ const App = (props) => {
   const position = usePosition(sliderContainer, type, size);
   const move = useMove(type, count, grid, position);
   //
-  const [wValue, setWValue] = useState(null);
-  const [dValue, setDValue] = useState(null);
-  const [keyArray, setKeyArray] = useState(null);
-
   const [checkList, setCheckList] = useState(null);
-
+  let wAverage = 0;
   //
   const moveSlide = (postion) => {
     if (postion === 'prev') {
@@ -43,50 +39,38 @@ const App = (props) => {
     };
   }
 
-  function customizer(objValue) {
-    if (objValue === 'N') {
+  function customizer(obj, src) {
+    if (obj === 'N') {
       return 0;
+    } else {
+      wAverage += src
     }
-  }
-  function aver(arr, keys) {
-    let valueSum = 0;
-    _.map(arr, (v, k) => {
-      const found = keys.find(element => element === k);
-      if (found) {
-        valueSum += v
-      }
-    })
-    return valueSum;
   }
 
   useEffect(() => {
     setCheckList(DS[topNum].기준정보);
-
-    const weight = DS[topNum].가중치;
-    const used = _.cloneDeep(DS[topNum].기준정보);
-    const mUsed = _.mergeWith(used, weight, customizer);
-    const keyArray = Object.keys(used);
-    const sUsed = aver(mUsed, keyArray);
-    const lists = _.cloneDeep(DS[topNum].호수추천);
-
-    ///console.log('>>>', DS[topNum].기준정보, checkList)
-    _.each(lists, (obj) => {
-      let valueSum = 0;
-      _.map(obj, (v, k) => {
-        const found = keyArray.find(element => element === k);
-        if (found) {
-          valueSum += (v * mUsed[k])
-        }
-      })
-      obj.TOTAL = Number((valueSum / sUsed).toFixed(2));
-    });
-    //
-    setData(_.sortBy(lists, 'TOTAL').reverse());
-    
   }, [topNum]);
 
   useEffect(() => {
-    console.log('useEffect checkList', checkList)
+    //wAverage = 0;
+    const keyArray = _.keys(DS[topNum].기준정보);
+    //const essArray = _.keys(DS[topNum].필수항목);
+    const weight = DS[topNum].가중치;
+    const used = _.cloneDeep(checkList);
+    const weightFix = _.mergeWith(used, weight, customizer);
+
+    const lists = _.cloneDeep(DS[topNum].호수추천);
+    _.each(lists, (obj) => {
+      let valueSum = 0;
+      _.map(obj, (v, k) => {
+        const findKey = keyArray.find(element => element === k);
+        if (findKey) {
+          valueSum += (v * weightFix[k])
+        }
+      })
+      obj.TOTAL = Number((valueSum / wAverage).toFixed(2));
+    });
+    setData(_.sortBy(lists, 'TOTAL').reverse());
   }, [checkList])
 
   const onCheck = e => {
@@ -97,19 +81,22 @@ const App = (props) => {
   }
 
   const CheckBox = () => {
+    const ess = DS[topNum].필수항목;
     const result = [];
     _.map(checkList, (v, k) => {
       const label = 'check' + k;
-      result.push(<div key={'check' + k}>
-        <input id={label} value={k} type={'checkbox'} checked={v === 'Y' && true} onChange={(e) => onCheck(e)} />
-        <label>{k}</label>
-      </div>)
+      result.push(
+        <div className={'checkbox'} key={'check' + k}>
+          <input id={label} value={k} type={'checkbox'} checked={v === 'Y' && true} disabled={ess[k]} onChange={(e) => onCheck(e)} />
+          <label htmlFor={label}>{k}</label>
+        </div>
+      )
     })
     return result;
   }
 
   const init = () => {
-    console.log('useEffect INIT')
+    //console.log('useEffect INIT')
     let resultTop = [];
     _.forEach(DS, function (n, key) {
       resultTop.push(n.부대)
@@ -163,14 +150,14 @@ const App = (props) => {
             >
               <div className={'empty'}>
                 <div className={'detail'}>
-                  <ExpendItem item={data[focused]} active={false} select={setSelectItem} key={'sideItem'} />
+                  <ExpendItem item={data[focused]} checkList={checkList} active={false} select={setSelectItem} key={'sideItem'} />
                 </div>
               </div>
             </Flipped>
           ) : (
             <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
               <div className={'detail'}>
-                <ExpendItem item={data[focused]} active={true} select={setSelectItem} key={'sideItem'} />
+                <ExpendItem item={data[focused]} checkList={checkList} active={true} select={setSelectItem} key={'sideItem'} />
               </div>
             </Flipped>
           )}

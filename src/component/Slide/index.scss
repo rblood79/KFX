@@ -23,6 +23,7 @@
     }
 
     .filter {
+        border: 1px solid #f00;
         position: absolute;
         top: 0;
         width: 100%;
@@ -116,4 +117,9 @@
         position: absolute;
         z-index: 0;
     }
+}
+
+
+.filterBox{
+    border: 1px solid #f00;
 }

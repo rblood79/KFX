@@ -103,8 +103,12 @@
           height: 78px;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: space-around;
           align-items: center;
+          &.disabled {
+            filter: grayscale(1) blur(.48px);
+            opacity: 0.48;
+          }
           .sideItemBase {
             background-color: #fff;
             border: 1px solid #ccc;
@@ -139,6 +143,10 @@
             z-index: 1;
             color: #0078d7;
             font-weight: bold;
+            i{
+              font-weight: normal;
+              font-size: 16px;
+            }
           }
           &:nth-child(1) {
             grid-column: 1;
