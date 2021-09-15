@@ -14,7 +14,7 @@ const App = (props) => {
     const item = props.item;
     const selectItem = props.select
     //
-    let percentColor = item && getColor(item.engine, 0, 240);
+    let percentColor = item && getColor(item.TOTAL, 0, 240);
 
     const [itemIcon] = useState([
         { name: '주기검사', icon: 'ri-tools-fill' },
@@ -57,9 +57,9 @@ const App = (props) => {
                 <div className={'graph'}>
                     <img src={process.env.PUBLIC_URL + '/assets/gr.png'} alt='graph' />
                 </div>
-                <div className={'itemTitle'}>{item && item.title}<span className={'itemTitleGray'}>BORAMAE</span></div>
+                <div className={'itemTitle'}>{item && item.호기}<span className={'itemTitleGray'}>BORAMAE</span></div>
                 <span className={'itemPoint'}>MATCHING POINT</span>
-                <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item && item.engine}%</div>
+                <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item && item.TOTAL}%</div>
                 <button className={'detailButton'} onClick={() => { onClick() }} />
             </div>
         </div>

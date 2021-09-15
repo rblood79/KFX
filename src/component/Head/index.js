@@ -1,18 +1,12 @@
 import './index.scss';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import context from '../Context';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css';
 
 const App = (props) => {
   const state = useContext(context);
-  const { topNum, setTopNum, type, setType, setFocused, setCount } = state;
-  const [topNav] = useState([
-    { id: 0, title: 'GWANGJU 1B', },
-    { id: 1, title: 'DAEGU 2B', },
-    { id: 2, title: 'BUSAN 3B', },
-    { id: 3, title: 'SACHUN 4B', },
-  ]);
+  const { topNum, topNav, setTopNum, type, setType, setFocused, setCount } = state;
 
   const onClick = (id) => {
     setFocused(0);
@@ -20,7 +14,7 @@ const App = (props) => {
     setTopNum(id)
   }
 
-  const onType = (type) =>{
+  const onType = (type) => {
     setFocused(0);
     setCount(0);
     setType(type)
@@ -34,14 +28,15 @@ const App = (props) => {
         </div>
       </div>
       <div className={'topNav'}>
-        {
-          topNav.map((item, idx) => {
+        <span className={'viewText'}>{topNav && topNav[topNum].기지}</span>
+        {topNav && (
+          topNav.map((item, index) => {
             return (
-              <button key={idx} className={classNames('topButton', idx === topNum ? 'active' : null)} onClick={() => onClick(item.id)}>
-                {item.title}
+              <button key={index} className={classNames('topButton', index === topNum ? 'active' : null)} onClick={() => onClick(index)}>
+                {item.대대}
               </button>
             )
-          })
+          }))
         }
       </div>
       <div className={classNames('topView', type)}>

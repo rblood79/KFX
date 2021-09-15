@@ -59,6 +59,7 @@ export function useGridNum(data, type) {
     });
     useEffect(() => {
         const total = data.length;
+        //console.log('grid', total)
         let _row = 1;
         let _col = total;
         let _gap = 96;

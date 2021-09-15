@@ -17,7 +17,7 @@ const App = (props) => {
     const active = focused === index && type !== 'grid';
     const selectItem = props.selectItem;
     //
-    let percentColor = getColor(item.engine, 0, 240);
+    let percentColor = getColor(item.TOTAL, 0, 240);
 
     const onClick = () => {
         //setPrev(focused)
@@ -27,24 +27,28 @@ const App = (props) => {
         type === 'list' && setCount(index);
     }
 
+    const getImage = (e) =>{
+        return 'assets/aircraft/' + e + '.png'
+    }
+
     return (
-        <Flipped flipId={item.id} translate>
-            <div key={item.id} className={classNames('listItem', active && 'active')}>
-                <GuideBox value={item.engine} active={active}/>
+        <Flipped flipId={item.호기ID} translate>
+            <div key={item.호기ID} className={classNames('listItem', active && 'active')}>
+                <GuideBox active={active}/>
                 <div className={'aircraftGroup'} >
                     <div className={'aircraft'}>
-                        <img src={process.env.PUBLIC_URL + item.img} alt={'KF-21'} />
+                        <img src={getImage(item.기종)} alt={'KF-21'} />
                     </div>
                 </div>
                 {(focused === index && type === 'list') ? (
                     <div className={classNames('item')} >
                         <div>
-                            <GueageBox value={item.engine} color={percentColor} />
+                            <GueageBox value={item.TOTAL} color={percentColor} />
                             <span className={'itemRating'}>RATING POINT</span>
-                            <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.engine}%</div>
+                            <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.TOTAL}%A</div>
                         </div>
                         <div className={'itemTitleGroup'}>
-                            <div className={'itemTitle'}>{item.title}</div>
+                            <div className={'itemTitle'}>{item.호기}</div>
                             <span className={'itemSubText'}>Boramae</span>
                         </div>
                         <button className={'detailButton'} onClick={() => { onClick() }} />
@@ -52,9 +56,9 @@ const App = (props) => {
 
                 ) : (
                     <div className={classNames('item')} >
-                        <div className={'itemTitle'}>{item.title}</div>
-                        <GueageBox value={item.engine} color={percentColor} />
-                        <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.engine}%</div>
+                        <div className={'itemTitle'}>{item.호기}</div>
+                        <GueageBox value={item.TOTAL} color={percentColor} />
+                        <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.TOTAL}%</div>
                         <button className={'detailButtonGrid'} onClick={() => { onClick() }} />
                     </div>
                 )}
