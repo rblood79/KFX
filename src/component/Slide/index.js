@@ -104,11 +104,10 @@ const App = (props) => {
       {result.data ? (
         <>
           <div className={'controller'}>
-            <button className={'controllerButton filterButton'} onClick={() => fView()}><i className="ri-equalizer-fill"></i></button>
-            <button className={'controllerButton prevButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i></button>
-            <button className={'controllerButton nextButton'} onClick={() => moveSlide('next')}><i className="ri-arrow-right-s-line"></i></button>
+            <button className={'controllerButton prevButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i>PREV</button>
+            <button className={'controllerButton filterButton'} onClick={() => fView()}><i className="ri-filter-fill"></i></button>
+            <button className={'controllerButton nextButton'} onClick={() => moveSlide('next')}>NEXT<i className="ri-arrow-right-s-line"></i></button>
             <div className={classNames('filter', filterView)}>
-              
                 <CheckBox />
             </div>
           </div>
