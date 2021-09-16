@@ -31,16 +31,16 @@ const App = (props) => {
     ])
 
     const SideItem = item => {
-        const rr = byKeys(item, _.keys(checkList))
+        const items = byKeys(item, _.keys(checkList))
         const result = [];
-        _.map(rr, (val, key) => {
-            const color = getColor(val, 0, 240)
+        _.map(items, (val, key) => {
+            //const color = getColor(val, 0, 240)
             result.push(
                 <li key={key} className={classNames('sideItem', checkList[key] === 'N' && 'disabled')}>
                     <span className={'sideItemBase'} />
                     <span className={'sideItemIcon'}><i className={_.find(itemIcon, ['name', key]).icon}/></span>
                     <span className={'sideItemTitle'}>{key}</span>
-                    <span className={'sideItemValue'} style={{color: color}}>{checkList[key] === 'N' ? <i className="ri-eye-off-line"/> : val}</span>
+                    <span className={'sideItemValue'}>{checkList[key] === 'N' ? <i className="ri-eye-off-line"/> : val}</span>
                 </li>
             )
         })

@@ -22,16 +22,18 @@
         }
     }
 
-    .filter {
-        border: 1px solid #f00;
-        position: absolute;
-        top: 0;
+    .controller {
+        position: fixed;
+        top: 48px;
+        right: 0px;
         width: 100%;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: flex-end;
         padding: 0 48px;
-        .filterButton {
+        pointer-events: none;
+        z-index: 110;
+        .controllerButton {
             border: 1px solid #d3d3d3;
             background-color: #fff;
             color: #d3d3d3;
@@ -41,8 +43,142 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            pointer-events: all;
+            z-index: 111;
             i {
                 font-size: 21px;
+            }
+            &.filterButton {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                border-right: none;
+            }
+            &.prevButton {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                border-right: none;
+
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                border-left: none;
+            }
+            &.nextButton {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                border-left: none;
+            }
+            &:hover {
+                color: #7c7c7c;
+            }
+            &.active {
+                background-color: #efefef;
+                box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.16);
+                color: #1c1c1c;
+            }
+        }
+        .filter {
+            background-color: #ccc;
+            pointer-events: none;
+            position: fixed;
+            top: calc(50% - 120px);
+            left: calc(50% - 600px);
+            display: grid;
+            grid-template-columns: repeat(4, 300px);
+            grid-template-rows: repeat(2, 120px);
+            gap: 1px;
+            opacity: 0;
+            transition: all 0.2s ease-in-out;
+
+            &::before {
+                content: "";
+                position: fixed;
+                background: rgba(0, 0, 0, 0.86);
+                width: calc(100% - 48px);
+                height: calc(100% - 48px);
+                left: 24px;
+                top: 24px;
+                border-radius: 15px;
+                z-index: 0;
+            }
+            &::after {
+                content: "배정조건";
+                position: fixed;
+                color: #fff;
+                width: 200px;
+                text-align: center;
+                font-size: 32px;
+                letter-spacing: 8px;
+                z-index: 100;
+                top: calc(50% - 240px);
+                left: calc(50% - 100px);
+            }
+            .checkbox {
+                background: #fff;
+                padding: 24px;
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                position: relative;
+                z-index: 1;
+                .check {
+                    width: 20px;
+                    height: 20px;
+                    position: relative;
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        display: flex;
+                        width: 18px;
+                        height: 18px;
+                        left: 0;
+                        top: 0;
+                        background-color: #fff;
+                        border: 2px solid rgba(0, 0, 0, 0.16);
+                        //box-shadow: inset 0 0 4px;
+
+                        background-repeat: no-repeat;
+                        background-position: center;
+                    }
+                    &:checked {
+                        &::after {
+                            content: "";
+                            background-color: #1c1c1c;
+                            background-image: url("check.png");
+                        }
+                    }
+                    &:disabled {
+                        &::after {
+                            content: "";
+                            background-color: #a4a4a4;
+                        }
+                    }
+                }
+                .checkboxText {
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: 8px;
+                    z-index: 1;
+                    .label {
+                        font-size: 16px;
+                        font-weight: bold;
+                        color: #1f3c70;
+                        height: 26px;
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+
+                        cursor: pointer;
+                    }
+                    .comment {
+                        font-size: 14px;
+                        color: #7c7c7c;
+                    }
+                }
+            }
+            &.active {
+                pointer-events: all;
+                opacity: 1;
+                //transform: translateY(-102px);
             }
         }
     }
@@ -119,7 +255,6 @@
     }
 }
 
-
-.filterBox{
+.filterBox {
     border: 1px solid #f00;
 }

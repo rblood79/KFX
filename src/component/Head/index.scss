@@ -3,8 +3,10 @@
     justify-content: space-between;
     z-index: 110;
     width: 100%;
+    height: 48px;
     padding: 0 48px;
     position: relative;
+    pointer-events: none;
     .topLogo {
         position: absolute;
         width: 254px;
@@ -27,12 +29,23 @@
             height: 54px;
             margin-bottom: 36px;
         }
+        &::after {
+            content: "AA";
+            position: fixed;
+            width: 245px;
+            height: 245px;
+            transform: rotate(45deg);
+            transform-origin: center;
+            box-shadow: inset -8px -8px 16px rgba(0,0,0,0.24);
+            top: -146px;
+        }
     }
     .topNav {
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1;
+        pointer-events: all;
         .viewText {
             padding-right: 16px;
             font-size: 14px;

@@ -39,11 +39,11 @@ const App = (props) => {
           }))
         }
       </div>
-      <div className={classNames('topView', type)}>
+      {/*<div className={classNames('topView', type)}>
         <span className={'viewText'}>VIEW TYPE</span>
         <button className={classNames('viewButton', type === 'list' && 'active')} onClick={() => onType('list')}><i className="ri-checkbox-blank-fill"></i></button>
         <button className={classNames('viewButton', type === 'grid' && 'active')} onClick={() => onType('grid')}><i className="ri-layout-grid-fill"></i></button>
-      </div>
+      </div>*/}
     </div>
   );
 }

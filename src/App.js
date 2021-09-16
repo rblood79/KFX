@@ -8,6 +8,7 @@ import Base from './component/Base';
 
 const App = () => {
   useEffect(() => {
+    console.log('App start')
   }, []);
 
   return (

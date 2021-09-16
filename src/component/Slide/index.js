@@ -1,5 +1,5 @@
 import './index.scss';
-import React, { useContext, useEffect, useState, useRef, } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
 import { Flipper, Flipped } from 'react-flip-toolkit';
@@ -9,26 +9,32 @@ import SlideItem from './slideItem';
 import ExpendItem from './expendItem';
 //import FilterBox from './filterBox';
 
-import { useWindowSize, useGridNum, usePosition, useMove, shuffle } from '../Mixin';
+import GuideBox from './guideBox';
+
+import { useWindowSize, useGridNum, usePosition, useMove, useData } from '../Mixin';
 import _ from 'lodash';
 
 import { DS } from '../Data';
 
 const App = (props) => {
+  //console.log('slide start')
   const state = useContext(context);
-  const { topNum, setTopNav, type, focused, setFocused, count, setCount } = state;
+  const { topNum, setTopNav, type, setType, focused, setFocused, count, setCount } = state;
   const [selectItem, setSelectItem] = useState(null);
-  const [data, setData] = useState([]);
+
+  const [checkList, setCheckList] = useState(null);
 
   const sliderContainer = useRef(null);
   const size = useWindowSize();
-  const grid = useGridNum(data, type, topNum);
+
+  const result = useData(DS, topNum, checkList)
+  const grid = useGridNum(result.data, type, topNum);
   const position = usePosition(sliderContainer, type, size);
   const move = useMove(type, count, grid, position);
+
+  const [filterView, setFilterView] = useState(null);
   //
-  const [checkList, setCheckList] = useState(null);
-  let wAverage = 0;
-  //
+
   const moveSlide = (postion) => {
     if (postion === 'prev') {
       type === 'list' && focused > 0 && setFocused(focused - 1);
@@ -37,47 +43,25 @@ const App = (props) => {
       type === 'list' && focused < grid.end && setFocused(focused + 1);
       count < grid.end && setCount(count + 1);
     };
-  }
-
-  function customizer(obj, src) {
-    if (obj === 'N') {
-      return 0;
-    } else {
-      wAverage += src
-    }
-  }
-
-  useEffect(() => {
-    setCheckList(DS[topNum].기준정보);
-  }, [topNum]);
-
-  useEffect(() => {
-    //wAverage = 0;
-    const keyArray = _.keys(DS[topNum].기준정보);
-    //const essArray = _.keys(DS[topNum].필수항목);
-    const weight = DS[topNum].가중치;
-    const used = _.cloneDeep(checkList);
-    const weightFix = _.mergeWith(used, weight, customizer);
-
-    const lists = _.cloneDeep(DS[topNum].호수추천);
-    _.each(lists, (obj) => {
-      let valueSum = 0;
-      _.map(obj, (v, k) => {
-        const findKey = keyArray.find(element => element === k);
-        if (findKey) {
-          valueSum += (v * weightFix[k])
-        }
-      })
-      obj.TOTAL = Number((valueSum / wAverage).toFixed(2));
-    });
-    setData(_.sortBy(lists, 'TOTAL').reverse());
-  }, [checkList])
+  };
 
   const onCheck = e => {
     let name = e.target.value;
     setCheckList(
       { ...checkList, [name]: e.target.checked ? 'Y' : 'N' }
-    )
+    );
+  };
+
+  const fView = () => {
+    if (filterView === null) {
+      setFilterView('active')
+      setType('grid')
+    } else {
+      setFilterView(null)
+      setType('list')
+    }
+    setFocused(0);
+    setCount(0);
   }
 
   const CheckBox = () => {
@@ -87,8 +71,10 @@ const App = (props) => {
       const label = 'check' + k;
       result.push(
         <div className={'checkbox'} key={'check' + k}>
-          <input id={label} value={k} type={'checkbox'} checked={v === 'Y' && true} disabled={ess[k]} onChange={(e) => onCheck(e)} />
-          <label htmlFor={label}>{k}</label>
+          <GuideBox />
+          <input id={label} className={'check'} value={k} type={'checkbox'} checked={v === 'Y' && true} disabled={ess[k]} onChange={(e) => onCheck(e)} />
+          <div className={'checkboxText'}><label htmlFor={label} className={'label'}>{k}</label>
+          <span className={'comment'}>임무 투입전 항공기.....</span></div>
         </div>
       )
     })
@@ -106,27 +92,28 @@ const App = (props) => {
   }
 
   useEffect(() => {
+    setCheckList(DS[topNum].기준정보);
+  }, [topNum]);
+
+  useEffect(() => {
     init();
   }, [DS])
 
   return (
-    <Flipper
-      className={'slider'}
-      flipKey={[data]}
-    >
-      {data ? (
+    <Flipper className={'slider'} flipKey={[result.data]}>
+      {result.data ? (
         <>
-          <div className={'filter'}>
-            <button className={'filterButton'} onClick={() => setData(shuffle(data))}><i className="ri-equalizer-fill"></i></button>
-            <button className={'filterButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i></button>
-            <button className={'filterButton'} onClick={() => moveSlide('next')}><i className="ri-arrow-right-s-line"></i></button>
-
-            <div style={{ position: 'absolute', zIndex: 10000, left: 0, top: 0 }}>
-              TYPE: {type} / COUNT: {count} / WIDTH: {size.width} / COL: {grid.col} / ROW: {grid.row} / End: {grid.end} / GAP: {grid.gap} / POS: {position.x} / MOVE: {move.x}
-              <CheckBox />
+          <div className={'controller'}>
+            <button className={'controllerButton filterButton'} onClick={() => fView()}><i className="ri-equalizer-fill"></i></button>
+            <button className={'controllerButton prevButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i></button>
+            <button className={'controllerButton nextButton'} onClick={() => moveSlide('next')}><i className="ri-arrow-right-s-line"></i></button>
+            <div className={classNames('filter', filterView)}>
+              
+                <CheckBox />
             </div>
           </div>
           <div className={classNames('slide')} ref={sliderContainer}>
+
             <div className={classNames('list', type === 'grid' && 'active')}
               style={{
                 transform: 'translateX(' + move.x + 'px)',
@@ -136,7 +123,7 @@ const App = (props) => {
               }}
             >
               {
-                data.map((item, i) => {
+                result.data.map((item, i) => {
                   return (
                     <SlideItem item={item} index={i} focused={focused} key={'slideItem' + i} selectItem={setSelectItem} />
                   )
@@ -150,14 +137,14 @@ const App = (props) => {
             >
               <div className={'empty'}>
                 <div className={'detail'}>
-                  <ExpendItem item={data[focused]} checkList={checkList} active={false} select={setSelectItem} key={'sideItem'} />
+                  <ExpendItem item={result.data[focused]} checkList={checkList} active={false} select={setSelectItem} key={'sideItem'} />
                 </div>
               </div>
             </Flipped>
           ) : (
             <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
               <div className={'detail'}>
-                <ExpendItem item={data[focused]} checkList={checkList} active={true} select={setSelectItem} key={'sideItem'} />
+                <ExpendItem item={result.data[focused]} checkList={checkList} active={true} select={setSelectItem} key={'sideItem'} />
               </div>
             </Flipped>
           )}

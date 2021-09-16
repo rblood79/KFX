@@ -1,4 +1,5 @@
 import { useEffect, useState, } from 'react';
+import _ from 'lodash';
 
 export function getColor(percent, start, end) {
     var a = percent / 100,
@@ -15,6 +16,46 @@ export function byKeys(obj, keys = []) {
         }
     })
     return filtered
+}
+
+
+
+
+export function useData(arr, num, checkList) {
+    const [data, setData] = useState({
+        data: undefined
+    });
+    const customizer = ((obj, src) => {
+        if (obj === 'N') {
+            return 0;
+        } else {
+            wAverage += src;
+        };
+    });
+    let wAverage = 0;
+    useEffect(() => {
+        const keyArray = _.keys(arr[num].기준정보);
+        const weight = arr[num].가중치;
+        const used = _.cloneDeep(checkList);
+        const weightFix = _.mergeWith(used, weight, customizer);
+        const lists = _.cloneDeep(arr[num].호수추천);
+        _.each(lists, (obj) => {
+            let valueSum = 0;
+            _.map(obj, (v, k) => {
+                const findKey = keyArray.find(element => element === k);
+                if (findKey) {
+                    valueSum += (v * weightFix[k])
+                }
+            })
+            obj.TOTAL = Number((valueSum / wAverage).toFixed(2));
+        });
+
+        const temp = _.sortBy(lists, 'TOTAL').reverse();
+        setData({
+            data: temp,
+        });
+    }, [arr, num, checkList, wAverage,]);
+    return data;
 }
 
 export function useMove(type, count, grid, position) {
@@ -41,10 +82,13 @@ export function usePosition(target, type, size) {
         x: 0,
     });
     useEffect(() => {
+        if(target.current === null){
+            return position;
+        }
         setPosition({
             x: type === 'list' ? Math.round(target.current.clientWidth * 0.5) : 0,
         });
-    }, [target, type, size]);
+    }, [target, type, size,]);
     return position;
 }
 
@@ -58,8 +102,10 @@ export function useGridNum(data, type) {
         height: undefined,
     });
     useEffect(() => {
+        if(!data){
+            return gridNum;
+        }
         const total = data.length;
-        //console.log('grid', total)
         let _row = 1;
         let _col = total;
         let _gap = 96;
@@ -87,7 +133,7 @@ export function useGridNum(data, type) {
             width: 360,
             height: 160,
         });
-    }, [data, type]);
+    }, [data, type,]);
     return gridNum;
 }
 
