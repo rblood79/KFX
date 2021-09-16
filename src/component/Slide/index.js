@@ -74,7 +74,7 @@ const App = (props) => {
           <GuideBox />
           <input id={label} className={'check'} value={k} type={'checkbox'} checked={v === 'Y' && true} disabled={ess[k]} onChange={(e) => onCheck(e)} />
           <div className={'checkboxText'}><label htmlFor={label} className={'label'}>{k}</label>
-          <span className={'comment'}>임무 투입전 항공기.....</span></div>
+            <span className={'comment'}>임무 투입전 항공기.....</span></div>
         </div>
       )
     })
@@ -104,11 +104,17 @@ const App = (props) => {
       {result.data ? (
         <>
           <div className={'controller'}>
-            <button className={'controllerButton prevButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i>PREV</button>
-            <button className={'controllerButton filterButton'} onClick={() => fView()}><i className="ri-filter-fill"></i></button>
-            <button className={'controllerButton nextButton'} onClick={() => moveSlide('next')}>NEXT<i className="ri-arrow-right-s-line"></i></button>
+            <button className={'controllerButton prevButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">PREV</span></button>
+            <button className={'controllerButton filterButton'} onClick={() => fView()}><i className="ri-filter-fill"></i><span className="controllText">검색조건</span></button>
+            <button className={'controllerButton nextButton'} onClick={() => moveSlide('next')}><span className="controllText">NEXT</span><i className="ri-arrow-right-s-line"></i></button>
             <div className={classNames('filter', filterView)}>
-                <CheckBox />
+              <div className={'filterClose'} onClick={() => fView()} />
+              <CheckBox />
+              <ul className={'filterInfo'}>
+                <li className={'infobox boxdisable'}>필수</li>
+                <li className={'infobox boxchecked'}>선택됨</li>
+                <li className={'infobox boxnormal'}>신택가능</li>
+              </ul>
             </div>
           </div>
           <div className={classNames('slide')} ref={sliderContainer}>
