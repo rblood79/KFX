@@ -15,10 +15,10 @@
             //grid-template-columns: repeat(9, 360px);
             //grid-template-rows: repeat(1, 160px);
             //grid-template: repeat(1, 160px) / repeat(9, 360px);
-            /*gap: 96px;
+            /*gap: 96px;*/
             &.active {
-                gap: 24px;
-            }*/
+                filter: grayscale(1) blur(2px);
+            }
         }
     }
 
@@ -92,7 +92,7 @@
             &::before {
                 content: "";
                 position: fixed;
-                background: rgba(0, 0, 0, 0.86);
+                background: rgba(0, 0, 0, 0.64);
                 width: calc(100% - 48px);
                 height: calc(100% - 48px);
                 left: 24px;
