@@ -7,9 +7,7 @@ import { Flipper, Flipped } from 'react-flip-toolkit';
 import context from '../Context';
 import SlideItem from './slideItem';
 import ExpendItem from './expendItem';
-//import FilterBox from './filterBox';
-
-import GuideBox from './guideBox';
+//import GuideBox from './guideBox';
 
 import { useWindowSize, useGridNum, usePosition, useMove, useData } from '../Mixin';
 import _ from 'lodash';
@@ -27,8 +25,10 @@ const App = (props) => {
   const sliderContainer = useRef(null);
   const size = useWindowSize();
 
-  const result = useData(DS, topNum, checkList)
-  const grid = useGridNum(result.data, type, topNum);
+  const result = useData(DS, topNum, checkList);
+  
+  const grid = useGridNum(sliderContainer, result.data && result.data.length, type);
+  
   const position = usePosition(sliderContainer, type, size);
   const move = useMove(type, count, grid, position);
 
@@ -71,7 +71,7 @@ const App = (props) => {
       const label = 'check' + k;
       result.push(
         <div className={'checkbox'} key={'check' + k}>
-          <GuideBox />
+          {/*<GuideBox />*/}
           <input id={label} className={'check'} value={k} type={'checkbox'} checked={v === 'Y' && true} disabled={ess[k]} onChange={(e) => onCheck(e)} />
           <div className={'checkboxText'}><label htmlFor={label} className={'label'}>{k}</label>
             <span className={'comment'}>임무 투입전 항공기.....</span></div>
@@ -80,14 +80,13 @@ const App = (props) => {
     })
     return result;
   }
-
+  
   const init = () => {
     //console.log('useEffect INIT')
     let resultTop = [];
     _.forEach(DS, function (n, key) {
       resultTop.push(n.부대)
     });
-
     setTopNav(resultTop);
   }
 
@@ -103,22 +102,21 @@ const App = (props) => {
     <Flipper className={'slider'} flipKey={[result.data]}>
       {result.data ? (
         <>
-          <div className={'controller'}>
+          <div className={classNames('controller', type === 'grid' && 'active')}>
             <button className={'controllerButton prevButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">PREV</span></button>
-            <button className={'controllerButton filterButton'} onClick={() => fView()}><i className="ri-filter-fill"></i><span className="controllText">검색조건</span></button>
+            <button className={'controllerButton filterButton'} onClick={() => fView()}><i className={type === 'list' ? "ri-filter-fill" : "ri-close-fill"}></i><span className="controllText">배정조건</span></button>
             <button className={'controllerButton nextButton'} onClick={() => moveSlide('next')}><span className="controllText">NEXT</span><i className="ri-arrow-right-s-line"></i></button>
             <div className={classNames('filter', filterView)}>
               <div className={'filterClose'} onClick={() => fView()} />
               <CheckBox />
               <ul className={'filterInfo'}>
                 <li className={'infobox boxdisable'}>필수</li>
-                <li className={'infobox boxchecked'}>선택됨</li>
-                <li className={'infobox boxnormal'}>신택가능</li>
+                <li className={'infobox boxchecked'}>선택</li>
+                <li className={'infobox boxnormal'}>선택가능</li>
               </ul>
             </div>
           </div>
           <div className={classNames('slide')} ref={sliderContainer}>
-
             <div className={classNames('list', type === 'grid' && 'active')}
               style={{
                 transform: 'translateX(' + move.x + 'px)',

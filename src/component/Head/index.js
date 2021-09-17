@@ -6,19 +6,19 @@ import 'remixicon/fonts/remixicon.css';
 
 const App = (props) => {
   const state = useContext(context);
-  const { topNum, topNav, setTopNum, type, setType, setFocused, setCount } = state;
+  const { topNum, topNav, setTopNum, setFocused, setCount } = state;
 
   const onClick = (id) => {
     setFocused(0);
     setCount(0);
-    setTopNum(id)
+    setTopNum(id);
   }
 
-  const onType = (type) => {
+  /*const onType = (type) => {
     setFocused(0);
     setCount(0);
     setType(type)
-  }
+  }*/
 
   return (
     <div className="head">

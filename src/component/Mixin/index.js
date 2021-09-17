@@ -18,9 +18,6 @@ export function byKeys(obj, keys = []) {
     return filtered
 }
 
-
-
-
 export function useData(arr, num, checkList) {
     const [data, setData] = useState({
         data: undefined
@@ -82,7 +79,7 @@ export function usePosition(target, type, size) {
         x: 0,
     });
     useEffect(() => {
-        if(target.current === null){
+        if (target.current === null) {
             return position;
         }
         setPosition({
@@ -92,7 +89,7 @@ export function usePosition(target, type, size) {
     return position;
 }
 
-export function useGridNum(data, type) {
+export function useGridNum(target, total, type) {
     const [gridNum, setGridNum] = useState({
         col: undefined,
         row: undefined,
@@ -102,21 +99,23 @@ export function useGridNum(data, type) {
         height: undefined,
     });
     useEffect(() => {
-        if(!data){
+        if (!total) {
             return gridNum;
         }
-        const total = data.length;
+        const targetWidth = Math.round(target.current.clientWidth);
+        //const total = data;
         let _row = 1;
         let _col = total;
+        let _end = total - 1;
         let _gap = 96;
         if (type === 'grid') {
-            if (15 < total) {
+            if (15 <= total) {
                 _row = 3;
                 _col = Math.ceil(total / _row);
-            } else if (10 < total && total < 15) {
+            } else if (10 < total && total <= 15) {
                 _row = 3;
                 _col = 5;
-            } else if (5 < total && total < 10) {
+            } else if (5 < total && total <= 10) {
                 _row = 2;
                 _col = 5;
             } else {
@@ -124,16 +123,18 @@ export function useGridNum(data, type) {
                 _col = total;
             }
             _gap = 16;
+            _end = _col - Math.round(targetWidth / 360);
         };
+        //console.log(gridNum)
         setGridNum({
             col: _col,
             row: _row,
+            end: _end,
             gap: _gap,
-            end: type === 'list' ? total - 1 : _col - 5,
             width: 360,
             height: 160,
         });
-    }, [data, type,]);
+    }, [total, type,]);
     return gridNum;
 }
 

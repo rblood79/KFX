@@ -9,6 +9,7 @@
     .slide {
         display: flex;
         .list {
+            will-change: transform;
             display: grid;
             justify-content: center;
             align-items: center;
@@ -17,7 +18,7 @@
             //grid-template: repeat(1, 160px) / repeat(9, 360px);
             /*gap: 96px;*/
             &.active {
-                filter: grayscale(1) blur(2px);
+                filter: grayscale(1);
             }
         }
     }
@@ -46,17 +47,20 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-size: 16px;
+                font-size: 14px;
                 font-weight: bold;
             }
             i {
-                font-size: 24px;
-                padding-top: 2px;
+                font-size: 22px;
+                padding-top: 1px;
             }
             &.filterButton {
                 width: 48px;
                 font-weight: normal;
                 flex-direction: column;
+                i {
+                    color: #0178D5;
+                }
                 .controllText {
                     position: absolute;
                     top: 48px;
@@ -76,9 +80,8 @@
             pointer-events: none;
             position: fixed;
             top: calc(50% - 120px);
-            left: calc(50% - 600px);
             display: grid;
-            grid-template-columns: repeat(4, 300px);
+            grid-template-columns: repeat(4, 260px);
             grid-template-rows: repeat(2, 120px);
             gap: 1px;
             opacity: 0;
@@ -97,10 +100,10 @@
                 left: calc(50% - 100px);
             }
 
-            &::after {
+            /*&::after {
                 content: "";
                 position: fixed;
-                background: rgba(0, 0, 0, 0.64);
+                background: rgba(0, 0, 0, 0.79);
                 width: calc(100% - 48px);
                 height: calc(100% - 48px);
                 left: 24px;
@@ -108,18 +111,20 @@
                 border-radius: 15px;
                 pointer-events: none;
                 z-index: 0;
-            }
-            
+            }*/
+
             .filterClose {
                 position: fixed;
+                background: rgba(0, 0, 0, 0.79);
                 left: 0;
                 top: 0;
                 width: 100%;
                 height: 100%;
             }
             .checkbox {
+                //background: rgba(255,255,255,0.86);
                 background: #fff;
-                padding: 24px;
+                padding: 16px;
                 display: flex;
                 align-items: flex-start;
                 justify-content: flex-start;
@@ -137,10 +142,9 @@
                         height: 18px;
                         left: 0;
                         top: 0;
-                        background-color: #fff;
-                        border: 2px solid rgba(0, 0, 0, 0.16);
-                        //box-shadow: inset 0 0 4px;
 
+                        border: 2px solid rgba(0, 0, 0, 0.16);
+                        background-color: #fff;
                         background-repeat: no-repeat;
                         background-position: center;
                     }
@@ -151,7 +155,7 @@
                             background-image: url("check.png");
                         }
                         &::before {
-                            content: "\EB81";
+                            content: "";
                         }
                     }
                     &:disabled {
@@ -172,7 +176,7 @@
                         color: #1f3c70;
                         height: 26px;
                         display: flex;
-                        justify-content: start;
+                        justify-content: flex-start;
                         align-items: center;
 
                         cursor: pointer;
@@ -188,7 +192,18 @@
                 opacity: 1;
                 //transform: translateY(-102px);
             }
-            
+        }
+        &.active {
+            .controllerButton {
+                color: #efefef;
+                &.filterButton i {
+                    border: 3px solid #056dcd;
+                    border-radius: 24px;
+                    font-size: 22px;
+                    font-weight: bold;
+                    padding: 0;
+                }
+            }
         }
     }
 
@@ -272,7 +287,7 @@
     display: flex;
     padding: 8px 0;
     position: absolute;
-    bottom: -56px;
+    bottom: -48px;
     left: 0;
     .infobox {
         display: flex;
@@ -293,12 +308,13 @@
         }
         &:before {
             content: "";
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             display: block;
             z-index: 1;
             background-color: #fff;
             background-image: url("check.png");
+            background-position: center;
             border: 2px solid rgba(0, 0, 0, 0.16);
             margin-right: 8px;
         }

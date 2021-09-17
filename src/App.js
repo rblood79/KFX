@@ -7,7 +7,7 @@ import Slide from './component/Slide';
 import Base from './component/Base';
 
 const App = () => {
-  const [isMobile, setIsMobile] = useState(/Mobi/i.test(window.navigator.userAgent));
+  const [isMobile] = useState(/Mobi/i.test(window.navigator.userAgent));
   useEffect(() => {
     //console.log('App start', isMobile)
   }, []);

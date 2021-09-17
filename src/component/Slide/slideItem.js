@@ -45,7 +45,7 @@ const App = (props) => {
                         <div>
                             <GueageBox value={item.TOTAL} color={percentColor} />
                             <span className={'itemRating'}>RATING POINT</span>
-                            <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.TOTAL}%A</div>
+                            <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.TOTAL}%</div>
                         </div>
                         <div className={'itemTitleGroup'}>
                             <div className={'itemTitle'}>{item.호기}</div>
@@ -53,12 +53,12 @@ const App = (props) => {
                         </div>
                         <button className={'detailButton'} onClick={() => { onClick() }} />
                     </div>
-
                 ) : (
                     <div className={classNames('item')} >
                         <div className={'itemTitle'}>{item.호기}</div>
                         <GueageBox value={item.TOTAL} color={percentColor} />
                         <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.TOTAL}%</div>
+                        <div className={'itemIndex'}>{index < 9 ? '0' + (index+1) : (index+1)}</div>
                         <button className={'detailButtonGrid'} onClick={() => { onClick() }} />
                     </div>
                 )}
