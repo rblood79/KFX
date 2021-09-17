@@ -103,36 +103,35 @@ export function useGridNum(target, total, type) {
             return gridNum;
         }
         const targetWidth = Math.round(target.current.clientWidth);
-        //const total = data;
+        let _width = 360;
+        let _height = 160;
         let _row = 1;
         let _col = total;
         let _end = total - 1;
         let _gap = 96;
+
+        let rowNum = Math.round(targetWidth / _width);
+        let colNum = Math.ceil(total / rowNum);
+        let colMin = Math.min(colNum, 3)
+
         if (type === 'grid') {
-            if (15 <= total) {
-                _row = 3;
+            if (colNum > 3) {
+                _row = colMin;
                 _col = Math.ceil(total / _row);
-            } else if (10 < total && total <= 15) {
-                _row = 3;
-                _col = 5;
-            } else if (5 < total && total <= 10) {
-                _row = 2;
-                _col = 5;
             } else {
-                _row = 1;
-                _col = total;
-            }
+                _row = colMin;
+                _col = rowNum;
+            };
             _gap = 16;
-            _end = _col - Math.round(targetWidth / 360);
+            _end = _col - Math.round(targetWidth / _width);
         };
-        //console.log(gridNum)
         setGridNum({
             col: _col,
             row: _row,
             end: _end,
             gap: _gap,
-            width: 360,
-            height: 160,
+            width: _width,
+            height: _height,
         });
     }, [total, type,]);
     return gridNum;
