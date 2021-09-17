@@ -34,6 +34,7 @@
         pointer-events: none;
         z-index: 110;
         .controllerButton {
+            position: relative;
             color: #464646;
             width: 96px;
             height: 48px;
@@ -59,10 +60,11 @@
                 font-weight: normal;
                 flex-direction: column;
                 i {
-                    color: #0178D5;
+                    color: #0178d5;
                 }
                 .controllText {
                     position: absolute;
+                    width: 64px;
                     top: 48px;
                 }
             }
@@ -196,8 +198,19 @@
         &.active {
             .controllerButton {
                 color: #efefef;
+                &.filterButton {
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        z-index: 1;
+                        border: 4px solid #02519b;
+                        width: 24px;
+                        height: 24px;
+                        transform: rotate(45deg);
+                    }
+                }
                 &.filterButton i {
-                    border: 3px solid #056dcd;
+                    //border: 3px solid #056dcd;
                     border-radius: 24px;
                     font-size: 22px;
                     font-weight: bold;
