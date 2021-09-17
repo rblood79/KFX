@@ -22,14 +22,14 @@ const App = (props) => {
 
   const [checkList, setCheckList] = useState(null);
 
-  const sliderContainer = useRef(null);
+  const sliderRef = useRef(null);
   const size = useWindowSize();
 
   const result = useData(DS, topNum, checkList);
   
-  const grid = useGridNum(sliderContainer, result.data && result.data.length, type);
+  const grid = useGridNum(sliderRef, result.data && result.data.length, type);
   
-  const position = usePosition(sliderContainer, type, size);
+  const position = usePosition(sliderRef, type, size);
   const move = useMove(type, count, grid, position);
 
   const [filterView, setFilterView] = useState(null);
@@ -116,7 +116,7 @@ const App = (props) => {
               </ul>
             </div>
           </div>
-          <div className={classNames('slide')} ref={sliderContainer}>
+          <div className={classNames('slide')} ref={sliderRef}>
             <div className={classNames('list', type === 'grid' && 'active')}
               style={{
                 transform: 'translateX(' + move.x + 'px)',
