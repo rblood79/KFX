@@ -9,7 +9,7 @@ const App = (props) => {
   const slideSize = 360;
 
   return (
-    <div className={classNames('base', type !== 'grid' ? null : !base && 'active')}>
+    <div className={classNames('base', type !== 'grid' ? null : 'active')}>
       <div className={'baseContents'} style={{ width: slideSize, height: slideSize }}>
         <div className={classNames('baseBox')}>
           <div className={'base'} />

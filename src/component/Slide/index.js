@@ -17,20 +17,23 @@ import { DS } from '../Data';
 const App = (props) => {
   //console.log('slide start')
   const state = useContext(context);
-  const { topNum, setTopNav, type, setType, focused, setFocused, count, setCount } = state;
+  const { topNum, setTopNav, type, setType, focused, setFocused, count, setCount, setBase } = state;
   const [selectItem, setSelectItem] = useState(null);
 
   const [checkList, setCheckList] = useState(null);
-
+  const [rank, setRank] = useState(null);
   const sliderRef = useRef(null);
   const size = useWindowSize();
 
   const result = useData(DS, topNum, checkList);
-  
+
   const grid = useGridNum(sliderRef, result.data && result.data.length, type);
-  
+
   const position = usePosition(sliderRef, type, size);
   const move = useMove(type, count, grid, position);
+
+  const ess = DS[topNum].필수항목;
+  const aver = DS[topNum].평균;
 
   const [filterView, setFilterView] = useState(null);
   //
@@ -54,18 +57,20 @@ const App = (props) => {
 
   const fView = () => {
     if (filterView === null) {
-      setFilterView('active')
-      setType('grid')
+      setFilterView('active');
+      setType('grid');
     } else {
-      setFilterView(null)
-      setType('list')
+      setFilterView(null);
+      setType('list');
     }
+    setSelectItem(null);
+    setBase(false)
     setFocused(0);
     setCount(0);
   }
 
   const CheckBox = () => {
-    const ess = DS[topNum].필수항목;
+    //const ess = DS[topNum].필수항목;
     const result = [];
     _.map(checkList, (v, k) => {
       const label = 'check' + k;
@@ -80,7 +85,7 @@ const App = (props) => {
     })
     return result;
   }
-  
+
   const init = () => {
     //console.log('useEffect INIT')
     let resultTop = [];
@@ -140,14 +145,14 @@ const App = (props) => {
             >
               <div className={'empty'}>
                 <div className={'detail'}>
-                  <ExpendItem item={result.data[focused]} checkList={checkList} active={false} select={setSelectItem} key={'sideItem'} />
+                  <ExpendItem item={result.data[focused]} ess={ess} aver={aver} checkList={checkList} active={false} select={setSelectItem} key={'sideItem'} />
                 </div>
               </div>
             </Flipped>
           ) : (
             <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
               <div className={'detail'}>
-                <ExpendItem item={result.data[focused]} checkList={checkList} active={true} select={setSelectItem} key={'sideItem'} />
+                <ExpendItem item={result.data[focused]} ess={ess} aver={aver} checkList={checkList} active={true} select={setSelectItem} key={'sideItem'} />
               </div>
             </Flipped>
           )}

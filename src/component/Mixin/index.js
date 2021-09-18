@@ -1,11 +1,12 @@
 import { useEffect, useState, } from 'react';
 import _ from 'lodash';
 
-export function getColor(percent, start, end) {
+export function getColor(percent, start, end, alpha) {
     var a = percent / 100,
         b = (end - start) * a,
-        c = b + start;
-    return 'hsl(' + c + ', 60%, 48%)';
+        c = b + start,
+        d = alpha ? alpha : 1;
+    return 'hsla(' + c + ', 60%, 48%, ' + d + ')';
 }
 
 export function byKeys(obj, keys = []) {
@@ -104,14 +105,13 @@ export function useGridNum(target, total, type) {
         }
         const targetWidth = Math.round(target.current.clientWidth);
         const count = Math.floor(targetWidth / 360);
-        
+
         let _row = 1;
         let _col = total;
         let _end = total - 1;
         let _gap = 96;
 
         let _width = type === 'list' ? 360 : Math.round((targetWidth - (16 * (count - 1))) / count);
-        //let _width = 360;
         let _height = 160;
 
         let rowNum = Math.round(targetWidth / _width);
@@ -141,57 +141,6 @@ export function useGridNum(target, total, type) {
     return gridNum;
 }
 
-/*export function useGridNum(target, total, type, setWidth) {
-    const [gridNum, setGridNum] = useState({
-        col: undefined,
-        row: undefined,
-        end: undefined,
-        gap: undefined,
-        width: undefined,
-        height: undefined,
-    });
-    useEffect(() => {
-        if (!total) {
-            return gridNum;
-        };
-        const targetWidth = Math.round(target.current.clientWidth);
-        const count = Math.floor(targetWidth / 360);
-
-        let _row = 1;
-        let _col = total;
-        let _end = total - 1;
-        let _gap = 96;
-        let _width = Math.round((targetWidth - (16 * (count - 1))) / count);
-        let _height = 160;
-
-        let rowNum = Math.round(targetWidth / _width);
-        let colNum = Math.ceil(total / rowNum);
-        let colMin = Math.min(colNum, 3);
-        
-        if (type === 'grid') {
-            if (colNum > 3) {
-                _row = colMin;
-                _col = Math.ceil(total / _row);
-            } else {
-                _row = colMin;
-                _col = rowNum;
-            };
-            _gap = 16;
-            _end = _col - Math.round(targetWidth / _width);
-        };
-        setWidth(_width)
-        setGridNum({
-            col: _col,
-            row: _row,
-            end: _end,
-            gap: _gap,
-            width: _width,
-            height: _height,
-        });
-    }, [total, type,]);
-    return gridNum;
-}*/
-
 export function useWindowSize() {
     const [windowSize, setWindowSize] = useState({
         width: undefined,
@@ -203,7 +152,7 @@ export function useWindowSize() {
                 width: window.innerWidth,
                 height: window.innerHeight,
             });
-        }
+        };
         // Add event listener
         window.addEventListener("resize", handleResize);
         // Call handler right away so state gets updated with initial window size
@@ -222,7 +171,6 @@ export function shuffle(dataSet) {
         // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-
         // And swap it with the current element.
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];

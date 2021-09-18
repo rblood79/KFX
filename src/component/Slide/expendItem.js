@@ -1,26 +1,37 @@
 import './expendItem.scss';
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
 import { getColor, byKeys } from '../Mixin'
 import context from '../Context';
-import { useEffect } from 'react/cjs/react.development';
+import { Spring, animated, useSpring, useSprings } from 'react-spring'
 
-
+import Chart from './chart';
 
 const App = (props) => {
     const state = useContext(context);
-    const { type, setBase, focused } = state;
+    const { type, setBase } = state;
     const item = props.item;
+    //const rank = props.index;
     const selectItem = props.select;
     const checkList = props.checkList;
+    const ess = props.ess;
+    const aver = props.aver;
 
-    const canvasRef = useRef(null);
-    //console.log(item)
-    //console.log(checkList)
+    const items = byKeys(item, _.keys(checkList));
+    const averItem = byKeys(aver, _.keys(checkList));
     //
-    let percentColor = item && getColor(item.TOTAL, 0, 240);
+    const percentColor = item && getColor(item.TOTAL, 0, 240);
+
+    const pValue = useSpring({
+        val: item.TOTAL,
+        color: percentColor,
+        from: { val: 0 }
+    });
+
+    //const iarr = byKeys(item, _.keys(ess))
+    //const arrItem = Object.keys(iarr).map(key => (iarr[key]));
 
     const [itemIcon] = useState([
         { name: '주기검사', icon: 'ri-tools-fill' },
@@ -34,7 +45,6 @@ const App = (props) => {
     ])
 
     const SideItem = item => {
-        const items = byKeys(item, _.keys(checkList))
         const result = [];
         _.map(items, (val, key) => {
             //const color = getColor(val, 0, 240)
@@ -43,47 +53,23 @@ const App = (props) => {
                     <span className={'sideItemBase'} />
                     <span className={'sideItemIcon'}><i className={_.find(itemIcon, ['name', key]).icon} /></span>
                     <span className={'sideItemTitle'}>{key}</span>
-                    <span className={'sideItemValue'}>{checkList[key] === 'N' ? <i className="ri-eye-off-line" /> : val}</span>
+                    <span className={'sideItemValue'}>
+                        {
+                            checkList[key] === 'N' ?
+                                <i className="ri-eye-off-line" /> :
+                                <span className={'sideItemUd'}>{val}<i className={val > averItem[key] ? "ri-arrow-up-s-fill" : "ri-arrow-down-s-fill"}></i></span>
+                        }
+                    </span>
                 </li>
             )
         })
         return result;
     }
 
-    const render = () => {
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
-        console.log(canvas.width)
-        if (context) {
-            context.strokeStyle = "red";  // 선 색깔
-            context.lineJoin = 'round';	// 선 끄트머리(?)
-            context.lineWidth = 1;		// 선 굵기
-
-            context.beginPath();
-            context.moveTo(canvas.width * .5, 0);
-            context.lineTo(canvas.width * .5, canvas.height);
-
-
-            context.moveTo(0, canvas.height * .5);
-            context.lineTo(canvas.width, canvas.height * .5);
-            context.closePath();
-
-            context.stroke();
-
-            context.font = '16px serif';
-            context.textAlign = 'center';
-            context.fillText('가동상태', canvas.width * .5, 20);
-        }
-    }
-
     const onClick = () => {
         selectItem(null);
         setBase(false);
     }
-
-    useEffect(() => {
-        render();
-    }, [focused])
 
     return (
         <div className={'detailContainer'} style={{ width: 360, height: 360 }}>
@@ -92,12 +78,12 @@ const App = (props) => {
             </ul>
             <div className={classNames('listItem', 'listItemExpend')} >
                 <div className={'graph'}>
-                    {/*<img src={process.env.PUBLIC_URL + '/assets/gr.png'} alt='graph' />*/}
-                    <canvas ref={canvasRef} className="canvas" width={360} height={360} />
+                    <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} />
                 </div>
-                <div className={'itemTitle'}>{item && item.호기}<span className={'itemTitleGray'}>BORAMAE</span></div>
+                <div className={'itemRank'}></div>
+                <div className={'itemTitle'}>호기{item && item.호기}<span className={'itemTitleGray'}>BORAMAE</span></div>
                 <span className={'itemPoint'}>MATCHING POINT</span>
-                <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item && item.TOTAL}%</div>
+                <animated.div className={classNames('itemPercent')} style={{ color: pValue.color }}>{pValue.val.interpolate((n) => n.toFixed(2) + '%')}</animated.div>
                 <button className={'detailButton'} onClick={() => { onClick() }} />
             </div>
         </div>

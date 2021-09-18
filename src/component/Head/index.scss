@@ -46,6 +46,7 @@
         align-items: center;
         z-index: 1;
         pointer-events: all;
+        transition: transform 0.24s ease-in-out;
         .viewText {
             padding-right: 16px;
             font-size: 16px;
@@ -73,6 +74,10 @@
             &.active {
                 text-decoration: underline;
             }
+        }
+        &.active {
+            //opacity: 0.1;
+            transform: translateY(-58px);
         }
     }
     .topView {

@@ -6,12 +6,14 @@ import 'remixicon/fonts/remixicon.css';
 
 const App = (props) => {
   const state = useContext(context);
-  const { topNum, topNav, setTopNum, setFocused, setCount } = state;
+  const { topNum, topNav, setTopNum, setFocused, setCount, base } = state;
 
   const onClick = (id) => {
     setFocused(0);
     setCount(0);
     setTopNum(id);
+    //setSelectItem(null);
+    //setBase(false)
   }
 
   /*const onType = (type) => {
@@ -27,12 +29,12 @@ const App = (props) => {
           <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt={'logo'} />
         </div>
       </div>
-      <div className={'topNav'}>
+      <div className={classNames('topNav', base && 'active')}>
         <span className={'viewText'}>{topNav && topNav[topNum].기지}</span>
         {topNav && (
           topNav.map((item, index) => {
             return (
-              <button key={index} className={classNames('topButton', index === topNum ? 'active' : null)} onClick={() => onClick(index)}>
+              <button key={index} className={classNames('topButton', index === topNum ? 'active' : null)} onClick={() => !base && onClick(index)}>
                 {item.대대}
               </button>
             )
