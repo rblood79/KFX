@@ -1,15 +1,31 @@
 import React, { useEffect, useState } from 'react';
-
+import _ from 'lodash';
 import './App.scss';
 import Head from './component/Head/';
 import Foot from './component/Foot/';
 import Slide from './component/Slide';
 import Base from './component/Base';
 
+import { DS } from './component/Data';
+
 const App = () => {
+  console.log('App')
   const [isMobile] = useState(/Mobi/i.test(window.navigator.userAgent));
+  const [top, setTop] = useState(null);
+  const [data, setData] = useState(null);
+
+  const dataLoad = () => {
+    setData(DS)
+  }
   useEffect(() => {
-    //console.log('App start', isMobile)
+    //
+    if (DS) {
+      let resultTop = [];
+      _.forEach(data, function (n, key) {
+        resultTop.push(n.부대)
+      });
+      setTop(resultTop);
+    }
   }, []);
 
   return (
@@ -22,12 +38,20 @@ const App = () => {
           {isMobile ? (
             <div>모바일은 지원하지 않습니다.</div>
           ) : (
-            <>
-              <Head />
-              <Base />
-              <Slide />
-              <Foot />
-            </>
+            data ? (
+              <>
+                <Head data={top} />
+                <Base />
+                <Slide data={data} />
+                <Foot />
+              </>
+            ) : (
+              <div className='loading'>
+                <button className={'callButton'} onClick={() => { dataLoad() }}>
+                  <span className='callButtonText'>Load</span>
+                </button>
+              </div>
+            )
           )}
         </div>
       </main>

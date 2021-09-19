@@ -13,11 +13,11 @@ import ExpendItem from './expendItem';
 import { useWindowSize, useGridNum, usePosition, useMove, useData } from '../Mixin';
 import _ from 'lodash';
 
-import { DS } from '../Data';
-
 const App = (props) => {
+  //console.log('index');
+  const DS = props.data;
   const state = useContext(context);
-  const { topNum, setTopNav, type, setType, focused, setFocused, count, setCount, base, setBase, setTemp } = state;
+  const { topNum, type, setType, focused, setFocused, count, setCount, base, setBase, setTemp } = state;
   const [selectItem, setSelectItem] = useState(null);
 
   const [checkList, setCheckList] = useState(null);
@@ -77,13 +77,11 @@ const App = (props) => {
   }
 
   const CheckBox = () => {
-    //const ess = DS[topNum].필수항목;
     const result = [];
     _.map(checkList, (v, k) => {
       const label = 'check' + k;
       result.push(
         <div className={'checkbox'} key={'check' + k}>
-          {/*<GuideBox />*/}
           <input id={label} className={'check'} value={k} type={'checkbox'} checked={v === 'Y' && true} disabled={ess[k]} onChange={(e) => onCheck(e)} />
           <div className={'checkboxText'}><label htmlFor={label} className={'label'}>{k}</label>
             <span className={'comment'}>임무 투입전 항공기.....</span></div>
@@ -93,22 +91,9 @@ const App = (props) => {
     return result;
   }
 
-  const init = () => {
-    //console.log('useEffect INIT')
-    let resultTop = [];
-    _.forEach(DS, function (n, key) {
-      resultTop.push(n.부대)
-    });
-    setTopNav(resultTop);
-  }
-
   useEffect(() => {
     setCheckList(DS[topNum].기준정보);
   }, [topNum]);
-
-  useEffect(() => {
-    init();
-  }, [DS])
 
   return (
     <Flipper className={'slider'} flipKey={[result.data]}>
@@ -154,7 +139,7 @@ const App = (props) => {
                 <div className={'detail'}>
                   <ExpendItem item={result.data[focused]} ess={ess} aver={aver} checkList={checkList} active={false} select={setSelectItem} key={'sideItem'} />
                 </div>
-          </div>}
+              </div>}
             </Flipped>
           ) : (
             <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
@@ -165,7 +150,7 @@ const App = (props) => {
           )}
           <button className={classNames('callButton', base && 'active')} onClick={onWindow}>
             <span className='callButtonText'>선 택</span>
-            </button>
+          </button>
         </>
       ) : (
         <div>empty</div>

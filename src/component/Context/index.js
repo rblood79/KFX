@@ -8,7 +8,6 @@ class UserProvider extends Component {
         url: 'http://localhost:8080',
         theme: 'light',
         topNum: 0,
-        topNav: null,
         type: 'list',
         focused: 0,
         base: false,
@@ -28,9 +27,6 @@ class UserProvider extends Component {
     };
     setTopNum = topNum => {
         this.setState(prevState => ({ topNum }));
-    };
-    setTopNav = topNav => {
-        this.setState(prevState => ({ topNav }));
     };
     setType = type => {
         this.setState(prevState => ({ type }));
@@ -59,8 +55,8 @@ class UserProvider extends Component {
     //
     render() {
         const { children } = this.props;
-        const { url, theme, topNum, topNav, type, focused, count, base, width, height, filter, temp } = this.state;
-        const { setTheme, setTopNum, setTopNav, setType, setFocused, setCount, setBase, setWidth, setHeight, setFilter, setTemp } = this;
+        const { url, theme, topNum, type, focused, count, base, width, height, filter, temp } = this.state;
+        const { setTheme, setTopNum, setType, setFocused, setCount, setBase, setWidth, setHeight, setFilter, setTemp } = this;
 
         return (
             <UserContext.Provider
@@ -68,7 +64,6 @@ class UserProvider extends Component {
                     theme,
                     url,
                     topNum,
-                    topNav,
                     type,
                     focused,
                     count,
@@ -79,7 +74,6 @@ class UserProvider extends Component {
                     temp,
                     setTheme,
                     setTopNum,
-                    setTopNav,
                     setType,
                     setFocused,
                     setCount,
