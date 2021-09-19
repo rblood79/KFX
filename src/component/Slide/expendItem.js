@@ -10,8 +10,9 @@ import { Spring, animated, useSpring, useSprings } from 'react-spring'
 import Chart from './chart';
 
 const App = (props) => {
+    //console.log('ex')
     const state = useContext(context);
-    const { type, setBase } = state;
+    const { type, setBase, focused, temp, } = state;
     const item = props.item;
     //const rank = props.index;
     const selectItem = props.select;
@@ -30,9 +31,9 @@ const App = (props) => {
         from: { val: 0 }
     });
 
-    //const iarr = byKeys(item, _.keys(ess))
-    //const arrItem = Object.keys(iarr).map(key => (iarr[key]));
-
+    const iarr = byKeys(item, _.keys(ess))
+    const arrItem = Object.keys(iarr).map(key => (iarr[key]));
+    
     const [itemIcon] = useState([
         { name: '주기검사', icon: 'ri-tools-fill' },
         { name: '야간비행여부', icon: 'ri-contrast-2-fill' },
@@ -67,9 +68,14 @@ const App = (props) => {
     }
 
     const onClick = () => {
+        //setTemp(arrItem);
         selectItem(null);
         setBase(false);
     }
+
+    useEffect(() => {
+        
+    },[focused])
 
     return (
         <div className={'detailContainer'} style={{ width: 360, height: 360 }}>
@@ -78,7 +84,7 @@ const App = (props) => {
             </ul>
             <div className={classNames('listItem', 'listItemExpend')} >
                 <div className={'graph'}>
-                    <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} />
+                    <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} arr={arrItem} cur={temp}/>
                 </div>
                 <div className={'itemRank'}></div>
                 <div className={'itemTitle'}>호기{item && item.호기}<span className={'itemTitleGray'}>BORAMAE</span></div>
@@ -91,7 +97,7 @@ const App = (props) => {
 }
 
 App.defaultProps = {
-    focused: 1,
+    focused: 0,
 };
 
 export default App;

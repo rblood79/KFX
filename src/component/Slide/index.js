@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
 import { Flipper, Flipped } from 'react-flip-toolkit';
+import { byKeys } from '../Mixin'
 
 import context from '../Context';
 import SlideItem from './slideItem';
@@ -15,13 +16,11 @@ import _ from 'lodash';
 import { DS } from '../Data';
 
 const App = (props) => {
-  //console.log('slide start')
   const state = useContext(context);
-  const { topNum, setTopNav, type, setType, focused, setFocused, count, setCount, setBase } = state;
+  const { topNum, setTopNav, type, setType, focused, setFocused, count, setCount, setBase, setTemp } = state;
   const [selectItem, setSelectItem] = useState(null);
 
   const [checkList, setCheckList] = useState(null);
-  const [rank, setRank] = useState(null);
   const sliderRef = useRef(null);
   const size = useWindowSize();
 
@@ -39,6 +38,12 @@ const App = (props) => {
   //
 
   const moveSlide = (postion) => {
+    
+
+    const iarr = byKeys(result.data[focused], _.keys(ess))
+    const arrItem = Object.keys(iarr).map(key => (iarr[key]));
+    setTemp(arrItem)
+
     if (postion === 'prev') {
       type === 'list' && focused > 0 && setFocused(focused - 1);
       count > 0 && setCount(count - 1);
@@ -143,11 +148,11 @@ const App = (props) => {
             <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}
             //onComplete={() => {type==='grid'&&setFocused(prev)}}
             >
-              <div className={'empty'}>
+              {/*<div className={'empty'}>
                 <div className={'detail'}>
                   <ExpendItem item={result.data[focused]} ess={ess} aver={aver} checkList={checkList} active={false} select={setSelectItem} key={'sideItem'} />
                 </div>
-              </div>
+          </div>*/}
             </Flipped>
           ) : (
             <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>

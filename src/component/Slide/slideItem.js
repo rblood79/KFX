@@ -1,5 +1,5 @@
 import './slideItem.scss';
-import React, { useContext,} from 'react';
+import React, { useContext, } from 'react';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
 import { Flipped } from 'react-flip-toolkit';
@@ -11,7 +11,7 @@ import GueageBox from './gueage';
 
 const App = (props) => {
     const state = useContext(context);
-    const { focused, setFocused, type, setBase, setCount } = state;
+    const { focused, setFocused, type, setBase, setCount, setTemp } = state;
     const index = props.index;
     const item = props.item;
     const active = focused === index && type !== 'grid';
@@ -20,21 +20,21 @@ const App = (props) => {
     let percentColor = getColor(item.TOTAL, 0, 240);
 
     const onClick = () => {
-        //setPrev(focused)
+        setTemp([0, 0, 0, 0])
         selectItem(item)
         setFocused(index)
         setBase(true)
         type === 'list' && setCount(index);
     }
 
-    const getImage = (e) =>{
+    const getImage = (e) => {
         return 'assets/aircraft/' + e + '.png'
     }
 
     return (
         <Flipped flipId={item.호기ID} translate>
             <div key={item.호기ID} className={classNames('listItem', active && 'active')}>
-                <GuideBox active={active}/>
+                <GuideBox active={active} />
                 <div className={'aircraftGroup'} >
                     <div className={'aircraft'}>
                         <img src={getImage(item.기종)} alt={'KF-21'} />
@@ -58,7 +58,7 @@ const App = (props) => {
                         <div className={'itemTitle'}>{item.호기}</div>
                         <GueageBox value={item.TOTAL} color={percentColor} />
                         <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.TOTAL}%</div>
-                        <div className={'itemIndex'}>{index < 9 ? '0' + (index+1) : (index+1)}</div>
+                        <div className={'itemIndex'}>{index < 9 ? '0' + (index + 1) : (index + 1)}</div>
                         <button className={'detailButtonGrid'} onClick={() => { onClick() }} />
                     </div>
                 )}
