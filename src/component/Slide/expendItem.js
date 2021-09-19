@@ -26,15 +26,17 @@ const App = (props) => {
     const percentColor = item && getColor(item.TOTAL, 0, 240);
 
     const pValue = useSpring({
-        val: item.TOTAL,
-        color: percentColor,
-        from: { val: 0 }
+        from: { val: 0 },
+        to: {
+            val: item.TOTAL,
+            color: percentColor
+        },
     });
 
 
     const iarr = byKeys(item, _.keys(ess))
     const arrItem = Object.keys(iarr).map(key => (iarr[key]));
-    
+
     const [itemIcon] = useState([
         { name: '주기검사', icon: 'ri-tools-fill' },
         { name: '야간비행여부', icon: 'ri-contrast-2-fill' },
@@ -75,8 +77,8 @@ const App = (props) => {
     }
 
     useEffect(() => {
-        
-    },[focused])
+
+    }, [focused])
 
     return (
         <div className={'detailContainer'} style={{ width: 360, height: 360 }}>
@@ -85,7 +87,7 @@ const App = (props) => {
             </ul>
             <div className={classNames('listItem', 'listItemExpend')} >
                 <div className={'graph'}>
-                    <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} arr={arrItem} cur={temp}/>
+                    <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} arr={arrItem} cur={temp} />
                 </div>
                 <div className={'itemRank'}></div>
                 <div className={'itemTitle'}>{item && item.호기}호기 <span className={'itemTitleGray'}>BORAMAE</span></div>
