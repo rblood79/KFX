@@ -1,7 +1,7 @@
 .slider {
     position: relative;
     width: 100%;
-    height: calc(100vh - 224px);
+    height: calc(100vh - 208px);
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -334,6 +334,7 @@
 .callButton {
     z-index: 100;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -341,10 +342,19 @@
     height: 48px;
     left: calc(50% - 24px);
     top: calc(50% - 24px);
+    color: #fff;
     .callButtonText {
         z-index: 1;
-        color: #fff;
         font-weight: bold;
+    }
+    i {
+        z-index: 1;
+        position: absolute;
+        bottom: 0;
+        font-size: 21px;
+    }
+    &.active {
+        opacity: 0;
     }
     &::before {
         content: "";
@@ -353,13 +363,15 @@
         height: 100%;
         transform: rotate(45deg);
         border: 2px solid rgba(0, 0, 0, 0.24);
-        background: #1f3c70;
+        background: #1c1c1c;
+        box-shadow: 0px 0px 32px rgba(5, 109, 205, 0.64);
         z-index: 0;
-        transition: background 0.24s ease-in-out;
+        transition: background 0.24s ease-in-out, box-shadow 0.24s ease-in-out;
     }
     &:hover {
         &::before {
-            background: #0178d5;
+            background: #1f3c70;
+            box-shadow: 0px 0px 8px rgba(5, 109, 205, 0.64);
         }
     }
 }

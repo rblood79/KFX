@@ -17,7 +17,7 @@ import { DS } from '../Data';
 
 const App = (props) => {
   const state = useContext(context);
-  const { topNum, setTopNav, type, setType, focused, setFocused, count, setCount, setBase, setTemp } = state;
+  const { topNum, setTopNav, type, setType, focused, setFocused, count, setCount, base, setBase, setTemp } = state;
   const [selectItem, setSelectItem] = useState(null);
 
   const [checkList, setCheckList] = useState(null);
@@ -163,7 +163,9 @@ const App = (props) => {
               </div>
             </Flipped>
           )}
-          <button className='callButton' onClick={onWindow}><span className='callButtonText'>선 택</span></button>
+          <button className={classNames('callButton', base && 'active')} onClick={onWindow}>
+            <span className='callButtonText'>선 택</span>
+            </button>
         </>
       ) : (
         <div>empty</div>
