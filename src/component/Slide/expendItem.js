@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css'
 import { getColor, byKeys } from '../Mixin'
 import context from '../Context';
-import { Spring, animated, useSpring, useSprings } from 'react-spring'
+import { animated, useSpring } from 'react-spring'
 
 import Chart from './chart';
 
@@ -30,6 +30,7 @@ const App = (props) => {
         color: percentColor,
         from: { val: 0 }
     });
+
 
     const iarr = byKeys(item, _.keys(ess))
     const arrItem = Object.keys(iarr).map(key => (iarr[key]));
@@ -87,7 +88,7 @@ const App = (props) => {
                     <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} arr={arrItem} cur={temp}/>
                 </div>
                 <div className={'itemRank'}></div>
-                <div className={'itemTitle'}>호기{item && item.호기}<span className={'itemTitleGray'}>BORAMAE</span></div>
+                <div className={'itemTitle'}>{item && item.호기}호기 <span className={'itemTitleGray'}>BORAMAE</span></div>
                 <span className={'itemPoint'}>MATCHING POINT</span>
                 <animated.div className={classNames('itemPercent')} style={{ color: pValue.color }}>{pValue.val.interpolate((n) => n.toFixed(2) + '%')}</animated.div>
                 <button className={'detailButton'} onClick={() => { onClick() }} />

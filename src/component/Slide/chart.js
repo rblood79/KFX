@@ -47,6 +47,7 @@ const App = (props) => {
         context.strokeStyle = "#ccc";  // 선 색깔
         context.lineJoin = 'round';	// 선 끄트머리(?)
         context.lineWidth = 1;		// 선 굵기
+        context.shadowBlur = 0;
         //세로
         context.beginPath();
         context.moveTo(wCenter + fixSize, size);
@@ -79,7 +80,8 @@ const App = (props) => {
         context.font = 'bold 12px Arial';
         context.textAlign = 'center';
         context.textBaseline = 'bottom';
-        context.fillStyle = '#1c1c1c'
+        context.fillStyle = '#1c1c1c';
+        context.shadowBlur = 0;
         context.fillText(now[0].key, wCenter, hCenter - 165);
 
         context.textAlign = 'left';
@@ -99,8 +101,8 @@ const App = (props) => {
         context.clearRect(0, 0, 480, 360);
         const ss = ((height / 2) - size) / 100;
         const setArray = [
-            { stroke: 'rgba(0,0,0,0.24)', fill: 'rgba(0,0,0,0.16)', width: 1 },
-            { stroke: strokeColor, fill: fillColor, width: 1.6 },
+            { stroke: 'rgba(0,0,0,0.24)', fill: 'rgba(0,0,0,0.16)', width: 1, shadow: 0 },
+            { stroke: strokeColor, fill: fillColor, width: 1.6, shadow: 0 },
         ]
         base();
         _.map(items, (item, i) => {
@@ -124,13 +126,12 @@ const App = (props) => {
                 setArray[i].fill,
                 setArray[i].stroke,
                 setArray[i].width,
+                setArray[i].shadow,
             );
         })
     }
 
     const loop = () => {
-
-
         for (i = 0; i < endArr.length; i += 1) {
             for (let t = 0; t < endArr[i].length; t += 1) {
                 delta = (endArr[i][t] - startArr[i][t]) / duration;
@@ -170,7 +171,7 @@ const App = (props) => {
 
 export default App;
 
-CanvasRenderingContext2D.prototype.fillPolygon = function (points, fillColor, strokeColor, lineWidth) {
+CanvasRenderingContext2D.prototype.fillPolygon = function (points, fillColor, strokeColor, lineWidth, shadow) {
     if (points.length <= 0) return;
     this.closePath();
     this.strokeStyle = strokeColor;  // 선 색깔
@@ -182,6 +183,8 @@ CanvasRenderingContext2D.prototype.fillPolygon = function (points, fillColor, st
     for (let i = 2; i < points.length - 1; i += 2) {
         this.lineTo(points[i], points[i + 1])
     }
+    this.shadowColor = fillColor;
+    this.shadowBlur = shadow || 0;
     this.closePath();
     this.stroke();
     this.fill();

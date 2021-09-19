@@ -38,8 +38,6 @@ const App = (props) => {
   //
 
   const moveSlide = (postion) => {
-    
-
     const iarr = byKeys(result.data[focused], _.keys(ess))
     const arrItem = Object.keys(iarr).map(key => (iarr[key]));
     setTemp(arrItem)
@@ -59,6 +57,10 @@ const App = (props) => {
       { ...checkList, [name]: e.target.checked ? 'Y' : 'N' }
     );
   };
+
+  const onWindow = () => {
+    window['returnFn'](result.data[focused]);
+  }
 
   const fView = () => {
     if (filterView === null) {
@@ -148,11 +150,11 @@ const App = (props) => {
             <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}
             //onComplete={() => {type==='grid'&&setFocused(prev)}}
             >
-              {/*<div className={'empty'}>
+              {<div className={'empty'}>
                 <div className={'detail'}>
                   <ExpendItem item={result.data[focused]} ess={ess} aver={aver} checkList={checkList} active={false} select={setSelectItem} key={'sideItem'} />
                 </div>
-          </div>*/}
+          </div>}
             </Flipped>
           ) : (
             <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
@@ -161,6 +163,7 @@ const App = (props) => {
               </div>
             </Flipped>
           )}
+          <button className='callButton' onClick={onWindow}><span className='callButtonText'>선 택</span></button>
         </>
       ) : (
         <div>empty</div>

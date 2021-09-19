@@ -16,6 +16,7 @@
         justify-content: space-between;
         position: relative;
         width: 620px;
+        transition: transform 0.24s ease-in-out, opacity 0.24s ease-in-out;
         &::before {
             content: "";
             position: absolute;
@@ -59,6 +60,10 @@
                     background-color: #fff;
                 }
             }
+        }
+        &.active {
+            opacity: 0;
+            transform: translateY(32px);
         }
     }
 }

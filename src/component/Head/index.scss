@@ -3,7 +3,7 @@
     justify-content: space-between;
     z-index: 110;
     width: 100%;
-    height: 48px;
+    height: 64px;
     padding: 0 48px;
     position: relative;
     pointer-events: none;
@@ -18,7 +18,6 @@
         justify-content: center;
         z-index: 10;
         clip-path: polygon(50% 100%, 0 0, 100% 0);
-        box-shadow: inset 0px 0px 16px rgba(0, 0, 0, 0.48);
         background-color: #1f3c70;
         background: radial-gradient(circle, #056dcd, #1f3c70);
         background-size: 200% 300%;
@@ -36,7 +35,7 @@
             height: 245px;
             transform: rotate(45deg);
             transform-origin: center;
-            box-shadow: inset -8px -8px 16px rgba(0,0,0,0.24);
+            box-shadow: inset -8px -8px 16px rgba(0,0,0,0.48);
             top: -146px;
         }
     }
@@ -46,7 +45,7 @@
         align-items: center;
         z-index: 1;
         pointer-events: all;
-        transition: transform 0.24s ease-in-out;
+        transition: transform 0.24s ease-in-out, opacity 0.24s ease-in-out;
         .viewText {
             padding-right: 16px;
             font-size: 16px;
@@ -76,8 +75,8 @@
             }
         }
         &.active {
-            //opacity: 0.1;
-            transform: translateY(-58px);
+            opacity: 0;
+            transform: translateY(-32px);
         }
     }
     .topView {

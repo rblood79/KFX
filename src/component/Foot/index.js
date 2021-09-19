@@ -1,8 +1,11 @@
 import './index.scss';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import context from '../Context';
 import classNames from 'classnames';
 
 const App = (props) => {
+  const state = useContext(context);
+  const { base } = state;
   const [stepData] = useState([
     { title: 'STEP 1', comment: 'Condition' },
     { title: 'STEP 2', comment: 'Aircraft' },
@@ -11,7 +14,7 @@ const App = (props) => {
   ])
   return (
     <div className={'step'}>
-      <ul className={'stepGroup'}>
+      <ul className={classNames('stepGroup', base && 'active')}>
         {
           stepData.map((item, idx) => {
             return (
