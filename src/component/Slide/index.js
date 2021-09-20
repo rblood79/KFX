@@ -12,7 +12,6 @@ import ExpendItem from './expendItem';
 
 import { useWindowSize, useGridNum, usePosition, useMove, useData } from '../Mixin';
 import _ from 'lodash';
-import { useSpring, animated } from 'react-spring'
 
 const App = (props) => {
   const DS = props.data;
