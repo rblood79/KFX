@@ -16,6 +16,7 @@ const App = (props) => {
     const item = props.item;
     const active = focused === index && type !== 'grid';
     const selectItem = props.selectItem;
+    const id = item.호기ID;
     //
     let percentColor = getColor(item.TOTAL, 0, 240);
 
@@ -32,7 +33,7 @@ const App = (props) => {
     }
 
     return (
-        <Flipped flipId={item.호기ID} translate>
+        <Flipped flipId={id} translate>
             <div key={item.호기ID} className={classNames('listItem', active && 'active')}>
                 <GuideBox active={active} />
                 <div className={'aircraftGroup'} >

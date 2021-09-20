@@ -4,19 +4,19 @@ import _ from 'lodash';
 import { getColor } from '../Mixin'
 
 const App = (props) => {
-    //const canvas = canvasRef.current;
-    //const context = canvas.getContext('2d');
     const [canvas, setCanvas] = useState(null)
     const [context, setContext] = useState(null)
-
+    
     const item = props.item;
-    const aver = props.aver;
+    const aver = props.aver || [0, 0, 0, 0];
     const total = props.total;
     //
     const def = Object.keys(aver).map(key => ({ key, value: aver[key] }));
     const now = Object.keys(item).map(key => ({ key, value: item[key] }));
 
-    const items = [def, now];
+    const items = [];
+    items.push(def)
+    items.push(now)
     //console.log(items)
 
     const fillColor = getColor(total, 0, 240, 0.48);
@@ -26,22 +26,21 @@ const App = (props) => {
     const fixSize = 0.5;
     const width = 480;
     const height = 360;
-    const wCenter = 480 * 0.5;
-    const hCenter = 360 * 0.5;
+    const wCenter = width * 0.5;
+    const hCenter = height * 0.5;
     const size = 20;
-
+    const timeout = useRef(null);
     let curArr = [];
     let startArr = [];
     let endArr = []
     let delta;
     let animationComplete = true;
     let FPS = 60;
-    let i;
-    let duration = 30;
+    let duration = 20;
 
     curArr.push(props.cur);
     startArr.push(props.cur);
-    endArr.push(props.arr);
+    endArr.push(Object.keys(item).map(key => (item[key])));
 
     const base = () => {
         context.strokeStyle = "#ccc";  // 선 색깔
@@ -132,7 +131,7 @@ const App = (props) => {
     }
 
     const loop = () => {
-        for (i = 0; i < endArr.length; i += 1) {
+        for (let i = 0; i < endArr.length; i += 1) {
             for (let t = 0; t < endArr[i].length; t += 1) {
                 delta = (endArr[i][t] - startArr[i][t]) / duration;
                 curArr[i][t] += delta;
@@ -150,9 +149,10 @@ const App = (props) => {
         };
         if (animationComplete) {
             draw(endArr[0]);
+            clearTimeout(timeout.current);
         } else {
             draw(curArr[0])
-            setTimeout(loop, FPS / duration);
+            timeout.current = setTimeout(() => { loop() }, FPS / duration);
         };
     };
 
@@ -160,6 +160,7 @@ const App = (props) => {
         setCanvas(canvasRef.current);
         canvas && setContext(canvas.getContext('2d'));
         if (context) {
+            clearTimeout(timeout.current);
             loop();
         }
     }, [canvas, context, item])

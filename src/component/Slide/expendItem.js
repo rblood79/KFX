@@ -25,17 +25,18 @@ const App = (props) => {
     //
     const percentColor = item && getColor(item.TOTAL, 0, 240);
 
-    const pValue = useSpring({
-        from: { val: 0 },
+    const {number, color} = useSpring({
+        from: { number: 0 },
         to: {
-            val: item.TOTAL,
+            number: item.TOTAL,
             color: percentColor
         },
+        reset: true,
+        //delay: 200,
     });
 
-
-    const iarr = byKeys(item, _.keys(ess))
-    const arrItem = Object.keys(iarr).map(key => (iarr[key]));
+    //const iarr = byKeys(item, _.keys(ess))
+    //const arrItem = Object.keys(iarr).map(key => (iarr[key]));
 
     const [itemIcon] = useState([
         { name: '주기검사', icon: 'ri-tools-fill' },
@@ -87,12 +88,14 @@ const App = (props) => {
             </ul>
             <div className={classNames('listItem', 'listItemExpend')} >
                 <div className={'graph'}>
-                    <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} arr={arrItem} cur={temp} />
+                    <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} cur={temp} />
                 </div>
                 <div className={'itemRank'}></div>
                 <div className={'itemTitle'}>{item && item.호기}호기 <span className={'itemTitleGray'}>BORAMAE</span></div>
                 <span className={'itemPoint'}>MATCHING POINT</span>
-                <animated.div className={classNames('itemPercent')} style={{ color: pValue.color }}>{pValue.val.interpolate((n) => n.toFixed(2) + '%')}</animated.div>
+                <animated.div className={classNames('itemPercent')} style={{ color: color }}>
+                    {number.to(n => n.toFixed(2) + '%')}
+                </animated.div>
                 <button className={'detailButton'} onClick={() => { onClick() }} />
             </div>
         </div>

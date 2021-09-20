@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    //opacity: .1;
     //flex: 1;
     .slide {
         display: flex;
@@ -61,6 +62,7 @@
                 flex-direction: column;
                 i {
                     color: #0178d5;
+                    font-size: 36px;
                 }
                 .controllText {
                     position: absolute;

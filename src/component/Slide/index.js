@@ -12,9 +12,9 @@ import ExpendItem from './expendItem';
 
 import { useWindowSize, useGridNum, usePosition, useMove, useData } from '../Mixin';
 import _ from 'lodash';
+import { useSpring, animated } from 'react-spring'
 
 const App = (props) => {
-  //console.log('index');
   const DS = props.data;
   const state = useContext(context);
   const { topNum, type, setType, focused, setFocused, count, setCount, base, setBase, setTemp } = state;
@@ -36,7 +36,6 @@ const App = (props) => {
 
   const [filterView, setFilterView] = useState(null);
   //
-
   const moveSlide = (postion) => {
     const iarr = byKeys(result.data[focused], _.keys(ess))
     const arrItem = Object.keys(iarr).map(key => (iarr[key]));
@@ -96,12 +95,12 @@ const App = (props) => {
   }, [topNum]);
 
   return (
-    <Flipper className={'slider'} flipKey={[result.data]}>
+    <Flipper className={'slider'} flipKey={[result.data]} >
       {result.data ? (
         <>
           <div className={classNames('controller', type === 'grid' && 'active')}>
             <button className={'controllerButton prevButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">PREV</span></button>
-            <button className={'controllerButton filterButton'} onClick={() => fView()}><i className={type === 'list' ? "ri-filter-fill" : "ri-close-fill"}></i><span className="controllText">배정조건</span></button>
+            <button className={'controllerButton filterButton'} onClick={() => fView()}><i className={type === 'list' ? "ri-arrow-up-s-line" : "ri-close-fill"}></i><span className="controllText">배정조건</span></button>
             <button className={'controllerButton nextButton'} onClick={() => moveSlide('next')}><span className="controllText">NEXT</span><i className="ri-arrow-right-s-line"></i></button>
             <div className={classNames('filter', filterView)}>
               <div className={'filterClose'} onClick={() => fView()} />
