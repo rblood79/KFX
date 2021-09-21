@@ -34,8 +34,19 @@ const App = (props) => {
   const aver = DS[topNum].평균;
   const comment = DS[topNum].배정조건;
 
+  
   const [filterView, setFilterView] = useState(null);
   //
+  //const timeout = useRef(null);
+  /*const autoSlide = () => {
+    if (focused < grid.col - 1) {
+      moveSlide('next');
+    } else {
+      setFocused(0);
+      setCount(0);
+    }
+    timeout.current = setTimeout(() => { autoSlide() }, 2000);
+  }*/
   const moveSlide = (postion) => {
     const iarr = byKeys(result.data[focused], _.keys(ess))
     const arrItem = Object.keys(iarr).map(key => (iarr[key]));
@@ -95,7 +106,7 @@ const App = (props) => {
   }, [DS, topNum]);
 
   return (
-    <Flipper className={'slider'} flipKey={[result.data]} >
+    <Flipper className={'slider'} flipKey={[result.data]}>
       {result.data ? (
         <>
           <div className={classNames('controller', type === 'grid' && 'active')}>
@@ -130,6 +141,7 @@ const App = (props) => {
               }
             </div>
           </div>
+
           {(selectItem === null) ? (
             <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}
             //onComplete={() => {type==='grid'&&setFocused(prev)}}
