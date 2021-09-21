@@ -40,9 +40,11 @@ export function useData(arr, num, checkList) {
         _.each(lists, (obj) => {
             let valueSum = 0;
             _.map(obj, (v, k) => {
+                //console.log(k, v)
                 const findKey = keyArray.find(element => element === k);
-                if (findKey) {
+                if (findKey && used) {
                     valueSum += (v * weightFix[k])
+                    //valueSum += (v * used[findKey])
                 }
             })
             obj.TOTAL = Number((valueSum / wAverage).toFixed(2));
@@ -52,7 +54,7 @@ export function useData(arr, num, checkList) {
         setData({
             data: temp,
         });
-    }, [arr, num, checkList, wAverage,]);
+    }, [arr, num, checkList, wAverage]);
     return data;
 }
 
@@ -81,7 +83,7 @@ export function usePosition(target, type, size) {
     });
     useEffect(() => {
         if (target.current === null) {
-            return position;
+            return { x: 0 };
         }
         setPosition({
             x: type === 'list' ? Math.round(target.current.clientWidth * 0.5) : 0,
@@ -99,9 +101,10 @@ export function useGridNum(target, total, type) {
         width: undefined,
         height: undefined,
     });
+
     useEffect(() => {
         if (!total) {
-            return gridNum;
+            return { col: 0, row: 0, end: 0, gap: 0, width: 0, height: 0 };
         }
         const targetWidth = Math.round(target.current.clientWidth);
         const count = Math.floor(targetWidth / 360);
@@ -137,7 +140,7 @@ export function useGridNum(target, total, type) {
             width: _width,
             height: _height,
         });
-    }, [total, type,]);
+    }, [target, total, type]);
     return gridNum;
 }
 

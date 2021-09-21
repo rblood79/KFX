@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import classNames from 'classnames';
 import _ from 'lodash';
 import './App.scss';
 import Head from './component/Head/';
@@ -8,21 +9,21 @@ import Base from './component/Base';
 import Loading from './component/Loading';
 
 const App = () => {
-  console.log('App')
+  const props = window['getProps']();
   const [isMobile] = useState(/Mobi/i.test(window.navigator.userAgent));
   const [top, setTop] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const onLoad = () => {
-    fetch('https://rblood79.github.io/data/dataset.js', {
+  const onLoad = useCallback(async () => {
+    fetch(props.url, {
       headers: {
         'Accept': 'application / json'
       }
     })
-      .then(response => response.json()) // => JSON body 를 JS로 변환
+      .then(response => response.json())
       .then(response => setData(response));
-  }
+  }, [props.url])
 
   useEffect(() => {
     let resultTop = [];
@@ -33,27 +34,26 @@ const App = () => {
   }, [data]);
 
   useEffect(() => {
-    onLoad()
-  }, []);
+    onLoad();
+  }, [onLoad]);
 
   return (
     <div className="App">
       <header className="header" />
       <main className="main">
-        <div className={'contents'}>
+        <div className={classNames('contents', loading && 'loading')}>
           {isMobile ? (
             <div>모바일은 지원하지 않습니다.</div>
           ) : (
-            loading ? (
-              <Loading callBack={setLoading} />
-            ) : (
-              <>
-                <Head data={top} />
-                <Base />
-                <Slide data={data} />
-                <Foot />
-              </>
-            )
+            <>
+              <Base loading={loading}/>
+              <Head data={top} />
+              {loading ?
+                <Loading callBack={setLoading} {...props} /> : <Slide data={data} />
+              }
+              <Foot stepNum={loading ? 0 : 1}/>
+            </>
+
           )}
         </div>
       </main>

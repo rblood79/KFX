@@ -49,14 +49,14 @@ const App = (props) => {
                             <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.TOTAL}%</div>
                         </div>
                         <div className={'itemTitleGroup'}>
-                            <div className={'itemTitle'}>{item.호기}</div>
+                            <div className={'itemTitle'}>{item.호기}호기</div>
                             <span className={'itemSubText'}>Boramae</span>
                         </div>
                         <button className={'detailButton'} onClick={() => { onClick() }} />
                     </div>
                 ) : (
                     <div className={classNames('item')} >
-                        <div className={'itemTitle'}>{item.호기}</div>
+                        <div className={'itemTitle'}>{item.호기}호기</div>
                         <GueageBox value={item.TOTAL} color={percentColor} />
                         <div className={classNames('itemPercent')} style={{ color: percentColor }}>{item.TOTAL}%</div>
                         <div className={'itemIndex'}>{index < 9 ? '0' + (index + 1) : (index + 1)}</div>

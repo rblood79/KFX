@@ -5,25 +5,30 @@ import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css';
 
 const App = (props) => {
-  const data = props.data
   const state = useContext(context);
-  const { topNum, topNav, setTopNum, setFocused, setCount, base } = state;
-
+  const { topNum, setTopNum, setFocused, setCount, base } = state;
+  const data = props.data;
   const onClick = (id) => {
     setFocused(0);
     setCount(0);
     setTopNum(id);
   }
-
   return (
     <div className="head">
-      <div className={'topLogo'} onClick={() => setTopNum(null)}>
+      <div className={'topLogo'} onClick={() => console.log(state)}>
         <div className={'logo'}>
           <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt={'logo'} />
         </div>
       </div>
       <div className={classNames('topNav', base && 'active')}>
-        <span className={'viewText'}>{topNav && topNav[topNum].기지}</span>
+        {
+          data && data.length > 0 && (
+            <>
+              <img className={'flag'} src={data[topNum].MARK} alt={data[topNum].기지} />
+              <span className={'viewText'}>{data[topNum].기지}</span>
+            </>
+          )
+        }
         {data && (
           data.map((item, index) => {
             return (

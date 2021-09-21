@@ -10,7 +10,7 @@ const App = (props) => {
     { title: 'STEP 1', comment: 'Condition' },
     { title: 'STEP 2', comment: 'Aircraft' },
     { title: 'STEP 3', comment: 'Confirm' },
-    { title: 'STEP 4', comment: 'Other' }
+    { title: 'STEP 4', comment: 'Finish' }
   ])
   return (
     <div className={'step'}>
@@ -31,7 +31,7 @@ const App = (props) => {
 }
 
 App.defaultProps = {
-  stepNum: 0,
+  stepNum: 1,
 };
 
 export default App;

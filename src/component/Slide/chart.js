@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect, useState, } from 'react';
+import React, { useRef, useEffect, useState} from 'react';
 import _ from 'lodash';
 import { getColor } from '../Mixin'
 
@@ -150,9 +150,12 @@ const App = (props) => {
         if (animationComplete) {
             draw(endArr[0]);
             clearTimeout(timeout.current);
+            //cancelAnimationFrame(loop);
         } else {
             draw(curArr[0])
             timeout.current = setTimeout(() => { loop() }, FPS / duration);
+            //requestAnimationFrame(loop);
+            
         };
     };
 
@@ -162,6 +165,7 @@ const App = (props) => {
         if (context) {
             clearTimeout(timeout.current);
             loop();
+            //requestAnimationFrame(loop);
         }
     }, [canvas, context, item])
 

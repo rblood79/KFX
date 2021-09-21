@@ -16,7 +16,7 @@ $minSize: 4px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    //user-select: none;
+    user-select: none;
     //filter: grayscale(100%);
     transition: height $duration ease-in-out, filter $duration ease-in-out;
     &:hover {

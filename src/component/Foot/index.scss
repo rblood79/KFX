@@ -7,6 +7,7 @@
     height: auto;
     padding: 0 24px;
     height: 64px;
+    max-height: 64px;
     .stepGroup {
         list-style: none;
         padding: 0;
@@ -16,7 +17,6 @@
         justify-content: space-between;
         position: relative;
         width: 620px;
-        transition: transform 0.24s ease-in-out, opacity 0.24s ease-in-out;
         &::before {
             content: "";
             position: absolute;
@@ -30,6 +30,7 @@
             flex-direction: column;
             align-items: center;
             width: 80px;
+            transition: all 0.24s ease-in-out;
             .stepItemTitle {
                 font-size: 14px;
                 color: #7c7c7c;
@@ -47,6 +48,7 @@
                 transform: rotate(45deg);
                 transform-origin: center;
                 margin-bottom: 8px;
+                transition: all 0.24s ease-in-out;
             }
             &.active {
                 .stepItemTitle {

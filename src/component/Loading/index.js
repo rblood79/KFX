@@ -1,31 +1,33 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './index.scss';
 import Base from '../Base';
 import Chart from '../Slide/chart';
 import { shuffle } from '../Mixin';
+import classNames from 'classnames';
 
 const App = (props) => {
+
     let cc = 0;
     const duration = 1000;
-    const { title, meassage, startMsg, endMsg } = window['getProps']();
     //console.log(title, meassage)
-    const maxCount = meassage.length || 0;
+    const maxCount = props.meassage.length || 0;
     const callBack = props.callBack;
     const [end, setEnd] = useState([0, 0, 0, 0]);
     const [start] = useState([0, 0, 0, 0]);
     const [percent, setPercent] = useState(0);
-    const [ment, setMent] = useState(meassage);
-    const [fix, setFix] = useState(startMsg);
+    const [ment] = useState(shuffle(props.meassage));
+    const [fix, setFix] = useState(props.startMsg);
     const timeout = useRef(null);
 
+    const [flag, setFlag] = useState(false);
     //
-    const loop = () => {
-        if (title) {
+    const loop = useCallback(() => {
+        if (props.title) {
             clearTimeout(timeout.current);
             let item = null;
             if (cc > maxCount - 1) {
                 item = randomArray(100, 100);
-                setFix(endMsg)
+                setFix(props.endMsg);
             } else {
                 item = randomArray(50, 100);
                 setFix(ment[cc])
@@ -35,44 +37,44 @@ const App = (props) => {
                 cc++;
                 timeout.current = setTimeout(() => { loop() }, duration);
             } else {
-                callBack(false);
+                setFlag(true);
+                timeout.current = setTimeout(() => {
+                    callBack(false);
+                    clearTimeout(timeout.current);
+                }, 1200);
             }
             setEnd(item.array);
             setPercent(item.total);
         }
-    }
+    }, [cc, maxCount, ment, props])
 
-
-    const randomArray = (n, m) => {
+    const randomArray = useCallback((n, m) => {
         let arr = {};
         let total = 0;
-        for (var i = 0; i < title.length; i++) {
+        for (var i = 0; i < props.title.length; i++) {
             const value = Math.floor((Math.random() * (m - n) + n));//Math.round((Math.random() * v) * 10) / 10;
-            arr[title[i]] = value;
+            arr[props.title[i]] = value;
             total += value;
         };
-        return { array: arr, total: total / title.length };
-    };
+        return { array: arr, total: total / props.title.length };
+    }, [props]);
 
     useEffect(() => {
-        setMent(shuffle(meassage))
+        loop();
         return () => setEnd(null);
-    }, [meassage])
-
-    useEffect(() => {
-        loop()
-    }, [])
+    }, [loop])
 
     return (
-        <div className='loading'>
+        <div className='load'>
             <Base loading={true} />
-            <div className={'graph'}>{title &&
+            <div className={classNames('graph', flag && 'active')}>{props.title &&
                 <Chart item={end} total={percent} cur={start} />}
+                <div className={'callButton'} onClick={() => { callBack(false) }}>
+                    <span className='callButtonText'>{fix}</span>
+                </div>
             </div>
 
-            <div className={'callButton'} onClick={() => { callBack(false) }}>
-                <span className='callButtonText'>{fix}</span>
-            </div>
+
         </div>
     );
 }

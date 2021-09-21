@@ -12,9 +12,7 @@ const App = (props) => {
   return (
     <div className={classNames('base', type !== 'grid' ? null : 'active', loading && 'loading')}>
       <div className={'baseContents'} style={{ width: slideSize, height: slideSize }}>
-        <div className={classNames('baseBox')}>
-          <div className={'base'} />
-        </div>
+        <div className={classNames('baseBox')} />
         <div className={classNames('inBox')} />
         {!loading &&
           <div className={'detailButton'}>

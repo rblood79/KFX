@@ -32,6 +32,7 @@ const App = (props) => {
 
   const ess = DS[topNum].필수항목;
   const aver = DS[topNum].평균;
+  const comment = DS[topNum].배정조건;
 
   const [filterView, setFilterView] = useState(null);
   //
@@ -80,9 +81,9 @@ const App = (props) => {
       const label = 'check' + k;
       result.push(
         <div className={'checkbox'} key={'check' + k}>
-          <input id={label} className={'check'} value={k} type={'checkbox'} checked={v === 'Y' && true} disabled={ess[k]} onChange={(e) => onCheck(e)} />
-          <div className={'checkboxText'}><label htmlFor={label} className={'label'}>{k}</label>
-            <span className={'comment'}>임무 투입전 항공기.....</span></div>
+          <div className='checkboxInput'><input id={label} className={'check'} value={k} type={'checkbox'} checked={v === 'Y' && true} disabled={ess[k]} onChange={(e) => onCheck(e)} /></div>
+          <div className={'checkboxText'} ><label htmlFor={label} className={'label'}>{k}</label>
+            <span className={'comment'}>{comment[k]}</span></div>
         </div>
       )
     })
@@ -91,7 +92,7 @@ const App = (props) => {
 
   useEffect(() => {
     setCheckList(DS[topNum].기준정보);
-  }, [topNum]);
+  }, [DS, topNum]);
 
   return (
     <Flipper className={'slider'} flipKey={[result.data]} >

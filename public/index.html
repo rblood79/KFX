@@ -3,16 +3,13 @@
 
 <head>
   <meta charset="utf-8" />
-  <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700&display=swap"
-    rel="stylesheet">
-  </link>
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100;400;800&display=swap" rel="stylesheet">
-  </link>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;700&display=swap" rel="stylesheet"></link>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@100;400;800&display=swap" rel="stylesheet"></link>
   <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -45,12 +42,14 @@
     -->
   <script>
     //const meassage갯수만큼 초기 로딩
+    const url = 'https://rblood79.github.io/data/dataset.js';
     const title = ['RUN', 'LEVEL', 'FLY', 'ISSUE'];
-    const se = ['READY', '요구조건에 맞는 기체를 찾았습니다']
-    const meassage = ['비행정보를 수집중이에요', '조종사와 미팅중입니다', '가동상태를 확인중입니다', '주요 결함을 보고 받고있어요', '정비사분들이 기체 등급 확인중입니다', '정비사에게 보고를 받고있어요', '활주로 점검중입니다', '관제탑과 통신중입니다'];
+    const se = ['READY', '요구조건에 맞는 기체를 찾았습니다'];
+    //const meassage = ['비행정보를 수집중이에요', '조종사와 미팅중입니다', '가동상태를 확인중입니다', '주요 결함을 보고 받고있어요', '정비사분들이 기체 등급 확인중입니다', '정비사에게 보고를 받고있어요', '활주로 점검중입니다', '관제탑과 통신중입니다'];
+    const meassage = ['비행정보를 수집중이에요', '조종사와 미팅중입니다', '조종사와 미팅중입니다'];
     //function meassage
     getProps = () => {
-      return { title: title, meassage: meassage, startMsg: se[0], endMsg: se[1] };
+      return { title: title, meassage: meassage, startMsg: se[0], endMsg: se[1], url: url };
     };
     //function click item
     returnFn = (props) => {
