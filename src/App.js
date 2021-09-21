@@ -43,7 +43,7 @@ const App = () => {
       <main className="main">
         <div className={classNames('contents', loading && 'loading')}>
           {isMobile ? (
-            <div>모바일은 지원하지 않습니다.</div>
+            <div className="mobile">모바일은 지원하지 않습니다.</div>
           ) : (
             <>
               <Base loading={loading}/>

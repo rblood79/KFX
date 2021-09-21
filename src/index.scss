@@ -27,6 +27,7 @@ button {
 }
 html {
   height: 100%;
+  overflow: hidden;
   body {
     margin: 0;
     font-family: "Noto Sans KR", sans-serif;
@@ -35,6 +36,7 @@ html {
     -moz-osx-font-smoothing: grayscale;
     background-color: #1c1c1c;
     height: 100%;
+    overflow: hidden;
     #root{
       height: 100%;
     }
