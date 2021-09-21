@@ -5,6 +5,7 @@ $duration: 0.24s;
 $radius: 16px;
 
 .App {
+  min-width: 1440px;
   height: 100%;
   display: flex;
   flex-direction: column;
