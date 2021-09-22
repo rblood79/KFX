@@ -82,7 +82,7 @@ $duration: 0.24s;
     }
     .detailButton {
       &::before {
-        background: linear-gradient(180deg, #424242, #1f3c70);
+        background: linear-gradient(45deg, #1c1c1c, #1f3c70);
         background-size: 300%;
         animation: baseAnime 3s ease infinite;
       }
