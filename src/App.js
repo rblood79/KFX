@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import _ from 'lodash';
 import './App.scss';
@@ -16,22 +16,25 @@ const App = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const onLoad = useCallback(async () => {
-    fetch(props.url, {
-      headers: {
-        'Accept': 'application / json'
-      }
-    }).then(response => response.json()).then(response => setData(response));
-    if (props && data) {
-      let resultTop = [];
-      _.forEach(data, function (n, key) {
-        resultTop.push(n.부대)
-      });
-      setTop(resultTop);
-    }
-  }, [props, data])
-
   useEffect(() => {
+    const onLoad = async () => {
+      fetch(props.url, {
+        headers: {
+          'Accept': 'application / json'
+        }
+      })
+        .then(response => response.json())
+        .then(response => setData(response))
+        .then(
+          () => {
+            let resultTop = [];
+            _.forEach(data, function (n) {
+              resultTop.push(n.부대)
+            });
+            setTop(resultTop);
+          }
+        )
+    }
     onLoad();
   }, []);
 
