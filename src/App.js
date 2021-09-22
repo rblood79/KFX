@@ -9,6 +9,7 @@ import Base from './component/Base';
 import Loading from './component/Loading';
 
 const App = () => {
+  //console.log('App start')
   const props = window['getProps']();
   const [isMobile] = useState(/Mobi/i.test(window.navigator.userAgent));
   const [top, setTop] = useState(null);
@@ -20,22 +21,18 @@ const App = () => {
       headers: {
         'Accept': 'application / json'
       }
-    })
-      .then(response => response.json())
-      .then(response => setData(response));
-  }, [props.url])
-
-  useEffect(() => {
-    let resultTop = [];
-    _.forEach(data, function (n, key) {
-      resultTop.push(n.부대)
-    });
-    setTop(resultTop);
-  }, [data]);
+    }).then(response => response.json()).then(response => setData(response));
+    if (props && data) {
+      let resultTop = [];
+      _.forEach(data, function (n, key) {
+        resultTop.push(n.부대)
+      });
+      setTop(resultTop);
+    }
+  }, [props, data])
 
   useEffect(() => {
     onLoad();
-    console.log('App start')
   }, []);
 
   return (
@@ -47,12 +44,12 @@ const App = () => {
             <div className="mobile">모바일은 지원하지 않습니다.</div>
           ) : (
             <>
-              <Base loading={loading}/>
+              <Base loading={loading} />
               <Head data={top} />
               {loading ?
                 <Loading callBack={setLoading} {...props} /> : <Slide data={data} />
               }
-              <Foot stepNum={loading ? 0 : 1}/>
+              <Foot stepNum={loading ? 0 : 1} />
             </>
 
           )}

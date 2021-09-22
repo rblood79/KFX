@@ -14,26 +14,21 @@ import { useWindowSize, useGridNum, usePosition, useMove, useData } from '../Mix
 import _ from 'lodash';
 
 const App = (props) => {
+  //console.log('slide')
   const DS = props.data;
   const state = useContext(context);
   const { topNum, type, setType, focused, setFocused, count, setCount, base, setBase, setTemp } = state;
   const [selectItem, setSelectItem] = useState(null);
-
   const [checkList, setCheckList] = useState(null);
   const sliderRef = useRef(null);
   const size = useWindowSize();
-
   const result = useData(DS, topNum, checkList);
-
   const grid = useGridNum(sliderRef, result.data && result.data.length, type);
-
   const position = usePosition(sliderRef, type, size);
   const move = useMove(type, count, grid, position);
-
   const ess = DS[topNum].필수항목;
   const aver = DS[topNum].평균;
   const comment = DS[topNum].배정조건;
-
 
   const [filterView, setFilterView] = useState(null);
   //
