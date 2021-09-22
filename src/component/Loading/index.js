@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './index.scss';
-import Base from '../Base';
 import Chart from '../Slide/chart';
 import { shuffle } from '../Mixin';
 import classNames from 'classnames';
@@ -37,11 +36,11 @@ const App = (props) => {
                 cc++;
                 timeout.current = setTimeout(() => { loop() }, duration);
             } else {
-                /*setFlag(true);
+                setFlag(true);
                 timeout.current = setTimeout(() => {
                     callBack(false);
                     clearTimeout(timeout.current);
-                }, 1200);*/
+                }, 1200);
             }
             setEnd(item.array);
             setPercent(item.total);
@@ -66,8 +65,10 @@ const App = (props) => {
 
     return (
         <div className='load'>
-            <div className={classNames('graph', flag && 'active')}>{props.title &&
-                <Chart item={end} total={percent} cur={start} />}
+            <div className={classNames('graph', flag && 'active')}>
+                {props.title &&
+                    <Chart item={end} total={percent} cur={start} />
+                }
                 <div className={'callButton'} onClick={() => { callBack(false) }}>
                     <span className='callButtonText'>{fix}</span>
                 </div>

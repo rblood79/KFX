@@ -2,10 +2,10 @@
     .callButton {
         //pointer-events: none;
         user-select: none;
-        width: 124px;
-        height: 124px;
-        left: calc(50% - 62px);
-        top: calc(50% - 66px);
+        width: 96px;
+        height: 96px;
+        left: calc(50% - 48px);
+        top: calc(50% - 48px);
         &:hover {
             &::before {
                 background: #1c1c1c;

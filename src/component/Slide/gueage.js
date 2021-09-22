@@ -1,10 +1,23 @@
 
 import './gueage.scss';
 import classNames from 'classnames';
+import React, { useEffect } from 'react';
+import { animated, useSpring } from 'react-spring';
 
 const App = (props) => {
     const value = props.value;
     const color = props.color;
+
+    const { number,} = useSpring({
+        from: {
+            number: 0,
+        },
+        to: {
+            number: value,
+        },
+        reset: true,
+        delay: 300,
+    });
 
     const Gueage = () => {
         const result = [];
@@ -13,9 +26,12 @@ const App = (props) => {
         }
         return result;
     }
+    useEffect(() => {
+        
+    }, [])
     return (
         <div className={classNames('boxGueageContainer')}>
-            <div className={'boxGueageBase'} style={{ width: value + '%', backgroundColor: color }}/>
+            <animated.div className={'boxGueageBase'} style={{ width: props.active ? number.to(n => n.toFixed(2) + '%') : value+'%', backgroundColor: color }}/>
             <Gueage />
         </div>
     );

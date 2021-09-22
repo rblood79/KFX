@@ -2,10 +2,10 @@ import './expendItem.scss';
 import React, { useContext, useState, useEffect } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
-import 'remixicon/fonts/remixicon.css'
-import { getColor, byKeys } from '../Mixin'
+import 'remixicon/fonts/remixicon.css';
+import { getColor, byKeys } from '../Mixin';
 import context from '../Context';
-import { animated, useSpring } from 'react-spring'
+import { animated, useSpring } from 'react-spring';
 
 import Chart from './chart';
 

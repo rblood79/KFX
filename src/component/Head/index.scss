@@ -10,12 +10,12 @@
     transition: transform 0.24s ease-in-out;
     .topLogo {
         position: absolute;
-        width: 254px;
-        height: 127px;
+        width: 224px;
+        height: 112px;
         top: -16px;
-        left: calc(50% - 127px);
+        left: calc(50% - 112px);
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         z-index: 10;
         clip-path: polygon(50% 100%, 0 0, 100% 0);
@@ -26,9 +26,11 @@
         pointer-events: all;
         .logo {
             z-index: 1;
-            width: 108px;
-            height: 54px;
-            margin-bottom: 36px;
+            width: 96px;
+            padding-top: 24px;
+            img {
+                width: 100%;
+            }
         }
         &::after {
             content: "";

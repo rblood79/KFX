@@ -34,7 +34,7 @@ const App = (props) => {
   const aver = DS[topNum].평균;
   const comment = DS[topNum].배정조건;
 
-  
+
   const [filterView, setFilterView] = useState(null);
   //
   //const timeout = useRef(null);
@@ -50,7 +50,7 @@ const App = (props) => {
   const moveSlide = (postion) => {
     const iarr = byKeys(result.data[focused], _.keys(ess))
     const arrItem = Object.keys(iarr).map(key => (iarr[key]));
-    setTemp(arrItem)
+    setTemp(arrItem);
 
     if (postion === 'prev') {
       type === 'list' && focused > 0 && setFocused(focused - 1);
@@ -110,9 +110,9 @@ const App = (props) => {
       {result.data ? (
         <>
           <div className={classNames('controller', type === 'grid' && 'active')}>
-            <button className={'controllerButton prevButton'} onClick={() => moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">PREV</span></button>
+            <button className={'controllerButton prevButton'} onClick={() => count !== 0 && moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">PREV</span></button>
             <button className={'controllerButton filterButton'} onClick={() => fView()}><i className={type === 'list' ? "ri-arrow-up-s-line" : "ri-close-fill"}></i><span className="controllText">배정조건</span></button>
-            <button className={'controllerButton nextButton'} onClick={() => moveSlide('next')}><span className="controllText">NEXT</span><i className="ri-arrow-right-s-line"></i></button>
+            <button className={'controllerButton nextButton'} onClick={() => count < grid.end && moveSlide('next')}><span className="controllText">NEXT</span><i className="ri-arrow-right-s-line"></i></button>
             <div className={classNames('filter', filterView)}>
               <div className={'filterClose'} onClick={() => fView()} />
               <CheckBox />
