@@ -9,8 +9,8 @@ import Base from './component/Base';
 import Loading from './component/Loading';
 
 const App = () => {
-  //console.log('App start')
-  const props = window['getProps']();
+  //console.log('App')
+  const [props] = useState(window['getProps']());
   const [isMobile] = useState(/Mobi/i.test(window.navigator.userAgent));
   const [top, setTop] = useState(null);
   const [data, setData] = useState(null);
@@ -24,19 +24,17 @@ const App = () => {
         }
       })
         .then(response => response.json())
-        .then(response => setData(response))
-        .then(
-          () => {
-            let resultTop = [];
-            _.forEach(data, function (n) {
-              resultTop.push(n.부대)
-            });
-            setTop(resultTop);
-          }
-        )
+        .then(response => setData(response));
     }
-    onLoad();
-  }, []);
+    const ini = () => {
+      let resultTop = [];
+      _.forEach(data, function (n) {
+        resultTop.push(n.부대)
+      });
+      setTop(resultTop);
+    }
+    !data ? onLoad() : ini();
+  }, [data, props.url]);
 
   return (
     <div className="App">
