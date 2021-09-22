@@ -37,11 +37,11 @@ const App = (props) => {
                 cc++;
                 timeout.current = setTimeout(() => { loop() }, duration);
             } else {
-                setFlag(true);
+                /*setFlag(true);
                 timeout.current = setTimeout(() => {
                     callBack(false);
                     clearTimeout(timeout.current);
-                }, 1200);
+                }, 1200);*/
             }
             setEnd(item.array);
             setPercent(item.total);
@@ -66,7 +66,6 @@ const App = (props) => {
 
     return (
         <div className='load'>
-            <Base loading={true} />
             <div className={classNames('graph', flag && 'active')}>{props.title &&
                 <Chart item={end} total={percent} cur={start} />}
                 <div className={'callButton'} onClick={() => { callBack(false) }}>
