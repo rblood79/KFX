@@ -1,5 +1,5 @@
 import './index.scss';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import context from '../Context';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css';
@@ -13,6 +13,8 @@ const App = (props) => {
     setCount(0);
     setTopNum(id);
   }
+  useEffect(() => {
+  },[])
   return (
     <div className="head">
       <div className={'topLogo'} onClick={() => console.log(state)}>

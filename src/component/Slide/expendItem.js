@@ -10,9 +10,8 @@ import { animated, useSpring } from 'react-spring';
 import Chart from './chart';
 
 const App = (props) => {
-    //console.log('ex')
     const state = useContext(context);
-    const { type, setBase, focused, temp, } = state;
+    const { type, setBase, temp, } = state;
     const item = props.item;
     //const rank = props.index;
     const selectItem = props.select;
@@ -78,8 +77,7 @@ const App = (props) => {
     }
 
     useEffect(() => {
-
-    }, [focused])
+    }, [])
 
     return (
         <div className={'detailContainer'} style={{ width: 360, height: 360 }}>

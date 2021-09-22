@@ -1,13 +1,16 @@
 import './index.scss';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import classNames from 'classnames';
 import context from '../Context';
 
 const App = (props) => {
   const state = useContext(context);
-  const { type, base} = state;
+  const { type, base } = state;
   const loading = props.loading;
   const slideSize = 360;
+
+  useEffect(() => {
+  },[])
 
   return (
     <div className={classNames('base', type !== 'grid' ? null : 'active', loading && 'loading')}>

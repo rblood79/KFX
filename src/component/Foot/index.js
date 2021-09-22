@@ -1,5 +1,5 @@
 import './index.scss';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import context from '../Context';
 import classNames from 'classnames';
 
@@ -12,6 +12,8 @@ const App = (props) => {
     { title: 'STEP 3', comment: 'Confirm' },
     { title: 'STEP 4', comment: 'Finish' }
   ])
+  useEffect(() => {
+  },[])
   return (
     <div className={'step'}>
       <ul className={classNames('stepGroup', base && 'active')}>

@@ -61,7 +61,7 @@ const App = (props) => {
     useEffect(() => {
         loop();
         return () => setEnd(null);
-    }, [loop])
+    }, [])
 
     return (
         <div className='load'>

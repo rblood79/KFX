@@ -35,7 +35,8 @@ const App = () => {
 
   useEffect(() => {
     onLoad();
-  }, [onLoad]);
+    console.log('App start')
+  }, []);
 
   return (
     <div className="App">
