@@ -64,6 +64,17 @@ $radius: 16px;
   width: 100%;
   height: 100%;
 }
+
+@media ( max-width: 768px ) {
+  $halfSize: 8px !important;
+  .header {
+    height: $halfSize;
+    padding: 0 $halfSize;
+  }
+  .main {
+    padding: 0 $halfSize;
+  }
+}
 /*@media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

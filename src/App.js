@@ -8,6 +8,8 @@ import Slide from './component/Slide';
 import Base from './component/Base';
 import Loading from './component/Loading';
 
+import Mobile from './component/Mobile';
+
 const App = () => {
   //console.log('App')
   const [props] = useState(window['getProps']());
@@ -42,7 +44,7 @@ const App = () => {
       <main className="main">
         <div className={classNames('contents', loading && 'loading')}>
           {isMobile ? (
-            <div className="mobile">모바일은 지원하지 않습니다.</div>
+            <Mobile />
           ) : (
             <>
               <Base loading={loading} />
