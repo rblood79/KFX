@@ -1,4 +1,4 @@
-import './expendItem.scss';
+import './detailItem.scss';
 import React, { useContext, useState, useEffect } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
@@ -11,9 +11,8 @@ import Chart from './chart';
 
 const App = (props) => {
     const state = useContext(context);
-    const { type, setBase, temp, } = state;
+    const { type, setBase, temp, base } = state;
     const item = props.item;
-    //const rank = props.index;
     const selectItem = props.select;
     const checkList = props.checkList;
     const ess = props.ess;
@@ -24,7 +23,7 @@ const App = (props) => {
     //
     const percentColor = item && getColor(item.TOTAL, 0, 240);
 
-    const {number, color} = useSpring({
+    const { number, color } = useSpring({
         from: { number: 0 },
         to: {
             number: item.TOTAL,
@@ -71,7 +70,6 @@ const App = (props) => {
     }
 
     const onClick = () => {
-        //setTemp(arrItem);
         selectItem(null);
         setBase(false);
     }
@@ -86,7 +84,7 @@ const App = (props) => {
             </ul>
             <div className={classNames('listItem', 'listItemExpend')} >
                 <div className={'graph'}>
-                    <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} cur={temp} />
+                    {base && <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} cur={temp} />}
                 </div>
                 <div className={'itemRank'}></div>
                 <div className={'itemTitle'}>{item && item.호기}호기 <span className={'itemTitleGray'}>BORAMAE</span></div>

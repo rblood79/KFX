@@ -23,15 +23,15 @@ export function useData(arr, num, checkList) {
     const [data, setData] = useState({
         data: undefined
     });
-    const customizer = ((obj, src) => {
-        if (obj === 'N') {
-            return 0;
-        } else {
-            wAverage += src;
-        };
-    });
-    let wAverage = 0;
     useEffect(() => {
+        let wAverage = 0;
+        const customizer = ((obj, src) => {
+            if (obj === 'N') {
+                return 0;
+            } else {
+                wAverage += src;
+            };
+        });
         const keyArray = _.keys(arr[num].기준정보);
         const weight = arr[num].가중치;
         const used = _.cloneDeep(checkList);
@@ -54,7 +54,7 @@ export function useData(arr, num, checkList) {
         setData({
             data: temp,
         });
-    }, [arr, num, checkList, wAverage]);
+    }, [arr, num, checkList]);
     return data;
 }
 
@@ -77,22 +77,23 @@ export function useMove(type, count, grid, position) {
     return move;
 }
 
-export function usePosition(target, type, size) {
+export function usePosition(type, size) {
     const [position, setPosition] = useState({
         x: 0,
     });
     useEffect(() => {
-        if (target.current === null) {
+        if (size === null) {
             return { x: 0 };
         }
         setPosition({
-            x: type === 'list' ? Math.round(target.current.clientWidth * 0.5) : 0,
+            x: type === 'list' ? (size.width - 32) * 0.5 : 0,
         });
-    }, [target, type, size,]);
+    }, [type, size,]);
     return position;
 }
 
 export function useGridNum(target, total, type) {
+
     const [gridNum, setGridNum] = useState({
         col: undefined,
         row: undefined,
@@ -103,7 +104,7 @@ export function useGridNum(target, total, type) {
     });
 
     useEffect(() => {
-        if (!total) {
+        if (!total || !target) {
             return { col: 0, row: 0, end: 0, gap: 0, width: 0, height: 0 };
         }
         const targetWidth = Math.round(target.current.clientWidth);

@@ -7,8 +7,7 @@ import { byKeys } from '../Mixin'
 
 import context from '../Context';
 import SlideItem from './slideItem';
-import ExpendItem from './expendItem';
-//import GuideBox from './guideBox';
+import DetailItem from './detailItem';
 
 import { useWindowSize, useGridNum, usePosition, useMove, useData } from '../Mixin';
 import _ from 'lodash';
@@ -24,7 +23,7 @@ const App = (props) => {
   const size = useWindowSize();
   const result = useData(DS, topNum, checkList);
   const grid = useGridNum(sliderRef, result.data && result.data.length, type);
-  const position = usePosition(sliderRef, type, size);
+  const position = usePosition(type, size);
   const move = useMove(type, count, grid, position);
   const ess = DS[topNum].필수항목;
   const aver = DS[topNum].평균;
@@ -42,6 +41,7 @@ const App = (props) => {
     }
     timeout.current = setTimeout(() => { autoSlide() }, 2000);
   }*/
+
   const moveSlide = (postion) => {
     const iarr = byKeys(result.data[focused], _.keys(ess))
     const arrItem = Object.keys(iarr).map(key => (iarr[key]));
@@ -101,67 +101,66 @@ const App = (props) => {
   }, [DS, topNum]);
 
   return (
-    <Flipper className={'slider'} flipKey={[result.data]}>
-      {result.data ? (
-        <>
-          <div className={classNames('controller', type === 'grid' && 'active')}>
-            <button className={'controllerButton prevButton'} onClick={() => count !== 0 && moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">PREV</span></button>
-            <button className={'controllerButton filterButton'} onClick={() => fView()}><i className={type === 'list' ? "ri-arrow-up-s-line" : "ri-close-fill"}></i><span className="controllText">배정조건</span></button>
-            <button className={'controllerButton nextButton'} onClick={() => count < grid.end && moveSlide('next')}><span className="controllText">NEXT</span><i className="ri-arrow-right-s-line"></i></button>
-            <div className={classNames('filter', filterView)}>
-              <div className={'filterClose'} onClick={() => fView()} />
-              <CheckBox />
-              <ul className={'filterInfo'}>
-                <li className={'infobox boxdisable'}>필수</li>
-                <li className={'infobox boxchecked'}>선택</li>
-                <li className={'infobox boxnormal'}>선택가능</li>
-              </ul>
-            </div>
-          </div>
-          <div className={classNames('slide')} ref={sliderRef}>
-            <div className={classNames('list', type === 'grid' && 'active')}
-              style={{
-                transform: 'translateX(' + move.x + 'px)',
-                gridTemplateColumns: 'repeat(' + grid.col + ', ' + grid.width + 'px)',
-                gridTemplateRows: 'repeat(' + grid.row + ', ' + grid.height + 'px)',
-                gap: grid.gap,
-              }}
-            >
-              {
-                result.data.map((item, i) => {
-                  return (
-                    <SlideItem item={item} index={i} focused={focused} key={'slideItem' + i} selectItem={setSelectItem} />
-                  )
-                })
-              }
-            </div>
-          </div>
-
-          {(selectItem === null) ? (
-            <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}
-            //onComplete={() => {type==='grid'&&setFocused(prev)}}
-            >
-              {<div className={'empty'}>
-                <div className={'detail'}>
-                  <ExpendItem item={result.data[focused]} ess={ess} aver={aver} checkList={checkList} active={false} select={setSelectItem} key={'sideItem'} />
+    <Flipper className={'slider'} flipKey={[result.data]}
+      //spring={"noWobble"} 
+      spring={{ stiffness: 560, damping: 56 }}
+    >
+      {
+        result.data ? (
+          selectItem === null ? (
+            <Flipped flipId={'FlippedContainer'} key={'swiperContainer'} translate
+              //onStart={() => {}}
+              >
+              <div className={classNames('slide')} ref={sliderRef}>
+                <div className={classNames('list', type === 'grid' && 'active')}
+                  style={{
+                    transform: 'translateX(' + move.x + 'px)',
+                    gridTemplateColumns: 'repeat(' + grid.col + ', ' + grid.width + 'px)',
+                    gridTemplateRows: 'repeat(' + grid.row + ', ' + grid.height + 'px)',
+                    gap: grid.gap,
+                  }}
+                >
+                  {
+                    result.data.map((item, i) => {
+                      return (
+                        <SlideItem item={item} index={i} focused={focused} key={'slideItem' + i} selectItem={setSelectItem} />
+                      )
+                    })
+                  }
                 </div>
-              </div>}
-            </Flipped>
-          ) : (
-            <Flipped flipId={'FlippedContainer'} key={'swiperContainer'}>
-              <div className={'detail'}>
-                <ExpendItem item={result.data[focused]} ess={ess} aver={aver} checkList={checkList} active={true} select={setSelectItem} key={'sideItem'} />
+                <button className={classNames('callButton', base && 'active')} onClick={onWindow}>
+                  <span className='callButtonText'>선 택</span>
+                </button>
               </div>
             </Flipped>
-          )}
-          <button className={classNames('callButton', base && 'active')} onClick={onWindow}>
-            <span className='callButtonText'>선 택</span>
-          </button>
-        </>
-      ) : (
-        <div>empty</div>
-      )}
+          ) : (
+            <Flipped flipId={'FlippedContainer'} key={'swiperContainer'} translate>
+              <div className={'detail'}>
+                <DetailItem item={result.data[focused]} ess={ess} aver={aver} checkList={checkList} active={false} select={setSelectItem} key={'sideItem'} />
+              </div>
+            </Flipped>
+          )
 
+        ) : (
+          <div>NO DATA</div>
+        )
+      }
+      {result.data &&
+        <div className={classNames('controller', type === 'grid' && 'active')}>
+          <button className={'controllerButton prevButton'} onClick={() => count !== 0 && moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">PREV</span></button>
+          <button className={'controllerButton filterButton'} onClick={() => fView()}><i className={type === 'list' ? "ri-arrow-up-s-line" : "ri-close-fill"}></i><span className="controllText">배정조건</span></button>
+          <button className={'controllerButton nextButton'} onClick={() => count < grid.end && moveSlide('next')}><span className="controllText">NEXT</span><i className="ri-arrow-right-s-line"></i></button>
+          <div className={classNames('filter', filterView)}>
+            <div className={'filterClose'} onClick={() => fView()} />
+            <CheckBox />
+            <ul className={'filterInfo'}>
+              <li className={'infobox boxdisable'}>필수</li>
+              <li className={'infobox boxchecked'}>선택</li>
+              <li className={'infobox boxnormal'}>선택가능</li>
+            </ul>
+          </div>
+        </div>
+      }
     </Flipper>
   );
 }

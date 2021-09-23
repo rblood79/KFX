@@ -17,6 +17,7 @@
         justify-content: space-between;
         position: relative;
         width: 620px;
+        transition: transform 0.24s ease-in-out, opacity 0.24s ease-in-out;
         &::before {
             content: "";
             position: absolute;

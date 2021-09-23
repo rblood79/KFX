@@ -47,8 +47,8 @@ const App = () => {
             <>
               <Base loading={loading} />
               <Head data={top} />
-              {loading ?
-                <Loading callBack={setLoading} {...props} /> : <Slide data={data} />
+              {
+                loading ? <Loading callBack={setLoading} {...props} /> : <Slide data={data} />
               }
               <Foot stepNum={loading ? 0 : 1} />
             </>

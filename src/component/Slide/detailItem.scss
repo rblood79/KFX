@@ -53,6 +53,7 @@
     }
     .detailButton {
       opacity: 1;
+      pointer-events: all;
     }
   }
   .graph {
@@ -76,7 +77,7 @@
   .detailContents {
     z-index: 1;
     position: absolute;
-    transform: translate(calc(50% + 128px), calc(50% - 104px));
+    transform: translate(calc(50% + 126px), calc(50% - 106px));
     display: grid;
     grid-template-columns: repeat(5, 70px);
     grid-template-rows: repeat(5, 70px);

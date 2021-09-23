@@ -1,6 +1,6 @@
 $centerSize: 360px;
 $defaultSize: 48px;
-$halfSize: 24px;
+$halfSize: 16px;
 $duration: 0.24s;
 $radius: 16px;
 
@@ -46,7 +46,7 @@ $radius: 16px;
   }
   .footer {
     width: 100%;
-    height: $halfSize;
+    height: $halfSize * 2;
     display: flex;
     align-items: center;
     justify-content: center;
