@@ -61,15 +61,7 @@ const App = (props) => {
                 </div>
                 {(focused === index && type === 'list') ? (
                     <div className={classNames('item')} >
-                        <div style={{display:'none'}}>
-                            <GueageBox value={item.TOTAL} color={percentColor} active={focused === index} />
-                            <span className={'itemRating'}>RATING POINT</span>
-                            <animated.div className={classNames('itemPercent')} style={{ color: percentColor }}>{number.to(n => n.toFixed(2) + '%')}</animated.div>
-                        </div>
-                        <div className={'itemTitleGroup'} style={{display:'none'}}>
-                            <div className={'itemTitle'}>{item.호기}호기</div>
-                            <span className={'itemSubText'}>Boramae</span>
-                        </div>
+                        
                         <button className={'detailButton'} onClick={() => { onClick() }} />
                     </div>
                 ) : (

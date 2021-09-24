@@ -82,6 +82,7 @@ $duration: 0.24s;
     }
     .detailButton {
       pointer-events: none;
+      top: 100%;
       &::before {
         background: linear-gradient(45deg, #1c1c1c, #1f3c70);
         background-size: 300%;

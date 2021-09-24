@@ -43,7 +43,7 @@ $minSize: 4px;
     }
     &.active {
         filter: none;
-        height: 360px;
+        //height: 360px;
         z-index: 0;
         .item {
             width: 100%;
@@ -148,7 +148,8 @@ $minSize: 4px;
     //opacity: 0;
     pointer-events: all;
     position: absolute;
-    top: 100%;
+    //top: 100%;
+    top: calc(100% + 100px);
     overflow: hidden;
     width: 126px;
     height: 64px;

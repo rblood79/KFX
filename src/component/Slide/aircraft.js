@@ -8,7 +8,7 @@ const App = (props) => {
     const { engine } = state;
     const prop = useSpring(
         {
-            config: { duration: 360 },
+            config: { duration: 380 },
             x: props.test
         }
     )
