@@ -6,7 +6,7 @@ import 'remixicon/fonts/remixicon.css';
 
 const App = (props) => {
   const state = useContext(context);
-  const { topNum, setTopNum, setFocused, setCount, base } = state;
+  const { topNum, setTopNum, setFocused, setCount, base, engine, setEngine } = state;
   const data = props.data;
   const onClick = (id) => {
     setFocused(0);
@@ -17,7 +17,7 @@ const App = (props) => {
   },[])
   return (
     <div className="head">
-      <div className={'topLogo'} onClick={() => console.log(state)}>
+      <div className={classNames('topLogo', engine && 'active')} onClick={() => setEngine(engine ? false : true)}>
         <div className={'logo'}>
           <img src={process.env.PUBLIC_URL + '/assets/other/logo.png'} alt={'logo'} />
         </div>

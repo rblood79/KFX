@@ -9,6 +9,8 @@ import context from '../Context';
 import GuideBox from './guideBox';
 import GueageBox from './gueage';
 
+import Aircraft from './aircraft';
+
 const App = (props) => {
     const state = useContext(context);
     const { focused, setFocused, type, setBase, setCount, setTemp, temp } = state;
@@ -53,7 +55,8 @@ const App = (props) => {
                 <GuideBox active={active} />
                 <div className={'aircraftGroup'} >
                     <div className={'aircraft'}>
-                        <img src={getImage(item.기종)} alt={'KF-21'} />
+                        {/*<img src={getImage(item.기종)} alt={'KF-21'} />*/}
+                        <Aircraft test={active ? 1 : 0}/>
                     </div>
                 </div>
                 {(focused === index && type === 'list') ? (
@@ -78,7 +81,6 @@ const App = (props) => {
                         <button className={'detailButtonGrid'} onClick={() => { onClick() }} />
                     </div>
                 )}
-
             </div>
         </Flipped>
     );

@@ -7,6 +7,7 @@ class UserProvider extends Component {
     state = {
         url: 'http://localhost:8080',
         theme: 'light',
+        engine: false,
         topNum: 0,
         type: 'list',
         focused: 0,
@@ -24,6 +25,9 @@ class UserProvider extends Component {
                 theme: theme ? 'dark' : 'light',
             }
         );
+    };
+    setEngine = engine => {
+        this.setState(prevState => ({ engine }));
     };
     setTopNum = topNum => {
         this.setState(prevState => ({ topNum }));
@@ -55,14 +59,15 @@ class UserProvider extends Component {
     //
     render() {
         const { children } = this.props;
-        const { url, theme, topNum, type, focused, count, base, width, height, filter, temp } = this.state;
-        const { setTheme, setTopNum, setType, setFocused, setCount, setBase, setWidth, setHeight, setFilter, setTemp } = this;
+        const { url, theme, engine, topNum, type, focused, count, base, width, height, filter, temp } = this.state;
+        const { setTheme, setEngine, setTopNum, setType, setFocused, setCount, setBase, setWidth, setHeight, setFilter, setTemp } = this;
 
         return (
             <UserContext.Provider
                 value={{
                     theme,
                     url,
+                    engine,
                     topNum,
                     type,
                     focused,
@@ -73,6 +78,7 @@ class UserProvider extends Component {
                     filter,
                     temp,
                     setTheme,
+                    setEngine,
                     setTopNum,
                     setType,
                     setFocused,

@@ -40,8 +40,12 @@
             transform: rotate(45deg);
             transform-origin: center;
             box-shadow: inset -16px -16px 32px rgba(0,0,0,0.64);
+            //background-image: url('./ptn.png');
             top: -146px;
         }
+        /*&.active {
+            background: radial-gradient(circle, #056dcd, #1f3c70);
+        }*/
     }
     .topNav {
         display: flex;

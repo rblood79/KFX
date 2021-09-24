@@ -6,9 +6,9 @@
     align-items: center;
     justify-content: space-between;
     width: 180px;
-    height: 240px;
+    height: 260px;
     left: calc(50% - 90px);
-    top: calc(50% - 120px);
+    top: calc(50% - 130px);
     pointer-events: none;
 
     .itemPercentGroup {
@@ -31,7 +31,7 @@
         text-align: center;
         .itemTitle {
             position: relative;
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 900;
         }
         .itemSubText {

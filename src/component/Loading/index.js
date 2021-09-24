@@ -63,8 +63,8 @@ const App = (props) => {
         <div className='load'>
             <div className={classNames('graph', flag && 'active')}>
                 <Chart item={end} total={percent} cur={start} />
-                <div className={'callButton'} onClick={() => { callBack(false) }}>
-                    <span className='callButtonText'>{fix}</span>
+                <div className={'loadingComment'} onClick={() => { callBack(false) }}>
+                    <span className='loadingText'>{fix}</span>
                 </div>
             </div>
         </div>
