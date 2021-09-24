@@ -47,7 +47,7 @@ const App = () => {
             <Mobile />
           ) : (
             <>
-              <Base loading={loading} />
+              <Base loading={loading}/>
               <Head data={top} />
               {
                 loading ? <Loading callBack={setLoading} {...props} /> : <Slide data={data} />

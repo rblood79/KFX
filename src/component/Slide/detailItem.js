@@ -24,13 +24,14 @@ const App = (props) => {
     const percentColor = item && getColor(item.TOTAL, 0, 240);
 
     const { number, color } = useSpring({
-        from: { number: 0 },
+        from: { 
+            number: temp[4] || 0 
+        },
         to: {
             number: item.TOTAL,
             color: percentColor
         },
         reset: true,
-        //delay: 200,
     });
 
     //const iarr = byKeys(item, _.keys(ess))

@@ -10,9 +10,8 @@ import GuideBox from './guideBox';
 import GueageBox from './gueage';
 
 const App = (props) => {
-    //console.log('sss')
     const state = useContext(context);
-    const { focused, setFocused, type, setBase, setCount, setTemp } = state;
+    const { focused, setFocused, type, setBase, setCount, setTemp, temp } = state;
     const index = props.index;
     const item = props.item;
     const active = focused === index && type !== 'grid';
@@ -23,12 +22,12 @@ const App = (props) => {
 
     const {number} = useSpring({
         from: {
-            number: 0,
+            number: temp[4] || 0,
         },
         to: {
             number: item.TOTAL,
         },
-        reset: true,
+        reset: true, //temp[4] === item.TOTAL ? false : true,
         delay: 200,
     });
 
@@ -59,12 +58,12 @@ const App = (props) => {
                 </div>
                 {(focused === index && type === 'list') ? (
                     <div className={classNames('item')} >
-                        <div>
+                        <div style={{display:'none'}}>
                             <GueageBox value={item.TOTAL} color={percentColor} active={focused === index} />
                             <span className={'itemRating'}>RATING POINT</span>
                             <animated.div className={classNames('itemPercent')} style={{ color: percentColor }}>{number.to(n => n.toFixed(2) + '%')}</animated.div>
                         </div>
-                        <div className={'itemTitleGroup'}>
+                        <div className={'itemTitleGroup'} style={{display:'none'}}>
                             <div className={'itemTitle'}>{item.호기}호기</div>
                             <span className={'itemSubText'}>Boramae</span>
                         </div>

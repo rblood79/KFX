@@ -8,28 +8,29 @@ import { byKeys } from '../Mixin'
 import context from '../Context';
 import SlideItem from './slideItem';
 import DetailItem from './detailItem';
+import FocuseItem from './focusItem';
 
-import { useWindowSize, useGridNum, usePosition, useMove, useData } from '../Mixin';
+import { useGridNum, useMove, useData } from '../Mixin';
 import _ from 'lodash';
 
 const App = (props) => {
   //console.log('slide')
   const DS = props.data;
   const state = useContext(context);
-  const { topNum, type, setType, focused, setFocused, count, setCount, base, setBase, setTemp } = state;
+  const { topNum, type, setType, focused, setFocused, count, setCount, base, setBase, setTemp, temp } = state;
+  const [filterView, setFilterView] = useState(null);
   const [selectItem, setSelectItem] = useState(null);
   const [checkList, setCheckList] = useState(null);
+
   const sliderRef = useRef(null);
-  const size = useWindowSize();
   const result = useData(DS, topNum, checkList);
-  const grid = useGridNum(result.data && result.data.length, type, size);
-  const position = usePosition(type, size);
-  const move = useMove(type, count, grid, position);
+  const grid = useGridNum(result.data && result.data.length, type);
+  const move = useMove(type, count, grid);
   const ess = DS[topNum].필수항목;
   const aver = DS[topNum].평균;
   const comment = DS[topNum].배정조건;
 
-  const [filterView, setFilterView] = useState(null);
+
   //
   //const timeout = useRef(null);
   /*const autoSlide = () => {
@@ -43,9 +44,22 @@ const App = (props) => {
   }*/
 
   const moveSlide = (postion) => {
-    const iarr = byKeys(result.data[focused], _.keys(ess))
-    const arrItem = Object.keys(iarr).map(key => (iarr[key]));
-    setTemp(arrItem);
+    if (base) {
+      const iarr = byKeys(result.data[focused], _.keys(ess))
+      let arrItem = Object.keys(iarr).map(key => (iarr[key]));
+      arrItem[4] = result.data[focused].TOTAL;
+      setTemp(arrItem);
+    } else {
+      let tarr = [];
+      for (let i = 0; i < 5; i++) {
+        if (i !== 4) {
+          tarr[i] = temp[i];
+        } else {
+          tarr[i] = result.data[focused].TOTAL
+        };
+      };
+      setTemp(tarr);
+    }
 
     if (postion === 'prev') {
       type === 'list' && focused > 0 && setFocused(focused - 1);
@@ -54,6 +68,7 @@ const App = (props) => {
       type === 'list' && focused < grid.end && setFocused(focused + 1);
       count < grid.end && setCount(count + 1);
     };
+    //console.log(selectItem)
   };
 
   const onCheck = e => {
@@ -102,8 +117,7 @@ const App = (props) => {
 
   return (
     <Flipper className={'slider'} flipKey={[result.data]}
-      //spring={"noWobble"} 
-      spring={{ stiffness: 560, damping: 56 }}
+    //spring={{ stiffness: 560, damping: 56 }}
     >
       {
         result.data ? (
@@ -126,10 +140,12 @@ const App = (props) => {
                     })
                   }
                 </div>
+                <FocuseItem item={result.data[focused]} />
                 <button className={classNames('callButton', base && 'active')} onClick={onWindow}>
                   <span className='callButtonText'>선 택</span>
                 </button>
               </div>
+
             </Flipped>
           ) : (
             <Flipped flipId={'FlippedContainer'} key={'swiperContainer'} translate>
@@ -145,6 +161,7 @@ const App = (props) => {
       }
       {result.data &&
         <div className={classNames('controller', type === 'grid' && 'active')}>
+
           <button className={'controllerButton prevButton'} onClick={() => count !== 0 && moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">PREV</span></button>
           <button className={'controllerButton filterButton'} onClick={() => fView()}><i className={type === 'list' ? "ri-arrow-up-s-line" : "ri-close-fill"}></i><span className="controllText">배정조건</span></button>
           <button className={'controllerButton nextButton'} onClick={() => count < grid.end && moveSlide('next')}><span className="controllText">NEXT</span><i className="ri-arrow-right-s-line"></i></button>

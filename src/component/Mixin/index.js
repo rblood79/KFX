@@ -77,7 +77,7 @@ export function useWindowSize() {
     });
     useEffect(() => {
         const handleResize = debounce(() => {
-            setWindowSize({width: window.innerWidth, height: window.innerHeight});
+            setWindowSize({width: window.innerWidth - 32, height: window.innerHeight});
         }, 100);
         window.addEventListener("resize", handleResize);
         handleResize();
@@ -86,41 +86,28 @@ export function useWindowSize() {
     return windowSize;
 }
 
-export function useMove(type, count, grid, position) {
+export function useMove(type, count, grid) {
     const [move, setMove] = useState({
         x: 0,
     });
+    const size = useWindowSize();
     useEffect(() => {
         let _x = 0;
+        let _c = type === 'list' ? size.width * 0.5 : 0;
         if (type === 'list') {
-            _x = Math.round(position.x - ((grid.width + grid.gap) * count) - (grid.width * 0.5))
+            _x = Math.round(_c - ((grid.width + grid.gap) * count) - (grid.width * 0.5))
             //} else if (data.length > 15 && !base) {
         } else {
-            _x = Math.round(position.x - ((grid.width + grid.gap) * count))
+            _x = Math.round(_c - ((grid.width + grid.gap) * count))
         };
         setMove({
             x: _x,
         });
-    }, [type, count, grid, position]);
+    }, [type, count, grid, size]);
     return move;
 }
 
-export function usePosition(type, size) {
-    const [position, setPosition] = useState({
-        x: 0,
-    });
-    useEffect(() => {
-        if (size === null) {
-            return { x: 0 };
-        }
-        setPosition({
-            x: type === 'list' ? (size.width - 32) * 0.5 : 0,
-        });
-    }, [type, size,]);
-    return position;
-}
-
-export function useGridNum(total, type, size) {
+export function useGridNum(total, type) {
     const [gridNum, setGridNum] = useState({
         col: undefined,
         row: undefined,
@@ -129,13 +116,13 @@ export function useGridNum(total, type, size) {
         width: undefined,
         height: undefined,
     });
-
+    const size = useWindowSize();
     useEffect(() => {
         if (!total) {
             return { col: 0, row: 0, end: 0, gap: 0, width: 0, height: 0 };
         }
-        const targetWidth = size.width - 32;
-        const count = Math.floor(targetWidth / 360);
+        const targetWidth = size.width;
+        const count = Math.floor(size.width / 360);
 
         let _row = 1;
         let _col = total;
@@ -168,7 +155,7 @@ export function useGridNum(total, type, size) {
             width: _width,
             height: _height,
         });
-    }, [size, total, type]);
+    }, [total, type, size]);
     return gridNum;
 }
 
@@ -187,3 +174,19 @@ export function shuffle(dataSet) {
     }
     return array;
 }
+
+/*export function usePosition(type) {
+    const [position, setPosition] = useState({
+        x: 0,
+    });
+    const size = useWindowSize();
+    useEffect(() => {
+        if (size === null) {
+            return { x: 0 };
+        }
+        setPosition({
+            x: type === 'list' ? (size.width - 32) * 0.5 : 0,
+        });
+    }, [type, size,]);
+    return position;
+}*/

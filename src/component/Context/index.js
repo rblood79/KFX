@@ -15,7 +15,7 @@ class UserProvider extends Component {
         width: 0,
         height: 0,
         filter: null,
-        temp: [0,0,0,0],
+        temp: [0,0,0,0,0],
     };
     // Method to update state
     setTheme = async theme => {
