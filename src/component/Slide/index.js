@@ -22,7 +22,7 @@ const App = (props) => {
   const sliderRef = useRef(null);
   const size = useWindowSize();
   const result = useData(DS, topNum, checkList);
-  const grid = useGridNum(sliderRef, result.data && result.data.length, type);
+  const grid = useGridNum(result.data && result.data.length, type, size);
   const position = usePosition(type, size);
   const move = useMove(type, count, grid, position);
   const ess = DS[topNum].필수항목;
@@ -108,9 +108,7 @@ const App = (props) => {
       {
         result.data ? (
           selectItem === null ? (
-            <Flipped flipId={'FlippedContainer'} key={'swiperContainer'} translate
-              //onStart={() => {}}
-              >
+            <Flipped flipId={'FlippedContainer'} key={'swiperContainer'} translate>
               <div className={classNames('slide')} ref={sliderRef}>
                 <div className={classNames('list', type === 'grid' && 'active')}
                   style={{

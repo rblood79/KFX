@@ -58,6 +58,34 @@ export function useData(arr, num, checkList) {
     return data;
 }
 
+export const debounce = (fn, ms) => {
+    let timer;
+    return _ => {
+        clearTimeout(timer);
+        timer = setTimeout(_ => {
+            timer = null;
+            fn.apply(this);
+        }, ms);
+    };
+}
+
+export function useWindowSize() {
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+        flag: false,
+    });
+    useEffect(() => {
+        const handleResize = debounce(() => {
+            setWindowSize({width: window.innerWidth, height: window.innerHeight});
+        }, 100);
+        window.addEventListener("resize", handleResize);
+        handleResize();
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    return windowSize;
+}
+
 export function useMove(type, count, grid, position) {
     const [move, setMove] = useState({
         x: 0,
@@ -92,8 +120,7 @@ export function usePosition(type, size) {
     return position;
 }
 
-export function useGridNum(target, total, type) {
-
+export function useGridNum(total, type, size) {
     const [gridNum, setGridNum] = useState({
         col: undefined,
         row: undefined,
@@ -104,10 +131,10 @@ export function useGridNum(target, total, type) {
     });
 
     useEffect(() => {
-        if (!total || !target) {
+        if (!total) {
             return { col: 0, row: 0, end: 0, gap: 0, width: 0, height: 0 };
         }
-        const targetWidth = Math.round(target.current.clientWidth);
+        const targetWidth = size.width - 32;
         const count = Math.floor(targetWidth / 360);
 
         let _row = 1;
@@ -141,30 +168,8 @@ export function useGridNum(target, total, type) {
             width: _width,
             height: _height,
         });
-    }, [target, total, type]);
+    }, [size, total, type]);
     return gridNum;
-}
-
-export function useWindowSize() {
-    const [windowSize, setWindowSize] = useState({
-        width: undefined,
-        height: undefined,
-    });
-    useEffect(() => {
-        function handleResize() {
-            setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            });
-        };
-        // Add event listener
-        window.addEventListener("resize", handleResize);
-        // Call handler right away so state gets updated with initial window size
-        handleResize();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", handleResize);
-    }, []); // Empty array ensures that effect is only run on mount
-    return windowSize;
 }
 
 export function shuffle(dataSet) {

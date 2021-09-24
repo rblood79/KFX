@@ -14,7 +14,7 @@
     left: calc(50% - 680px);
     top: -48px;
     font-size: 48px;
-    font-weight: bold;
+    font-weight: 900;
   }
   .itemTitle {
     position: absolute;
@@ -22,7 +22,7 @@
     left: calc(50% - 680px);
     top: 0px;
     font-size: 48px;
-    font-weight: bold;
+    font-weight: 900;
     .itemTitleGray {
       color: #b4b4b4;
     }
@@ -34,12 +34,13 @@
     text-decoration: underline;
   }
   .itemPercent {
-    font-size: 96px;
+    font-size: 72px;
     position: absolute;
     left: calc(50% - 680px);
     top: 96px !important;
-    font-family: "Urbanist", sans-serif;
+    font-family: "GmarketSans", sans-serif;
     line-height: 96px;
+    font-weight: 900;
   }
   .boxLineGroup {
     //box-shadow: 8px 0px 16px rgb(0, 0, 0, 0.24);
@@ -122,11 +123,12 @@
       .sideItemTitle {
         z-index: 1;
         color: #1c1c1c;
+        font-weight: 500;
       }
       .sideItemValue {
         z-index: 1;
         color: #02519b;
-        font-weight: bold;
+        font-weight: 900;
         i {
           font-weight: normal;
           font-size: 16px;
@@ -134,6 +136,7 @@
         .sideItemUd {
           display: flex;
           align-items: center;
+          font-family: "GmarketSans", sans-serif;
         }
         .ri-arrow-up-s-fill {
           color: #f00;

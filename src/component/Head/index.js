@@ -19,7 +19,7 @@ const App = (props) => {
     <div className="head">
       <div className={'topLogo'} onClick={() => console.log(state)}>
         <div className={'logo'}>
-          <img src={process.env.PUBLIC_URL + '/assets/logo.png'} alt={'logo'} />
+          <img src={process.env.PUBLIC_URL + '/assets/other/logo.png'} alt={'logo'} />
         </div>
       </div>
       <div className={classNames('topNav', base && 'active')}>

@@ -88,7 +88,7 @@ const App = (props) => {
                 </div>
                 <div className={'itemRank'}></div>
                 <div className={'itemTitle'}>{item && item.호기}호기 <span className={'itemTitleGray'}>BORAMAE</span></div>
-                <span className={'itemPoint'}>MATCHING POINT</span>
+                <span className={'itemPoint'}>RAITING POINT</span>
                 <animated.div className={classNames('itemPercent')} style={{ color: color }}>
                     {number.to(n => n.toFixed(2) + '%')}
                 </animated.div>

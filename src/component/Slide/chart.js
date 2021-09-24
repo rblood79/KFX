@@ -79,7 +79,7 @@ const App = (props) => {
                 ];
                 context.fillPolygon(polygonPoints, 'rgba(0,0,0,0)', '#dedede');
             }
-            context.font = 'bold 12px Arial';
+            context.font = '600 12px Noto Sans KR';
             context.textAlign = 'center';
             context.textBaseline = 'bottom';
             context.fillStyle = '#1c1c1c';

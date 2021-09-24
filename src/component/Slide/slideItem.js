@@ -10,7 +10,7 @@ import GuideBox from './guideBox';
 import GueageBox from './gueage';
 
 const App = (props) => {
-
+    //console.log('sss')
     const state = useContext(context);
     const { focused, setFocused, type, setBase, setCount, setTemp } = state;
     const index = props.index;
@@ -21,7 +21,7 @@ const App = (props) => {
     //
     let percentColor = getColor(item.TOTAL, 0, 240);
 
-    const { number,} = useSpring({
+    const {number} = useSpring({
         from: {
             number: 0,
         },
@@ -29,7 +29,7 @@ const App = (props) => {
             number: item.TOTAL,
         },
         reset: true,
-        //delay: 200,
+        delay: 200,
     });
 
     const onClick = () => {
@@ -45,7 +45,7 @@ const App = (props) => {
     }
 
     useEffect(() => {
-
+        //console.log('item useEffect')
     }, [])
 
     return (
@@ -60,7 +60,7 @@ const App = (props) => {
                 {(focused === index && type === 'list') ? (
                     <div className={classNames('item')} >
                         <div>
-                            <GueageBox value={item.TOTAL} color={percentColor} active={focused === index}/>
+                            <GueageBox value={item.TOTAL} color={percentColor} active={focused === index} />
                             <span className={'itemRating'}>RATING POINT</span>
                             <animated.div className={classNames('itemPercent')} style={{ color: percentColor }}>{number.to(n => n.toFixed(2) + '%')}</animated.div>
                         </div>
