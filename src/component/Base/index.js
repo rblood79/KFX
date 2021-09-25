@@ -5,12 +5,19 @@ import context from '../Context';
 
 const App = (props) => {
   const state = useContext(context);
-  const { type, base} = state;
+  const { type, base } = state;
   const loading = props.loading;
   const slideSize = 360;
 
+  const Line = () => {
+    const result = [];
+    for (let i = 0; i < 9; i++) {
+      result.push(<span key={i} className={classNames('sliceLine')} />)
+    }
+    return result;
+  }
   useEffect(() => {
-  },[])
+  }, [])
 
   return (
     <div className={classNames('base', type !== 'grid' ? null : 'active', loading && 'loading')}>
@@ -25,6 +32,9 @@ const App = (props) => {
             </div>
           </div>
         }
+      </div>
+      <div className={'slice'}>
+        <Line />
       </div>
     </div>
   );

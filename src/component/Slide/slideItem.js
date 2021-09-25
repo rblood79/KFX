@@ -41,10 +41,6 @@ const App = (props) => {
         type === 'list' && setCount(index);
     }
 
-    const getImage = (e) => {
-        return 'assets/aircraft/' + e + '.png'
-    }
-
     useEffect(() => {
         //console.log('item useEffect')
     }, [])

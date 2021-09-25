@@ -12,7 +12,7 @@ $duration: 0.24s;
   align-items: center;
   pointer-events: none;
   transition: opacity $duration ease-in-out;
-  
+
   .baseContents {
     position: relative;
     width: 0px;
@@ -93,9 +93,27 @@ $duration: 0.24s;
   &.active {
     opacity: 0;
   }
-  
 }
-
+.slice {
+  width: calc(360px * 9);
+  height: calc(360px * 10);
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  left: calc(50% - 1620px);
+  transform: rotate(45deg);
+  transform-origin: center;
+  .sliceLine {
+    width: 360px;
+    height: 100%;
+    max-width: 360px;
+    min-width: 360px;
+    border-left: 1px solid #dfdfdf;
+    border-image: linear-gradient(to bottom, #ccc, #efefef, #ccc);
+    border-image-slice: 1;
+    //box-shadow: 16px 0px 16px rgba(0, 0, 0, 0.1);
+  }
+}
 @keyframes baseAnime {
   0% {
     background-position: 0% 50%;

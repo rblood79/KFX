@@ -79,24 +79,24 @@ const App = (props) => {
                 ];
                 context.fillPolygon(polygonPoints, 'rgba(0,0,0,0)', '#dedede');
             }
-            context.font = '600 12px Noto Sans KR';
+            context.font = '500 14px Noto Sans KR';
             context.textAlign = 'center';
             context.textBaseline = 'bottom';
             context.fillStyle = '#1c1c1c';
             context.shadowBlur = 0;
-            context.fillText(now[0].key, wCenter, hCenter - 165);
+            context.fillText(now[0].key, wCenter, hCenter - 160);
 
             context.textAlign = 'left';
             context.textBaseline = 'middle';
-            context.fillText(now[1].key, wCenter + 165, hCenter);
+            context.fillText(now[1].key, wCenter + 160, hCenter);
 
             context.textAlign = 'center';
             context.textBaseline = 'top';
-            context.fillText(now[2].key, wCenter, hCenter + 165);
+            context.fillText(now[2].key, wCenter, hCenter + 160);
 
             context.textAlign = 'right';
             context.textBaseline = 'middle';
-            context.fillText(now[3].key, wCenter - 165, hCenter);
+            context.fillText(now[3].key, wCenter - 160, hCenter);
         }
         const draw = (arr) => {
             context.clearRect(0, 0, 480, 360);

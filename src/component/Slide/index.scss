@@ -42,12 +42,13 @@
             color: #464646;
             width: 96px;
             height: 48px;
-            font-weight: 900;
+            font-weight: 500;
             display: flex;
             justify-content: center;
             align-items: center;
             pointer-events: all;
             z-index: 111;
+            font-family: "Noto Sans KR", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
             .controllText {
                 display: flex;
@@ -291,9 +292,10 @@
     top: calc(50% - 243px);
     color: #fff;
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    font-family: "Noto Sans KR", "Helvetica Neue", Helvetica, Arial, sans-serif;
     .callButtonText {
         z-index: 1;
-        font-weight: 900;
+        font-weight: 500;
     }
     i {
         z-index: 1;

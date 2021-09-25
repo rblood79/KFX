@@ -110,7 +110,7 @@ $minSize: 4px;
         }
 
         .itemIndex {
-            font-weight: 900;
+            font-weight: 100;
             color: #a4a4a4;
             z-index: 1;
             position: absolute;
@@ -118,6 +118,7 @@ $minSize: 4px;
             top: 0px;
             font-size: 36px;
             text-align: right;
+            font-family: "GmarketSans", sans-serif;
         }
     }
     .aircraftGroup {
@@ -169,7 +170,7 @@ $minSize: 4px;
             padding: 8px;
             height: 66px;
             color: #fff;
-            font-weight: 900;
+            font-weight: 500;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
