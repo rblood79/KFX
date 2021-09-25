@@ -19,13 +19,13 @@ const App = (props) => {
         <div className="imageContainer" >
             {engine ? (
                 <animated.img alt={'KF21'}
-                    src={prop.x.to({ range: [0, 1], output: [60, 40] }).to(num => '/assets/aircraft/FA50/FA_00' + Math.round(num))}
+                    src={prop.x.to({ range: [0, 1], output: [60, 40] }).to(num => process.env.PUBLIC_URL + '/assets/aircraft/FA50/FA_00' + Math.round(num))}
                     style={{
                         transform: prop.x.to({ range: [0, 0.5, 1], output: [1, 1, 2.8] }).to(x => `scale(${x})`),
                         marginTop: prop.x.to({ range: [0, 0.5, 1], output: [0, 0, -42] }).to(x => x)
                     }}
                 />) : (
-                <animated.img src='/assets/aircraft/FA50/FA_0060' alt={'KF21'}
+                <animated.img src={process.env.PUBLIC_URL + '/assets/aircraft/FA50/FA_0060'} alt={'KF21'}
                     style={{
                         transform: prop.x.to({ range: [0, 0.5, 1], output: [1, 1, 1.4] }).to(x => `scale(${x})`),
                     }}
