@@ -13,7 +13,7 @@ import Mobile from './component/Mobile';
 const App = () => {
   //console.log('App')
   const [props] = useState(window['getProps']());
-  const [isMobile] = useState(/Mobi/i.test(window.navigator.userAgent));
+  const [isMobile] = useState(window.navigator.userAgentData.mobile);
   const [top, setTop] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
