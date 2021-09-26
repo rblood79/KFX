@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import _ from 'lodash';
 import './App.scss';
+import { isMobile } from 'react-device-detect';
 import Head from './component/Head/';
 import Foot from './component/Foot/';
 import Slide from './component/Slide';
@@ -13,7 +14,6 @@ import Mobile from './component/Mobile';
 const App = () => {
   //console.log('App')
   const [props] = useState(window['getProps']());
-  const [isMobile] = useState(window.navigator.userAgentData.mobile);
   const [top, setTop] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,7 +47,7 @@ const App = () => {
             <Mobile />
           ) : (
             <>
-              <Base loading={loading}/>
+              <Base loading={loading} />
               <Head data={top} />
               {
                 loading ? <Loading callBack={setLoading} {...props} /> : <Slide data={data} />
