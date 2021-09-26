@@ -21,6 +21,7 @@ const App = (props) => {
   const [filterView, setFilterView] = useState(null);
   const [selectItem, setSelectItem] = useState(null);
   const [checkList, setCheckList] = useState(null);
+  const [images, setImages] = useState(null);
 
   const sliderRef = useRef(null);
   const result = useData(DS, topNum, checkList);
@@ -42,6 +43,16 @@ const App = (props) => {
     }
     timeout.current = setTimeout(() => { autoSlide() }, 2000);
   }*/
+
+  const preLoad = () => {
+    const arr = [];
+    for (let i = 40; i < 60; i++) {
+      const preImage = new Image();
+      preImage.src = process.env.PUBLIC_URL + '/assets/aircraft/FA50/FA_00' + i;
+      arr.push(preImage)
+    }
+    setImages(arr);
+  };
 
   const moveSlide = (postion) => {
     if (base) {
@@ -113,6 +124,7 @@ const App = (props) => {
 
   useEffect(() => {
     setCheckList(DS[topNum].기준정보);
+    preLoad();
   }, [DS, topNum]);
 
   return (
@@ -135,7 +147,7 @@ const App = (props) => {
                   {
                     result.data.map((item, i) => {
                       return (
-                        <SlideItem item={item} index={i} focused={focused} key={'slideItem' + i} selectItem={setSelectItem} />
+                        <SlideItem item={item} index={i} focused={focused} images={images} key={'slideItem' + i} selectItem={setSelectItem} />
                       )
                     })
                   }

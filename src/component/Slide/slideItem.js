@@ -42,7 +42,7 @@ const App = (props) => {
     }
 
     useEffect(() => {
-        //console.log('item useEffect')
+        //console.log('item useEffect', props.images)
     }, [])
 
     return (
@@ -52,7 +52,7 @@ const App = (props) => {
                 <div className={'aircraftGroup'} >
                     <div className={'aircraft'}>
                         {/*<img src={getImage(item.기종)} alt={'KF-21'} />*/}
-                        <Aircraft test={active ? 1 : 0}/>
+                        <Aircraft active={active ? 1 : 0} images={props.images}/>
                     </div>
                 </div>
                 {(focused === index && type === 'list') ? (
