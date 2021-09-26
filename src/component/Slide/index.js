@@ -147,7 +147,7 @@ const App = (props) => {
                   {
                     result.data.map((item, i) => {
                       return (
-                        <SlideItem item={item} index={i} focused={focused} images={images} key={'slideItem' + i} selectItem={setSelectItem} />
+                        <SlideItem item={item} index={i} focused={focused} key={'slideItem' + i} selectItem={setSelectItem} />
                       )
                     })
                   }

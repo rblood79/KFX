@@ -52,7 +52,7 @@ const App = (props) => {
                 <div className={'aircraftGroup'} >
                     <div className={'aircraft'}>
                         {/*<img src={getImage(item.기종)} alt={'KF-21'} />*/}
-                        <Aircraft active={active ? 1 : 0} images={props.images}/>
+                        <Aircraft active={active ? 1 : 0}/>
                     </div>
                 </div>
                 {(focused === index && type === 'list') ? (
