@@ -46,10 +46,10 @@ const App = (props) => {
 
   const preLoad = () => {
     const arr = [];
-    for (let i = 40; i < 60; i++) {
+    for (let i = 40; i <= 60; i++) {
       const preImage = new Image();
       preImage.src = process.env.PUBLIC_URL + '/assets/aircraft/FA50/FA_00' + i;
-      arr.push(preImage)
+      arr.push(preImage);
     }
     setImages(arr);
   };
