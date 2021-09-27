@@ -9,7 +9,7 @@ const App = (props) => {
     //const images = props.images;
     const prop = useSpring(
         {
-            config: { duration: 600 },
+            config: { duration: 420 },
             x: props.active
         }
     )
