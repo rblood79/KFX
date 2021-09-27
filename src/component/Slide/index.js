@@ -21,6 +21,7 @@ const App = (props) => {
   const [filterView, setFilterView] = useState(null);
   const [selectItem, setSelectItem] = useState(null);
   const [checkList, setCheckList] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [images, setImages] = useState(null);
 
   const sliderRef = useRef(null);
@@ -48,7 +49,7 @@ const App = (props) => {
     const arr = [];
     for (let i = 40; i <= 60; i++) {
       const preImage = new Image();
-      preImage.src = process.env.PUBLIC_URL + '/assets/aircraft/FA50/FA_00' + i;
+      preImage.src = process.env.PUBLIC_URL + '/assets/aircraft/TH50/FA_00' + i;
       arr.push(preImage);
     }
     setImages(arr);
