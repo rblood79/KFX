@@ -83,26 +83,26 @@ const App = (props) => {
             context.textBaseline = 'bottom';
             context.fillStyle = '#898989';
             context.shadowBlur = 0;
-            context.fillText(now[0].key, wCenter, hCenter - 165);
+            context.fillText(now[0].key, wCenter, hCenter - 163);
 
             context.textAlign = 'left';
             context.textBaseline = 'middle';
-            context.fillText(now[1].key, wCenter + 165, hCenter);
+            context.fillText(now[1].key, wCenter + 163, hCenter);
 
             context.textAlign = 'center';
             context.textBaseline = 'top';
-            context.fillText(now[2].key, wCenter, hCenter + 165);
+            context.fillText(now[2].key, wCenter, hCenter + 163);
 
             context.textAlign = 'right';
             context.textBaseline = 'middle';
-            context.fillText(now[3].key, wCenter - 165, hCenter);
+            context.fillText(now[3].key, wCenter - 163, hCenter);
         }
         const draw = (arr) => {
             context.clearRect(0, 0, 480, 360);
             const ss = ((height / 2) - size) / 100;
             const setArray = [
-                { stroke: 'rgba(0,0,0,0.24)', fill: 'rgba(0,0,0,0.16)', width: 1, shadow: 0 },
-                { stroke: strokeColor, fill: fillColor, width: 1.6, shadow: 0 },
+                { stroke: 'rgba(0,0,0,0.16)', fill: 'rgba(0,0,0,0.16)', width: 1, shadow: 0 },
+                { stroke: 'rgba(0,0,0,0.24)', fill: 'rgba(0,0,0,0.24)', width: 0.5, shadow: 0 },
             ]
             base();
 
@@ -115,24 +115,80 @@ const App = (props) => {
                         wCenter, hCenter + ss * item[2].value,
                         wCenter - ss * item[3].value, hCenter,
                     ];
+                    context.fillPolygon(polygonPoints,
+                        setArray[i].fill,
+                        setArray[i].stroke,
+                        setArray[i].width,
+                        setArray[i].shadow,
+                    );
                 } else {
-                    polygonPoints = [
+                    /*polygonPoints = [
                         wCenter, hCenter - ss * arr[0],
                         wCenter + ss * arr[1], hCenter,
                         wCenter, hCenter + ss * arr[2],
                         wCenter - ss * arr[3], hCenter,
+                    ];*/
+
+                    polygonPoints = [
+                        wCenter, hCenter,
+                        wCenter + ss * arr[1], hCenter,
+                        wCenter, hCenter - ss * arr[0],
                     ];
+                    context.fillPolygon(polygonPoints,
+                        getColor(total, 0, 240, 0.5),
+                        setArray[i].stroke,
+                        setArray[i].width,
+                        setArray[i].shadow,
+                    );
+
+                    polygonPoints = [
+                        wCenter, hCenter,
+                        wCenter + ss * arr[1], hCenter,
+                        wCenter, hCenter + ss * arr[2],
+                    ];
+                    context.fillPolygon(polygonPoints,
+                        getColor(total, 0, 240, 0.6),
+                        setArray[i].stroke,
+                        setArray[i].width,
+                        setArray[i].shadow,
+                    );
+
+                    polygonPoints = [
+                        wCenter, hCenter,
+                        wCenter, hCenter + ss * arr[2],
+                        wCenter - ss * arr[3], hCenter,
+                    ];
+                    context.fillPolygon(polygonPoints,
+                        getColor(total, 0, 240, 0.8),
+                        setArray[i].stroke,
+                        setArray[i].width,
+                        setArray[i].shadow,
+                    );
+
+                    polygonPoints = [
+                        wCenter, hCenter,
+                        wCenter, hCenter - ss * arr[0],
+                        wCenter - ss * arr[3], hCenter,
+                    ];
+                    context.fillPolygon(polygonPoints,
+                        getColor(total, 0, 240, 0.6),
+                        setArray[i].stroke,
+                        setArray[i].width,
+                        setArray[i].shadow,
+                    );
+
                 }
-                context.fillPolygon(polygonPoints,
+                /*context.fillPolygon(polygonPoints,
                     setArray[i].fill,
                     setArray[i].stroke,
                     setArray[i].width,
                     setArray[i].shadow,
-                );
+                );*/
                 if (i > 0 && props.numView) {
+                    context.font = '600 14px GmarketSans';
                     context.textAlign = 'center';
                     context.textBaseline = 'bottom';
-                    context.fillStyle = '#000';
+                    context.fillStyle = '#4c4c4c';
                     context.fillText(arr[0].toFixed(0), wCenter, hCenter + 8 - ss * arr[0]);
                     context.textBaseline = 'middle';
                     context.textAlign = 'left';
@@ -179,7 +235,7 @@ const App = (props) => {
             loop();
             //requestAnimationFrame(loop);
         }
-    }, [canvas, context, item, fillColor, hCenter, now, strokeColor, wCenter, def, props.cur, props.numView])
+    }, [canvas, context, item, fillColor, hCenter, now, strokeColor, wCenter, def, total, props.cur, props.numView])
 
     return (
         <canvas ref={canvasRef} className="canvas" width={480} height={360} />
@@ -190,7 +246,6 @@ export default App;
 
 CanvasRenderingContext2D.prototype.fillPolygon = function (points, fillColor, strokeColor, lineWidth, shadow) {
     if (points.length <= 0) return;
-    this.closePath();
     this.strokeStyle = strokeColor;  // 선 색깔
     this.lineJoin = 'round';	// 선 끄트머리(?)
     this.lineWidth = lineWidth || .5;		// 선 굵기
@@ -205,6 +260,5 @@ CanvasRenderingContext2D.prototype.fillPolygon = function (points, fillColor, st
     this.shadowBlur = shadow || 0;
     this.closePath();
     this.stroke();
-
     this.fill();
 }

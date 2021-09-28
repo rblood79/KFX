@@ -153,7 +153,7 @@ const App = (props) => {
                     })
                   }
                 </div>
-                <FocuseItem item={result.data[focused]} />
+                {type !== 'grid' && <FocuseItem item={result.data[focused]} />}
                 {type !== 'grid' && <button className={classNames('callButton', base && 'active')} onClick={onWindow}>
                   <i className="ri-check-fill"></i>
                   <span className='callButtonText'>호기선택</span>
