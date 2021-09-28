@@ -11,16 +11,16 @@ import Loading from './component/Loading';
 
 import Mobile from './component/Mobile';
 
-const App = () => {
-  //console.log('App')
-  const [props] = useState(window['getProps']());
+const App = (props) => {
+  const { uid } = props.match.params;
+  const [prop] = useState(window['getProps']());
   const [top, setTop] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  //console.log(prop.url+'/'+uid)
   useEffect(() => {
     const onLoad = async () => {
-      fetch(props.url, {
+      fetch(uid ? prop.url+'/'+uid : prop.url, {
         headers: {
           'Accept': 'application / json'
         }
@@ -36,7 +36,7 @@ const App = () => {
       setTop(resultTop);
     }
     !data ? onLoad() : ini();
-  }, [data, props.url]);
+  }, [data, prop.url, uid]);
 
   return (
     <div className="App">
@@ -50,7 +50,7 @@ const App = () => {
               <Base loading={loading} />
               <Head data={top} />
               {
-                loading ? <Loading callBack={setLoading} {...props} /> : <Slide data={data} />
+                loading ? <Loading callBack={setLoading} {...prop} /> : <Slide data={data} />
               }
               <Foot stepNum={loading ? 0 : 1} />
             </>

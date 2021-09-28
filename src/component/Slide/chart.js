@@ -4,7 +4,6 @@ import _ from 'lodash';
 import { getColor } from '../Mixin'
 
 const App = (props) => {
-    //console.log('chart')
     const canvasRef = useRef(null);
     const timeout = useRef(null);
     //
@@ -63,10 +62,10 @@ const App = (props) => {
                 wCenter - ss * 5, hCenter, // 3
             ];
             context.fillPolygon(polygonPoints, 'rgba(0,0,0,0.0)', '#a4a4a4');
-            
+
             context.stroke();
 
-           // context.beginPath();
+            // context.beginPath();
 
             for (let i = 0; i < 5; i++) {
 
@@ -82,21 +81,21 @@ const App = (props) => {
             context.font = '500 14px Noto Sans KR';
             context.textAlign = 'center';
             context.textBaseline = 'bottom';
-            context.fillStyle = '#1c1c1c';
+            context.fillStyle = '#898989';
             context.shadowBlur = 0;
-            context.fillText(now[0].key, wCenter, hCenter - 160);
+            context.fillText(now[0].key, wCenter, hCenter - 165);
 
             context.textAlign = 'left';
             context.textBaseline = 'middle';
-            context.fillText(now[1].key, wCenter + 160, hCenter);
+            context.fillText(now[1].key, wCenter + 165, hCenter);
 
             context.textAlign = 'center';
             context.textBaseline = 'top';
-            context.fillText(now[2].key, wCenter, hCenter + 160);
+            context.fillText(now[2].key, wCenter, hCenter + 165);
 
             context.textAlign = 'right';
             context.textBaseline = 'middle';
-            context.fillText(now[3].key, wCenter - 160, hCenter);
+            context.fillText(now[3].key, wCenter - 165, hCenter);
         }
         const draw = (arr) => {
             context.clearRect(0, 0, 480, 360);
@@ -130,6 +129,21 @@ const App = (props) => {
                     setArray[i].width,
                     setArray[i].shadow,
                 );
+                if (i > 0 && props.numView) {
+                    context.textAlign = 'center';
+                    context.textBaseline = 'bottom';
+                    context.fillStyle = '#000';
+                    context.fillText(arr[0].toFixed(0), wCenter, hCenter + 8 - ss * arr[0]);
+                    context.textBaseline = 'middle';
+                    context.textAlign = 'left';
+                    context.fillText(arr[1].toFixed(0), wCenter - 8 + ss * arr[1], hCenter);
+                    context.textBaseline = 'top';
+                    context.textAlign = 'center';
+                    context.fillText(arr[2].toFixed(0), wCenter, hCenter - 8 + ss * arr[2]);
+                    context.textBaseline = 'middle';
+                    context.textAlign = 'right';
+                    context.fillText(arr[3].toFixed(0), wCenter + 8 - ss * arr[3], hCenter);
+                }
             })
         }
         const loop = () => {
@@ -165,7 +179,7 @@ const App = (props) => {
             loop();
             //requestAnimationFrame(loop);
         }
-    }, [canvas, context, item, fillColor, hCenter, now, strokeColor, wCenter, def, props.cur])
+    }, [canvas, context, item, fillColor, hCenter, now, strokeColor, wCenter, def, props.cur, props.numView])
 
     return (
         <canvas ref={canvasRef} className="canvas" width={480} height={360} />

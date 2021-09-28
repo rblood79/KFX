@@ -21,8 +21,8 @@ const App = (props) => {
   const [filterView, setFilterView] = useState(null);
   const [selectItem, setSelectItem] = useState(null);
   const [checkList, setCheckList] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [images, setImages] = useState(null);
+  
+  // const [images, setImages] = useState(null);
 
   const sliderRef = useRef(null);
   const result = useData(DS, topNum, checkList);
@@ -45,7 +45,7 @@ const App = (props) => {
     timeout.current = setTimeout(() => { autoSlide() }, 2000);
   }*/
 
-  const preLoad = () => {
+  /*const preLoad = () => {
     const arr = [];
     for (let i = 40; i <= 60; i++) {
       const preImage = new Image();
@@ -53,7 +53,7 @@ const App = (props) => {
       arr.push(preImage);
     }
     setImages(arr);
-  };
+  };*/
 
   const moveSlide = (postion) => {
     if (base) {
@@ -125,7 +125,7 @@ const App = (props) => {
 
   useEffect(() => {
     setCheckList(DS[topNum].기준정보);
-    preLoad();
+    //preLoad();
   }, [DS, topNum]);
 
   return (
