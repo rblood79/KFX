@@ -17,18 +17,7 @@ const App = (props) => {
     const [fix, setFix] = useState(props.startMsg);
     const timeout = useRef(null);
     const [flag, setFlag] = useState(false);
-    // eslint-disable-next-line no-unused-vars
-    const [images, setImages] = useState(null);
     //
-    const preLoad = () => {
-        const arr = [];
-        for (let i = 40; i <= 60; i++) {
-          const preImage = new Image();
-          preImage.src = process.env.PUBLIC_URL + '/assets/aircraft/TH50/FA_00' + i;
-          arr.push(preImage);
-        }
-        setImages(arr);
-      };
 
     useEffect(() => {
         const loop = () => {
@@ -68,7 +57,6 @@ const App = (props) => {
             return { array: arr, total: total / props.title.length };
         };
         loop();
-        preLoad();
         return () => setEnd(null);
     }, [cc, maxCount, ment, props.endMsg, props.title, callBack])
 

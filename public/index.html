@@ -19,11 +19,15 @@
       You can see me?
     -->
   <script>
-    //const meassage갯수만큼 초기 로딩
+    // url에서 다이렉트로 데이터 가져와도 되고
+    // url에 서스명 넣고 router parameter에 동적 변수 넣어서 사용해도 되고
+    // ex : 도메인/서비스명/파라미터
+    // 서비스명은 아래 url
     const url = 'https://rblood79.github.io/KFX/src/component/Data/index.json';
     const title = ['RUN', 'LEVEL', 'FLY', 'ISSUE'];
     const se = ['READY', '최고의 기체를 찾았습니다'];
     const meassage = ['비행정보를 수집중이에요', '조종사와 미팅중입니다', '가동상태를 확인중입니다', '결함을 보고 받고있어요', '기체 등급 확인중입니다', '활주로 점검중입니다', '관제탑과 통신중입니다'];
+    //const meassage갯수만큼 초기 로딩
     //배열 없을때 바로 시작
     //const meassage = [];
     getProps = () => {

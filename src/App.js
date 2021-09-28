@@ -17,7 +17,7 @@ const App = (props) => {
   const [top, setTop] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  //console.log(prop.url+'/'+uid)
+  
   useEffect(() => {
     const onLoad = async () => {
       fetch(uid ? prop.url+'/'+uid : prop.url, {

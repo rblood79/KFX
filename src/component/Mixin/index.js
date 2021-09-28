@@ -174,19 +174,3 @@ export function shuffle(dataSet) {
     }
     return array;
 }
-
-/*export function usePosition(type) {
-    const [position, setPosition] = useState({
-        x: 0,
-    });
-    const size = useWindowSize();
-    useEffect(() => {
-        if (size === null) {
-            return { x: 0 };
-        }
-        setPosition({
-            x: type === 'list' ? (size.width - 32) * 0.5 : 0,
-        });
-    }, [type, size,]);
-    return position;
-}*/

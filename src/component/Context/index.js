@@ -5,8 +5,6 @@ const UserContext = React.createContext();
 class UserProvider extends Component {
     // Context state
     state = {
-        url: 'http://localhost:8080',
-        theme: 'light',
         engine: false,
         topNum: 0,
         type: 'list',

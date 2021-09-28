@@ -3,8 +3,6 @@ import React, { useEffect } from 'react';
 import classNames from 'classnames';
 
 const App = (props) => {
-  //const slideSize = 360;
-
   useEffect(() => {
   }, [])
 
