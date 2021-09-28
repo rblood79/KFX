@@ -20,7 +20,7 @@ const App = (props) => {
   
   useEffect(() => {
     const onLoad = async () => {
-      const URL = uid ? prop.url+'/'+uid : prop.url;
+      const URL = prop.url; //uid ? prop.url+'/'+uid : prop.url;
       fetch(URL, {
         headers: {
           'Accept': 'application / json'
