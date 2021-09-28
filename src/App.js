@@ -20,13 +20,14 @@ const App = (props) => {
   
   useEffect(() => {
     const onLoad = async () => {
-      fetch(uid ? prop.url+'/'+uid : prop.url, {
+      const URL = uid ? prop.url+'/'+uid : prop.url;
+      fetch(URL, {
         headers: {
           'Accept': 'application / json'
         }
       })
         .then(response => response.json())
-        .then(response => setData(response));
+        .then(response => setData(response))
     }
     const ini = () => {
       let resultTop = [];
@@ -50,7 +51,7 @@ const App = (props) => {
               <Base loading={loading} />
               <Head data={top} />
               {
-                loading ? <Loading callBack={setLoading} {...prop} /> : <Slide data={data} />
+                loading ? <Loading callBack={setLoading} {...prop} /> : data ? <Slide data={data} /> : <div>데이터가 없습니다.</div>
               }
               <Foot stepNum={loading ? 0 : 1} />
             </>
