@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css';
 
 const App = (props) => {
+  
   const state = useContext(context);
   const { topNum, setTopNum, setFocused, setCount, base, engine, setEngine } = state;
   const data = props.data;
@@ -34,7 +35,7 @@ const App = (props) => {
         {data && (
           data.map((item, index) => {
             return (
-              <button key={index} className={classNames('topButton', index === topNum ? 'active' : null)} onClick={() => !base && onClick(index)}>
+              <button key={item.대대} className={classNames('topButton', index === topNum ? 'active' : null)} onClick={() => !base && onClick(index)}>
                 {item.대대}
               </button>
             )

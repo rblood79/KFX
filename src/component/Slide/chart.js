@@ -102,7 +102,7 @@ const App = (props) => {
             const ss = ((height / 2) - size) / 100;
             const setArray = [
                 { stroke: 'rgba(0,0,0,0.16)', fill: 'rgba(0,0,0,0.16)', width: 1, shadow: 0 },
-                { stroke: 'rgba(0,0,0,0.24)', fill: 'rgba(0,0,0,0.24)', width: 0.5, shadow: 0 },
+                { stroke: 'rgba(0,0,0,0.48)', fill: 'rgba(0,0,0,0.24)', width: 0.5, shadow: 0 },
             ]
             base();
 

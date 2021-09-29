@@ -1,5 +1,5 @@
 import './detailItem.scss';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
 import 'remixicon/fonts/remixicon.css';
@@ -11,7 +11,7 @@ import Chart from './chart';
 
 const App = (props) => {
     const state = useContext(context);
-    const { type, setBase, temp, base } = state;
+    const { setBase, temp, base } = state;
     const item = props.item;
     const selectItem = props.select;
     const checkList = props.checkList;
@@ -24,8 +24,8 @@ const App = (props) => {
     const percentColor = item && getColor(item.TOTAL, 0, 240);
 
     const { number, color } = useSpring({
-        from: { 
-            number: temp[4] || 0 
+        from: {
+            number: temp[4] || 0
         },
         to: {
             number: item.TOTAL,
@@ -48,10 +48,9 @@ const App = (props) => {
         { name: '주요결함', icon: 'ri-pulse-line' },
     ])
 
-    const SideItem = item => {
+    const SideItem = useCallback((item) => {
         const result = [];
         _.map(items, (val, key) => {
-            //const color = getColor(val, 0, 240)
             result.push(
                 <li key={key} className={classNames('sideItem', checkList[key] === 'N' && 'disabled')}>
                     <span className={'sideItemBase'} />
@@ -66,9 +65,9 @@ const App = (props) => {
                     </span>
                 </li>
             )
-        })
+        });
         return result;
-    }
+    }, [averItem, checkList, itemIcon, items,])
 
     const onClick = () => {
         selectItem(null);
@@ -77,17 +76,15 @@ const App = (props) => {
 
     useEffect(() => {
     }, [])
-
     return (
         <div className={'detailContainer'} style={{ width: 360, height: 360 }}>
             <ul className={'detailContents'}>
-                <SideItem {...item} type={type} key={'sideItem'} />
+                <SideItem {...item} />
             </ul>
             <div className={classNames('listItem', 'listItemExpend')} >
                 <div className={'graph'}>
-                    {base && <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} cur={temp} numView={true}/>}
+                    {base && <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} cur={temp} numView={true} />}
                 </div>
-                <div className={'itemRank'}></div>
                 <div className={'itemTitle'}>{item && item.호기}호기 <span className={'itemTitleGray'}>BORAMAE</span></div>
                 <span className={'itemPoint'}>RAITING POINT</span>
                 <animated.div className={classNames('itemPercent')} style={{ color: color }}>

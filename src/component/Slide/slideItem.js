@@ -12,6 +12,7 @@ import GueageBox from './gueage';
 import Aircraft from './aircraft';
 
 const App = (props) => {
+    //console.log('/// list item')
     const state = useContext(context);
     const { focused, setFocused, type, setBase, setCount, setTemp, temp } = state;
     const index = props.index;
@@ -22,7 +23,7 @@ const App = (props) => {
     //
     let percentColor = getColor(item.TOTAL, 0, 240);
 
-    const {number} = useSpring({
+    const { number } = useSpring({
         from: {
             number: temp[4] || 0,
         },
@@ -47,17 +48,16 @@ const App = (props) => {
 
     return (
         <Flipped flipId={id} translate>
-            <div key={item.호기ID} className={classNames('listItem', active && 'active')}>
-                <GuideBox active={active} />
+            <div className={classNames('listItem', active && 'active')}>
+                {!active && <GuideBox active={active} />}
                 <div className={'aircraftGroup'} >
                     <div className={'aircraft'}>
                         {/*<img src={getImage(item.기종)} alt={'KF-21'} />*/}
-                        <Aircraft active={active ? 1 : 0}/>
+                        <Aircraft active={active ? 1 : 0} />
                     </div>
                 </div>
                 {(focused === index && type === 'list') ? (
                     <div className={classNames('item')} >
-                        
                         <button className={'detailButton'} onClick={() => { onClick() }} />
                     </div>
                 ) : (

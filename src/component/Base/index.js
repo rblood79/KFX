@@ -1,22 +1,21 @@
 import './index.scss';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useCallback } from 'react';
 import classNames from 'classnames';
 import context from '../Context';
 
 const App = (props) => {
+  //console.log('base')
   const state = useContext(context);
   const { type, base } = state;
   const loading = props.loading;
   const slideSize = 360;
 
-  const Line = () => {
+  const Line = useCallback(() => {
     const result = [];
     for (let i = 0; i < 9; i++) {
-      result.push(<span key={i} className={classNames('sliceLine')} />)
+      result.push(<span key={'line' + i} className={classNames('sliceLine')} />)
     }
     return result;
-  }
-  useEffect(() => {
   }, [])
 
   return (
@@ -34,7 +33,9 @@ const App = (props) => {
         }
       </div>
       <div className={'slice'}>
-        <Line />
+        {
+          <Line key={'lineGroup'} />
+        }
       </div>
     </div>
   );
