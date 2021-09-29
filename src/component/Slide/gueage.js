@@ -1,7 +1,7 @@
 
 import './gueage.scss';
 import classNames from 'classnames';
-//import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { animated, useSpring } from 'react-spring';
 
 const App = (props) => {
@@ -19,29 +19,20 @@ const App = (props) => {
         delay: 300,
     });
 
-    /*const Gueage = () => {
+    const Gueage = useCallback(() => {
         const result = [];
         for (let i = 0; i < 10; i++) {
             result.push(<span key={i} className={classNames('boxGueage')} />)
         }
         return result;
-    }
+    }, [])
     useEffect(() => {
 
-    }, [])*/
+    }, [])
     return (
         <div className={classNames('boxGueageContainer')}>
             <animated.div className={'boxGueageBase'} style={{ width: props.active ? number.to(n => n.toFixed(2) + '%') : value + '%', backgroundColor: color }} />
-            <span className={classNames('boxGueage')} />
-            <span className={classNames('boxGueage')} />
-            <span className={classNames('boxGueage')} />
-            <span className={classNames('boxGueage')} />
-            <span className={classNames('boxGueage')} />
-            <span className={classNames('boxGueage')} />
-            <span className={classNames('boxGueage')} />
-            <span className={classNames('boxGueage')} />
-            <span className={classNames('boxGueage')} />
-            <span className={classNames('boxGueage')} />
+            <Gueage />
         </div>
     );
 }
