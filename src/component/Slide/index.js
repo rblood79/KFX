@@ -175,19 +175,20 @@ const App = (props) => {
       }
       {result.data &&
         <div className={classNames('controller', type === 'grid' && 'active')}>
-
           <button className={'controllerButton prevButton'} onClick={() => count !== 0 && moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">PREV</span></button>
           <button className={'controllerButton filterButton'} onClick={() => fView()}><i className={type === 'list' ? "ri-arrow-up-s-line" : "ri-close-fill"}></i><span className="controllText">배정조건</span></button>
           <button className={'controllerButton nextButton'} onClick={() => count < grid.end && moveSlide('next')}><span className="controllText">NEXT</span><i className="ri-arrow-right-s-line"></i></button>
-          <div className={classNames('filter', filterView)}>
-            <div className={'filterClose'} onClick={() => fView()} />
-            <CheckBox />
-            <ul className={'filterInfo'}>
-              <li className={'infobox boxdisable'}>필수</li>
-              <li className={'infobox boxchecked'}>선택</li>
-              <li className={'infobox boxnormal'}>선택가능</li>
-            </ul>
-          </div>
+          {type === 'grid' &&
+            <div className={classNames('filter')}>
+              <div className={'filterClose'} onClick={() => fView()} />
+              <CheckBox />
+              <ul className={'filterInfo'}>
+                <li className={'infobox boxdisable'}>필수</li>
+                <li className={'infobox boxchecked'}>선택</li>
+                <li className={'infobox boxnormal'}>선택가능</li>
+              </ul>
+            </div>
+          }
         </div>
       }
     </Flipper>
