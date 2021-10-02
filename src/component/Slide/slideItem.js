@@ -47,7 +47,7 @@ const App = (props) => {
     }, [])
 
     return (
-        <Flipped flipId={id} translate>
+        <Flipped flipId={id}>
             <div className={classNames('listItem', active && 'active')}>
                 {!active && <GuideBox active={active} />}
                 <div className={'aircraftGroup'} >

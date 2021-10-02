@@ -5,15 +5,15 @@ const UserContext = React.createContext();
 class UserProvider extends Component {
     // Context state
     state = {
-        engine: false,
-        topNum: 0,
         type: 'list',
-        focused: 0,
+        engine: false,
         base: false,
+        filter: null,
+        topNum: 0,
+        focused: 0,
         count: 0,
         width: 0,
         height: 0,
-        filter: null,
         temp: [0,0,0,0,0],
     };
     // Method to update state

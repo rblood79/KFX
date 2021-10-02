@@ -6,7 +6,7 @@ export function getColor(percent, start, end, alpha) {
         b = (end - start) * a,
         c = b + start,
         d = alpha ? alpha : 1;
-    return 'hsla(' + c + ', 80%, 40%, ' + d + ')';
+    return 'hsla(' + c + ', 60%, 48%, ' + d + ')';
 }
 
 export function byKeys(obj, keys = []) {

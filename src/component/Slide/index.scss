@@ -83,6 +83,9 @@
                 box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.16);
                 color: #1c1c1c;
             }
+            &.disabled {
+                color: #c4c4c4 !important;
+            }
         }
         .filter {
             //background-color: #ccc;
