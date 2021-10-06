@@ -282,7 +282,8 @@
     width: 126px;
     height: 64px;
     left: calc(50% - 63px);
-    top: calc(50% - 180px - 64px);
+    top: 50%;
+    //top: calc(50% - 180px - 64px);
     color: #fff;
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     font-family: "Noto Sans KR", "Helvetica Neue", Helvetica, Arial, sans-serif;

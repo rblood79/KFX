@@ -10,7 +10,7 @@ import SlideItem from './slideItem';
 import DetailItem from './detailItem';
 import FocuseItem from './focusItem';
 
-import { useGridNum, useMove, useData } from '../Mixin';
+import { useGridNum, useMove, useData, useWindowSize } from '../Mixin';
 import _ from 'lodash';
 
 const App = (props) => {
@@ -28,6 +28,7 @@ const App = (props) => {
   const result = useData(DS, topNum, checkList);
   const grid = useGridNum(result.data && result.data.length, type, size);
   const move = useMove(type, count, grid);
+  const winSize = useWindowSize();
   const ess = DS[topNum].필수항목;
   const aver = DS[topNum].평균;
   const comment = DS[topNum].배정조건;
@@ -154,7 +155,7 @@ const App = (props) => {
                   }
                 </div>
                 {type !== 'grid' && <FocuseItem item={result.data[focused]} />}
-                {type !== 'grid' && <button className={classNames('callButton', base && 'active')} onClick={onWindow}>
+                {type !== 'grid' && <button className={classNames('callButton', base && 'active')} style={{ marginTop: -Math.round(size * 0.5 * 1.414) + 12 }} onClick={onWindow}>
                   <i className="ri-check-fill"></i>
                   <span className='callButtonText'>호기선택</span>
                 </button>}

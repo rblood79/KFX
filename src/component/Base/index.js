@@ -13,7 +13,7 @@ const App = (props) => {
   const Line = useCallback(() => {
     const result = [];
     for (let i = 0; i < 9; i++) {
-      result.push(<span key={'line' + i} className={classNames('sliceLine')} style={{width: size, maxWidth: size, minWidth: size}}/>)
+      result.push(<span key={'line' + i} className={classNames('sliceLine')} style={{ width: size, maxWidth: size, minWidth: size }} />)
     }
     return result;
   }, [size])
@@ -24,7 +24,7 @@ const App = (props) => {
         <div className={classNames('baseBox')} />
         <div className={classNames('inBox')} />
         {!loading &&
-          <div className={'detailButton'}>
+          <div className={'detailButton'} style={{ marginTop: Math.round(size * 0.5 * 1.414) - 74 }}>
             <div className={classNames('detailButtonContainer', base && 'active')}>
               <span className={'detailText'}>상세정보<i className={"ri-search-line"}></i></span>
               <span className={'detailText'}>닫기<i className={"ri-close-line"}></i></span>
@@ -32,7 +32,7 @@ const App = (props) => {
           </div>
         }
       </div>
-      <div className={'slice'} style={{width: width, height: (size * 10)}}>
+      <div className={'slice'} style={{ width: width, height: (size * 10) }}>
         {
           <Line key={'lineGroup'} />
         }

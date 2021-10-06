@@ -78,12 +78,12 @@ const App = (props) => {
     }, [])
     return (
         <div className={'detailContainer'} style={{ width: size, height: size }}>
-            <ul className={'detailContents'}>
+            <ul className={'detailContents'} style={{ marginLeft: Math.round(size * 0.5 * 1.414) - 94, top: 32 + Math.round((size - 282) * 0.5) }}>
                 <SideItem {...item} />
             </ul>
             <div className={classNames('listItem', 'listItemExpend')} >
                 <div className={'graph'}>
-                    {base && <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} cur={temp} numView={true} size={size}/>}
+                    {base && <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} cur={temp} numView={true} size={size} />}
                 </div>
                 <div className={'itemTitle'}>{item && item.호기}호기 <span className={'itemTitleGray'}>BORAMAE</span></div>
                 <span className={'itemPoint'}>RAITING POINT</span>

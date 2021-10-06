@@ -80,10 +80,12 @@
   .detailContents {
     z-index: 1;
     position: absolute;
-    transform: translate(calc(50% + 126px), calc(50% - 106px));
+    width: 428px;
+    left: 50%;
+    //transform: translate(calc(50% + 126px), calc(50% - 106px));
     display: grid;
     grid-template-columns: repeat(5, 70px);
-    grid-template-rows: repeat(5, 70px);
+    grid-template-rows: repeat(4, 70px);
     .sideItem {
       position: relative;
       width: 78px;
