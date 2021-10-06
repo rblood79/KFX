@@ -10,6 +10,7 @@ const App = (props) => {
   const loading = props.loading;
   const slideSize = size;
   const width = size * 9;
+  const height = size * 10;
   const Line = useCallback(() => {
     const result = [];
     for (let i = 0; i < 9; i++) {
@@ -32,7 +33,7 @@ const App = (props) => {
           </div>
         }
       </div>
-      <div className={'slice'} style={{ width: width, height: (size * 10) }}>
+      <div className={'slice'} style={{ width: width, height: height }}>
         {
           <Line key={'lineGroup'} />
         }
