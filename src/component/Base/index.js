@@ -6,17 +6,17 @@ import context from '../Context';
 const App = (props) => {
   //console.log('base')
   const state = useContext(context);
-  const { type, base } = state;
+  const { type, base, size } = state;
   const loading = props.loading;
-  const slideSize = 360;
-
+  const slideSize = size;
+  const width = size * 9;
   const Line = useCallback(() => {
     const result = [];
     for (let i = 0; i < 9; i++) {
-      result.push(<span key={'line' + i} className={classNames('sliceLine')} />)
+      result.push(<span key={'line' + i} className={classNames('sliceLine')} style={{width: size, maxWidth: size, minWidth: size}}/>)
     }
     return result;
-  }, [])
+  }, [size])
 
   return (
     <div className={classNames('base', type !== 'grid' ? null : 'active', loading && 'loading')}>
@@ -32,7 +32,7 @@ const App = (props) => {
           </div>
         }
       </div>
-      <div className={'slice'}>
+      <div className={'slice'} style={{width: width, height: (size * 10)}}>
         {
           <Line key={'lineGroup'} />
         }

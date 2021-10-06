@@ -11,7 +11,7 @@ import Chart from './chart';
 
 const App = (props) => {
     const state = useContext(context);
-    const { setBase, temp, base } = state;
+    const { setBase, temp, base, size } = state;
     const item = props.item;
     const selectItem = props.select;
     const checkList = props.checkList;
@@ -77,13 +77,13 @@ const App = (props) => {
     useEffect(() => {
     }, [])
     return (
-        <div className={'detailContainer'} style={{ width: 360, height: 360 }}>
+        <div className={'detailContainer'} style={{ width: size, height: size }}>
             <ul className={'detailContents'}>
                 <SideItem {...item} />
             </ul>
             <div className={classNames('listItem', 'listItemExpend')} >
                 <div className={'graph'}>
-                    {base && <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} cur={temp} numView={true} />}
+                    {base && <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} cur={temp} numView={true} size={size}/>}
                 </div>
                 <div className={'itemTitle'}>{item && item.호기}호기 <span className={'itemTitleGray'}>BORAMAE</span></div>
                 <span className={'itemPoint'}>RAITING POINT</span>

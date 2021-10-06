@@ -107,7 +107,7 @@ export function useMove(type, count, grid) {
     return move;
 }
 
-export function useGridNum(total, type) {
+export function useGridNum(total, type, size) {
     const [gridNum, setGridNum] = useState({
         col: undefined,
         row: undefined,
@@ -116,20 +116,20 @@ export function useGridNum(total, type) {
         width: undefined,
         height: undefined,
     });
-    const size = useWindowSize();
+    const winSize = useWindowSize();
     useEffect(() => {
         if (!total) {
             return { col: 0, row: 0, end: 0, gap: 0, width: 0, height: 0 };
         }
-        const targetWidth = size.width;
-        const count = Math.floor(targetWidth / 360);
+        const targetWidth = winSize.width;
+        const count = Math.floor(targetWidth / size);
 
         let _row = 1;
         let _col = total;
         let _end = total - 1;
         let _gap = 96;
 
-        let _width = type === 'list' ? 360 : Math.round((targetWidth - (16 * (count - 1))) / count);
+        let _width = type === 'list' ? size : Math.round((targetWidth - (16 * (count - 1))) / count);
         let _height = 160;
 
         let rowNum = Math.round(targetWidth / _width);
@@ -155,7 +155,7 @@ export function useGridNum(total, type) {
             width: _width,
             height: _height,
         });
-    }, [total, type, size]);
+    }, [total, type, winSize, size]);
     return gridNum;
 }
 

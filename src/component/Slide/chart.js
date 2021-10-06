@@ -20,7 +20,7 @@ const App = (props) => {
 
     const fixSize = 0.5;
     const width = 480;
-    const height = 360;
+    const height = props.size;
     const wCenter = width * 0.5;
     const hCenter = height * 0.5;
     const size = 20;
@@ -98,7 +98,7 @@ const App = (props) => {
             context.fillText(now[3].key, wCenter - 163, hCenter);
         }
         const draw = (arr) => {
-            context.clearRect(0, 0, 480, 360);
+            context.clearRect(0, 0, 480, height);
             const ss = ((height / 2) - size) / 100;
             const setArray = [
                 { stroke: 'rgba(0,0,0,0.16)', fill: 'rgba(0,0,0,0.16)', width: 1, shadow: 0 },
@@ -235,10 +235,10 @@ const App = (props) => {
             loop();
             //requestAnimationFrame(loop);
         }
-    }, [canvas, context, item, fillColor, hCenter, now, strokeColor, wCenter, def, total, props.cur, props.numView])
+    }, [canvas, context, item, fillColor, hCenter, now, strokeColor, wCenter, def, total, props.cur, props.numView, height])
 
     return (
-        <canvas ref={canvasRef} className="canvas" width={480} height={360} />
+        <canvas ref={canvasRef} className="canvas" width={480} height={height} />
     );
 }
 

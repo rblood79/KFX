@@ -1,11 +1,14 @@
-import React, { useState, useRef, useEffect, } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import './index.scss';
 import Chart from '../Slide/chart';
 import { shuffle } from '../Mixin';
 import classNames from 'classnames';
+import context from '../Context';
 
 const App = (props) => {
     //console.log('loading')
+    const state = useContext(context);
+    const { size } = state;
     let cc = 0;
     const duration = 1000;
     const maxCount = props.meassage.length || 0;
@@ -63,7 +66,7 @@ const App = (props) => {
     return (
         <div className='load'>
             <div className={classNames('graph', flag && 'active')}>
-                <Chart item={end} total={percent} cur={start} />
+                <Chart item={end} total={percent} cur={start} size={size}/>
                 <div className={'loadingComment'} onClick={() => { callBack(false) }}>
                     <span className='loadingText'>{fix}</span>
                 </div>

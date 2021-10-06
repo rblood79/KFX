@@ -1,4 +1,4 @@
-$centerSize: 360px;
+
 $defaultSize: 48px;
 $halfSize: 24px;
 $duration: 0.24s;
@@ -43,7 +43,6 @@ $minSize: 4px;
     }
     &.active {
         filter: none;
-        //height: 360px;
         z-index: 0;
         .item {
             width: 100%;

@@ -14,6 +14,7 @@ class UserProvider extends Component {
         count: 0,
         width: 0,
         height: 0,
+        size: 360,
         temp: [0,0,0,0,0],
     };
     // Method to update state
@@ -57,7 +58,7 @@ class UserProvider extends Component {
     //
     render() {
         const { children } = this.props;
-        const { url, theme, engine, topNum, type, focused, count, base, width, height, filter, temp } = this.state;
+        const { url, theme, engine, topNum, type, focused, count, base, width, height, size, filter, temp } = this.state;
         const { setTheme, setEngine, setTopNum, setType, setFocused, setCount, setBase, setWidth, setHeight, setFilter, setTemp } = this;
 
         return (
@@ -73,6 +74,7 @@ class UserProvider extends Component {
                     base,
                     width,
                     height,
+                    size,
                     filter,
                     temp,
                     setTheme,

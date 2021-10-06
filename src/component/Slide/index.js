@@ -17,7 +17,7 @@ const App = (props) => {
   //console.log('slide')
   const DS = props.data;
   const state = useContext(context);
-  const { topNum, type, setType, focused, setFocused, count, setCount, base, setBase, setTemp, temp } = state;
+  const { topNum, type, setType, focused, setFocused, count, setCount, base, setBase, setTemp, temp, size } = state;
   const [filterView, setFilterView] = useState(null);
   const [selectItem, setSelectItem] = useState(null);
   const [checkList, setCheckList] = useState(null);
@@ -26,7 +26,7 @@ const App = (props) => {
 
   const sliderRef = useRef(null);
   const result = useData(DS, topNum, checkList);
-  const grid = useGridNum(result.data && result.data.length, type);
+  const grid = useGridNum(result.data && result.data.length, type, size);
   const move = useMove(type, count, grid);
   const ess = DS[topNum].필수항목;
   const aver = DS[topNum].평균;

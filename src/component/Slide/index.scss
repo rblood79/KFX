@@ -16,10 +16,6 @@
             display: grid;
             justify-content: center;
             align-items: center;
-            //grid-template-columns: repeat(9, 360px);
-            //grid-template-rows: repeat(1, 160px);
-            //grid-template: repeat(1, 160px) / repeat(9, 360px);
-            /*gap: 96px;*/
             transform: translateX(100vw);
             &.active {
                 filter: grayscale(1);
