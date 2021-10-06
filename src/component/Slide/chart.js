@@ -235,7 +235,7 @@ const App = (props) => {
             loop();
             //requestAnimationFrame(loop);
         }
-    }, [canvas, context, item, fillColor, hCenter, now, strokeColor, wCenter, def, total, props.cur, props.numView, height])
+    }, [canvas, context, item, fillColor, hCenter, now, strokeColor, wCenter, def, total, props.cur, props.numView, height, width, props.size])
 
     return (
         <canvas ref={canvasRef} className="canvas" width={width} height={height} />
