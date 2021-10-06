@@ -19,7 +19,7 @@ const App = (props) => {
     const strokeColor = getColor(total, 0, 240, 1);
 
     const fixSize = 0.5;
-    const width = 480;
+    const width = props.size + (props.size / 3);
     const height = props.size;
     const wCenter = width * 0.5;
     const hCenter = height * 0.5;
@@ -80,22 +80,22 @@ const App = (props) => {
             }
             context.font = '500 14px Noto Sans KR';
             context.textAlign = 'center';
-            context.textBaseline = 'bottom';
+            context.textBaseline = 'top';
             context.fillStyle = '#898989';
             context.shadowBlur = 0;
-            context.fillText(now[0].key, wCenter, hCenter - 163);
+            context.fillText(now[0].key, wCenter, 4);
 
             context.textAlign = 'left';
             context.textBaseline = 'middle';
-            context.fillText(now[1].key, wCenter + 163, hCenter);
+            context.fillText(now[1].key, wCenter - 16 + (props.size * 0.5), hCenter);
 
             context.textAlign = 'center';
-            context.textBaseline = 'top';
-            context.fillText(now[2].key, wCenter, hCenter + 163);
+            context.textBaseline = 'bottom';
+            context.fillText(now[2].key, wCenter, height - 4);
 
             context.textAlign = 'right';
             context.textBaseline = 'middle';
-            context.fillText(now[3].key, wCenter - 163, hCenter);
+            context.fillText(now[3].key, wCenter + 16 - (props.size * 0.5), hCenter);
         }
         const draw = (arr) => {
             context.clearRect(0, 0, 480, height);
@@ -238,7 +238,7 @@ const App = (props) => {
     }, [canvas, context, item, fillColor, hCenter, now, strokeColor, wCenter, def, total, props.cur, props.numView, height])
 
     return (
-        <canvas ref={canvasRef} className="canvas" width={480} height={height} />
+        <canvas ref={canvasRef} className="canvas" width={width} height={height} />
     );
 }
 
