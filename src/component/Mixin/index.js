@@ -122,7 +122,7 @@ export function useGridNum(total, type) {
             return { col: 0, row: 0, end: 0, gap: 0, width: 0, height: 0 };
         }
         const targetWidth = size.width;
-        const count = Math.floor(size.width / 360);
+        const count = Math.floor(targetWidth / 360);
 
         let _row = 1;
         let _col = total;
