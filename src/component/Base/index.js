@@ -9,11 +9,12 @@ const App = (props) => {
   const { type, base, size } = state;
   const loading = props.loading;
   const slideSize = size;
-  const width = size * 9;
+  const width = size * 11;
   const height = size * 10;
+
   const Line = useCallback(() => {
     const result = [];
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 11; i++) {
       result.push(<span key={'line' + i} className={classNames('sliceLine')} style={{ width: size, maxWidth: size, minWidth: size }} />)
     }
     return result;

@@ -7,10 +7,10 @@ const App = (props) => {
   const state = useContext(context);
   const { base, type } = state;
   const [stepData] = useState([
-    { title: 'Search', comment: 'STEP 1' },
-    { title: 'Aircraft', comment: 'STEP 2' },
-    { title: 'Condition', comment: 'STEP 3' },
-    { title: 'Decision', comment: 'STEP 4' }
+    { title: '조회', comment: 'Search' },
+    { title: '호수', comment: 'Aircraft' },
+    { title: '조건', comment: 'Condition' },
+    { title: '선택', comment: 'Decision' }
   ]);
 
   const step = () => {
