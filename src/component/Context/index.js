@@ -6,7 +6,7 @@ class UserProvider extends Component {
     // Context state
     state = {
         type: 'list',
-        engine: false,
+        engine: true,
         base: false,
         filter: null,
         topNum: 0,
@@ -14,7 +14,7 @@ class UserProvider extends Component {
         count: 0,
         width: 0,
         height: 0,
-        size: 320,
+        size: 340,
         temp: [0,0,0,0,0],
     };
     // Method to update state

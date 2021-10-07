@@ -20,7 +20,7 @@ const App = (props) => {
                 <animated.img className={'image'} alt={'KF21'}
                     src={prop.x.to({ range: [0, 1], output: [60, 40] }).to(num => process.env.PUBLIC_URL + '/assets/aircraft/TH50/FA_00' + Math.round(num))}
                     style={{
-                        transform: prop.x.to({ range: [0, 0.5, 1], output: [1, 1, 2.6] }).to(x => `scale(${x})`),
+                        transform: prop.x.to({ range: [0, 0.5, 1], output: [0.8, 0.8, 2] }).to(x => `scale(${x})`),
                         marginTop: prop.x.to({ range: [0, 0.5, 1], output: [0, 0, -42] }).to(x => x)
                     }}
                 />) : (

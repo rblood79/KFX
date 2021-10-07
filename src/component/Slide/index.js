@@ -155,7 +155,7 @@ const App = (props) => {
                   }
                 </div>
                 {type !== 'grid' && <FocuseItem item={result.data[focused]} />}
-                {type !== 'grid' && <button className={classNames('callButton', base && 'active')} style={{ marginTop: -Math.round((size * 0.5) * 1.414) + 8 }} onClick={onWindow}>
+                {type !== 'grid' && <button className={classNames('callButton', base && 'active')} style={{ marginTop: -Math.round((size * 0.5) * 1.414) + 10 }} onClick={onWindow}>
                   <i className="ri-check-fill"></i>
                   <span className='callButtonText'>선택</span>
                 </button>}

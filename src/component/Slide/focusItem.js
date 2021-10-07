@@ -10,7 +10,7 @@ import GueageBox from './gueage';
 const App = (props) => {
     
     const state = useContext(context);
-    const { temp } = state;
+    const { temp, size } = state;
     const item = props.item;
     //
     let percentColor = getColor(item.TOTAL, 0, 240);
@@ -31,7 +31,7 @@ const App = (props) => {
     }, [])
 
     return (
-        <div className={classNames('focuseItem')} >
+        <div className={classNames('focuseItem')} style={{height: size, marginTop: -size * 0.5}}>
             <div className={'itemPercentGroup'} >
                 <GueageBox value={item.TOTAL} color={percentColor} />
                 <span className={'itemRating'}>RATING POINT</span>
