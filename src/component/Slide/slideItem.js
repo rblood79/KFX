@@ -14,7 +14,7 @@ import Aircraft from './aircraft';
 const App = (props) => {
     //console.log('/// list item')
     const state = useContext(context);
-    const { focused, setFocused, type, setBase, setCount, setTemp, temp } = state;
+    const { focused, setFocused, type, setBase, setCount, setTemp, temp, size } = state;
     const index = props.index;
     const item = props.item;
     const active = focused === index && type !== 'grid';
@@ -58,11 +58,11 @@ const App = (props) => {
                 </div>
                 {(focused === index && type === 'list') ? (
                     <div className={classNames('item')} >
-                        <button className={'detailButton'} onClick={() => { onClick() }} />
+                        <button className={'detailButton'} style={{marginTop: Math.round(size * 0.5)}} onClick={() => { onClick() }} />
                     </div>
                 ) : (
                     <div className={classNames('item')} >
-                        <div className={'itemTitle'}>{item.호기}호기</div>
+                        <div className={'itemTitle'}>{item.호기}</div>
                         <GueageBox value={item.TOTAL} color={percentColor} />
                         <animated.div className={classNames('itemPercent')} style={{ color: percentColor }}>{type === 'grid' ? number.to(n => n.toFixed(2) + '%') : item.TOTAL + '%'}</animated.div>
                         <div className={'itemIndex'}>{index < 9 ? '0' + (index + 1) : (index + 1)}</div>

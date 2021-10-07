@@ -14,7 +14,7 @@ class UserProvider extends Component {
         count: 0,
         width: 0,
         height: 0,
-        size: 360,
+        size: 320,
         temp: [0,0,0,0,0],
     };
     // Method to update state

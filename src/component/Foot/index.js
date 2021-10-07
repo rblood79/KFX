@@ -7,10 +7,10 @@ const App = (props) => {
   const state = useContext(context);
   const { base, type } = state;
   const [stepData] = useState([
-    { title: 'STEP 1', comment: 'Search' },
-    { title: 'STEP 2', comment: 'Aircraft' },
-    { title: 'STEP 3', comment: 'Condition' },
-    { title: 'STEP 4', comment: 'Finish' }
+    { title: 'Search', comment: 'STEP 1' },
+    { title: 'Aircraft', comment: 'STEP 2' },
+    { title: 'Condition', comment: 'STEP 3' },
+    { title: 'Decision', comment: 'STEP 4' }
   ]);
 
   const step = () => {
@@ -31,7 +31,8 @@ const App = (props) => {
             return (
               <li key={idx} className={classNames('stepItem', idx === step() ? 'active' : null)}>
                 <span className={'stepItemTitle'}>{item.title}</span>
-                <span className={'stepItemComment'}>{item.comment}</span>
+                {/*<span className={'stepItemTitle'}>{item.title}</span>
+                <span className={'stepItemComment'}>{item.comment}</span>*/}
               </li>
             )
           })

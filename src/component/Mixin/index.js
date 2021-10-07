@@ -77,7 +77,8 @@ export function useWindowSize() {
     });
     useEffect(() => {
         const handleResize = debounce(() => {
-            setWindowSize({width: window.innerWidth - 32, height: window.innerHeight});
+            //setWindowSize({width: window.innerWidth - 32, height: window.innerHeight});
+            setWindowSize({width: window.innerWidth, height: window.innerHeight});
         }, 100);
         window.addEventListener("resize", handleResize);
         handleResize();

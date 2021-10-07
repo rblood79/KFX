@@ -144,10 +144,10 @@ $minSize: 4px;
     //opacity: 0;
     pointer-events: all;
     position: absolute;
-    //top: 100%;
-    top: calc(100% + 100px);
+    top: 50%;
+    //top: calc(100% + 100px);
     overflow: hidden;
-    width: 126px;
+    width: 128px;
     height: 64px;
     z-index: 0;
     clip-path: polygon(50% 100%, 0 0, 100% 0);
@@ -175,6 +175,7 @@ $minSize: 4px;
                 font-size: 18px;
                 padding-top: 4px;
                 color: #0178d5;
+                font-weight: bold;
             }
         }
     }

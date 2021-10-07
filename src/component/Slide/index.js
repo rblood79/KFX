@@ -155,9 +155,9 @@ const App = (props) => {
                   }
                 </div>
                 {type !== 'grid' && <FocuseItem item={result.data[focused]} />}
-                {type !== 'grid' && <button className={classNames('callButton', base && 'active')} style={{ marginTop: -Math.round(size * 0.5 * 1.414) + 12 }} onClick={onWindow}>
+                {type !== 'grid' && <button className={classNames('callButton', base && 'active')} style={{ marginTop: -Math.round((size * 0.5) * 1.414) + 8 }} onClick={onWindow}>
                   <i className="ri-check-fill"></i>
-                  <span className='callButtonText'>호기선택</span>
+                  <span className='callButtonText'>선택</span>
                 </button>}
               </div>
 
@@ -175,7 +175,7 @@ const App = (props) => {
         )
       }
       {result.data &&
-        <div className={classNames('controller', type === 'grid' && 'active')}>
+        <div className={classNames('controller', type === 'grid' && 'active')} style={{marginTop: Math.round(size * 0.5 * 1.414)}}>
           <button className={classNames('controllerButton prevButton', count === 0 && 'disabled')} onClick={() => count !== 0 && moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">PREV</span></button>
           <button className={'controllerButton filterButton'} onClick={() => fView()}><i className={type === 'list' ? "ri-arrow-up-s-line" : "ri-close-fill"}></i><span className="controllText">배정조건</span></button>
           <button className={classNames('controllerButton nextButton', count >= grid.end && 'disabled')} onClick={() => count < grid.end && moveSlide('next')}><span className="controllText">NEXT</span><i className="ri-arrow-right-s-line"></i></button>

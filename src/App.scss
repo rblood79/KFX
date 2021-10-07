@@ -21,13 +21,13 @@ $radius: 16px;
   .main {
     flex: 1;
     width: 100%;
-    padding: 0 $halfSize;
+    padding: 0; //$halfSize;
     display: flex;
     .contents {
       position: relative;
       background: #fff;
       width: 100%;
-      border-radius: $radius;
+      //border-radius: $radius;
       padding: 16px 0;
       display: flex;
       flex-direction: column;

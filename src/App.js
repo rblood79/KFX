@@ -41,7 +41,7 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <header className="header" />
+      {/*<header className="header" />*/}
       <main className="main">
         <div className={classNames('contents', loading && 'loading')}>
           {isMobile ? (
@@ -59,9 +59,9 @@ const App = (props) => {
           )}
         </div>
       </main>
-      <footer className="footer">
+      {/*<footer className="footer">
         {isMobile ? '© ROK KF-21 lis, ALL RIGHTS RESERVED' : '© ROK Government KF-21 lis program data, ALL RIGHTS RESERVED'}
-      </footer>
+            </footer>*/}
     </div>
   );
 }

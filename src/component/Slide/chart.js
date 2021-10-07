@@ -18,9 +18,8 @@ const App = (props) => {
     const fillColor = getColor(total, 0, 240, 0.48);
     const strokeColor = getColor(total, 0, 240, 1);
 
-    const fixSize = 0.5;
-    const width = props.size + (props.size / 3);
-    const height = props.size;
+    const width = Math.round(props.size * 1.414);
+    const height = width - 144;//props.size - 16;
     const wCenter = width * 0.5;
     const hCenter = height * 0.5;
     const size = 20;
@@ -45,11 +44,11 @@ const App = (props) => {
             context.shadowBlur = 0;
             //세로
             context.beginPath();
-            context.moveTo(wCenter + fixSize, size);
-            context.lineTo(wCenter + fixSize, height - size);
+            context.moveTo(wCenter, size);
+            context.lineTo(wCenter, height - size);
             //가로
-            context.moveTo(80, hCenter + fixSize);
-            context.lineTo(width - 80, hCenter + fixSize);
+            context.moveTo(wCenter - (height * 0.5) + 20, hCenter);
+            context.lineTo(wCenter + (height * 0.5) - 20, hCenter);
             context.closePath();
             //
             context.stroke();
@@ -65,10 +64,7 @@ const App = (props) => {
 
             context.stroke();
 
-            // context.beginPath();
-
             for (let i = 0; i < 5; i++) {
-
                 const inSize = ss * i;
                 let polygonPoints = [
                     wCenter, hCenter - inSize,
@@ -87,7 +83,7 @@ const App = (props) => {
 
             context.textAlign = 'left';
             context.textBaseline = 'middle';
-            context.fillText(now[1].key, wCenter - 16 + (props.size * 0.5), hCenter);
+            context.fillText(now[1].key, wCenter + (height * 0.5) - 16, hCenter);
 
             context.textAlign = 'center';
             context.textBaseline = 'bottom';
@@ -95,10 +91,10 @@ const App = (props) => {
 
             context.textAlign = 'right';
             context.textBaseline = 'middle';
-            context.fillText(now[3].key, wCenter + 16 - (props.size * 0.5), hCenter);
+            context.fillText(now[3].key, wCenter - (height * 0.5) + 16, hCenter);
         }
         const draw = (arr) => {
-            context.clearRect(0, 0, 480, height);
+            context.clearRect(0, 0, width, height);
             const ss = ((height / 2) - size) / 100;
             const setArray = [
                 { stroke: 'rgba(0,0,0,0.16)', fill: 'rgba(0,0,0,0.16)', width: 1, shadow: 0 },
