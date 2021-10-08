@@ -1,8 +1,6 @@
 
-$defaultSize: 48px;
+
 $halfSize: 16px;
-$duration: 0.24s;
-$radius: 16px;
 
 .App {
   height: 100%;
@@ -27,7 +25,6 @@ $radius: 16px;
       position: relative;
       background: #fff;
       width: 100%;
-      //border-radius: $radius;
       padding: 16px 0;
       display: flex;
       flex-direction: column;
