@@ -85,7 +85,7 @@ const App = (props) => {
                 <div className={'graph'}>
                     {base && <Chart item={byKeys(item, _.keys(ess))} aver={byKeys(aver, _.keys(ess))} total={item.TOTAL} cur={temp} numView={true} size={size} />}
                 </div>
-                <div className={'itemTitle'}>{item && item.호기}호기 <span className={'itemTitleGray'}>BORAMAE</span></div>
+                <div className={'itemTitle'}>{item && item.호기} <span className={'itemTitleGray'}>BORAMAE</span></div>
                 <span className={'itemPoint'}>RAITING POINT</span>
                 <animated.div className={classNames('itemPercent')} style={{ color: color }}>
                     {number.to(n => n.toFixed(2) + '%')}
