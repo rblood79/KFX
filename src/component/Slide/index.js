@@ -111,13 +111,19 @@ const App = (props) => {
 
   const CheckBox = () => {
     const result = [];
-    
-    _.map(checkList, (v, k) => {
-      console.log(v, '//', k)
+
+    const mergeList = _.merge({}, checkList, ess);
+
+    const sortList = Object.entries(mergeList)
+      .sort(([, a], [, b]) => a - b)
+      .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+    console.log(sortList)
+
+    _.map(sortList, (v, k) => {
       const label = 'check' + k;
       result.push(
         <div className={'checkbox'} key={'check' + k}>
-          <div className='checkboxInput'><input id={label} className={'check'} value={k} type={'checkbox'} checked={v === 'Y' && true} disabled={ess[k]} onChange={(e) => onCheck(e)} /></div>
+          <div className='checkboxInput'><input id={label} className={'check'} value={k} type={'checkbox'} checked={(v === 'Y' || v !== 'N') && true} disabled={ess[k]} onChange={(e) => onCheck(e)} /></div>
           <div className={'checkboxText'} ><label htmlFor={label} className={'label'}>{k}</label>
             <span className={'comment'}>{comment[k]}</span></div>
         </div>
@@ -177,7 +183,7 @@ const App = (props) => {
         )
       }
       {result.data &&
-        <div className={classNames('controller', type === 'grid' && 'active')} style={{marginTop: Math.round(size * 0.5 * 1.414)}}>
+        <div className={classNames('controller', type === 'grid' && 'active')} style={{ marginTop: Math.round(size * 0.5 * 1.414) }}>
           <button className={classNames('controllerButton prevButton', count === 0 && 'disabled')} onClick={() => count !== 0 && moveSlide('prev')}><i className="ri-arrow-left-s-line"></i><span className="controllText">이전호기</span></button>
           <button className={'controllerButton filterButton'} onClick={() => fView()}><i className={type === 'list' ? "ri-arrow-up-s-line" : "ri-close-fill"}></i><span className="controllText">배정조건</span></button>
           <button className={classNames('controllerButton nextButton', count >= grid.end && 'disabled')} onClick={() => count < grid.end && moveSlide('next')}><span className="controllText">다음호기</span><i className="ri-arrow-right-s-line"></i></button>

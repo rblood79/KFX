@@ -7,7 +7,7 @@ import 'remixicon/fonts/remixicon.css';
 const App = (props) => {
   
   const state = useContext(context);
-  const { topNum, setTopNum, setFocused, setCount, base, engine, setEngine } = state;
+  const { topNum, setTopNum, setFocused, setCount, base, engine } = state;
   const data = props.data;
   const onClick = (id) => {
     setFocused(0);
