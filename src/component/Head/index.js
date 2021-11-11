@@ -18,7 +18,7 @@ const App = (props) => {
   },[])
   return (
     <div className="head">
-      <div className={classNames('topLogo', engine && 'active')} onClick={() => setEngine(engine ? false : true)}>
+      <div className={classNames('topLogo', engine && 'active')} >
         <div className={'logo'}>
           <img src={process.env.PUBLIC_URL + '/assets/other/logo.png'} alt={'logo'} />
         </div>

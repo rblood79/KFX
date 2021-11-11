@@ -74,7 +74,7 @@ const App = (props) => {
                 ];
                 context.fillPolygon(polygonPoints, 'rgba(0,0,0,0)', '#dedede');
             }
-            context.font = '500 14px Noto Sans KR';
+            context.font = '400 12px Noto Sans KR';
             context.textAlign = 'center';
             context.textBaseline = 'top';
             context.fillStyle = '#898989';
@@ -181,20 +181,23 @@ const App = (props) => {
                     setArray[i].shadow,
                 );*/
                 if (i > 0 && props.numView) {
-                    context.font = '600 14px GmarketSans';
+                    context.font = '500 12px GmarketSans';
                     context.textAlign = 'center';
-                    context.textBaseline = 'bottom';
-                    context.fillStyle = '#4c4c4c';
-                    context.fillText(arr[0].toFixed(0), wCenter, hCenter + 8 - ss * arr[0]);
+                    context.textBaseline = arr[0] < 33 ? 'bottom' : 'top';
+                    context.fillStyle = '#343434';
+                    context.fillText(arr[0].toFixed(0), wCenter, hCenter + (arr[0] < 33 ? -4 : 8) - ss * arr[0]);
+
                     context.textBaseline = 'middle';
-                    context.textAlign = 'left';
-                    context.fillText(arr[1].toFixed(0), wCenter - 8 + ss * arr[1], hCenter);
-                    context.textBaseline = 'top';
+                    context.textAlign = arr[1] < 33 ? 'left' : 'right';
+                    context.fillText(arr[1].toFixed(0), wCenter - (arr[1] < 33 ? -4 : 8) + ss * arr[1], hCenter);
+
+                    context.textBaseline = arr[2] < 33 ? 'top' : 'bottom';
                     context.textAlign = 'center';
-                    context.fillText(arr[2].toFixed(0), wCenter, hCenter - 8 + ss * arr[2]);
+                    context.fillText(arr[2].toFixed(0), wCenter, hCenter - (arr[2] < 33 ? -4 : 8) + ss * arr[2]);
+
                     context.textBaseline = 'middle';
-                    context.textAlign = 'right';
-                    context.fillText(arr[3].toFixed(0), wCenter + 8 - ss * arr[3], hCenter);
+                    context.textAlign = arr[3] < 33 ? 'right' : 'left';
+                    context.fillText(arr[3].toFixed(0), wCenter + (arr[3] < 33 ? -4 : 8) - ss * arr[3], hCenter);
                 }
             })
         }

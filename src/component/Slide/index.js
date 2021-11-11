@@ -185,8 +185,8 @@ const App = (props) => {
               <CheckBox />
               <ul className={'filterInfo'}>
                 <li className={'infobox boxdisable'}>필수</li>
-                <li className={'infobox boxchecked'}>선택</li>
-                <li className={'infobox boxnormal'}>선택가능</li>
+                <li className={'infobox boxchecked'}>선택(변경가능)</li>
+                <li className={'infobox boxnormal'}>미선택(선택가능)</li>
               </ul>
             </div>
           }
