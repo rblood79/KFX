@@ -33,7 +33,10 @@ const App = (props) => {
   const aver = DS[topNum].평균;
   const comment = DS[topNum].배정조건;
 
-
+  const mergeList = _.merge({}, checkList, ess);
+  const sortList = Object.entries(mergeList)
+      .sort(([, a], [, b]) => a - b)
+      .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
   //
   //const timeout = useRef(null);
   /*const autoSlide = () => {
@@ -111,13 +114,6 @@ const App = (props) => {
 
   const CheckBox = () => {
     const result = [];
-
-    const mergeList = _.merge({}, checkList, ess);
-
-    const sortList = Object.entries(mergeList)
-      .sort(([, a], [, b]) => a - b)
-      .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
-    console.log(sortList)
 
     _.map(sortList, (v, k) => {
       const label = 'check' + k;
