@@ -43,7 +43,7 @@ const App = (props) => {
         { name: '외장변경', icon: 'ri-timer-line' },
         { name: '실무장여부', icon: 'ri-flight-takeoff-fill' },
         { name: '항공기등급', icon: 'ri-todo-line' },
-        { name: '가동상태', icon: 'ri-user-heart-line' },
+        { name: '가동상태', icon: 'ri-dashboard-2-line' },
         { name: '최근비행', icon: 'ri-calendar-line' },
         { name: '주요결함', icon: 'ri-pulse-line' },
     ])
