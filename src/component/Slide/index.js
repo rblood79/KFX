@@ -111,7 +111,9 @@ const App = (props) => {
 
   const CheckBox = () => {
     const result = [];
+    
     _.map(checkList, (v, k) => {
+      console.log(v, '//', k)
       const label = 'check' + k;
       result.push(
         <div className={'checkbox'} key={'check' + k}>
